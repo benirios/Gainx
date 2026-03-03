@@ -1,20 +1,23 @@
 # macOS
 .DS_Store
 
-# Flutter
-.flutter-plugins
+# Flutter/Dart
+.dart_tool/
 .packages
 .pub-cache/
-.build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
 **/build/
-**/ios/Pods/
-.android/
+android/.gradle
+ios/Pods/
+pubspec.lock
+
+# IDE
 .idea/
 .vscode/
 *.iml
 
-# Generated
+# Generated files
 .generated/
-
-# Logs
-pubspec.lock

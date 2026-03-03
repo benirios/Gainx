@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../providers/auth_provider.dart';
-import '../../services/auth_service.dart';
 import '../../services/firestore_service.dart';
+import '../plan/plan_screen.dart';
 import '../profile/profile_setup_screen.dart';
 import 'login_screen.dart';
 import 'signup_screen.dart';
@@ -70,34 +70,8 @@ class _SignedInRouterState extends State<_SignedInRouter> {
         if (snapshot.data == false) {
           return ProfileSetupScreen(userId: widget.userId);
         }
-        return _HomeScreen(authState: widget.authState);
+        return PlanScreen(userId: widget.userId, authState: widget.authState);
       },
-    );
-  }
-}
-
-class _HomeScreen extends StatelessWidget {
-  const _HomeScreen({required this.authState});
-
-  final ClerkAuthState authState;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Gainx')),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Signed in'),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () => AuthService().signOut(authState),
-              child: const Text('Sign out'),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
