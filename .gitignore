@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# Flutter/Dart
+.dart_tool/
+.packages
+.pub-cache/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+**/build/
+android/.gradle
+ios/Pods/
+pubspec.lock
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Generated files
+.generated/
