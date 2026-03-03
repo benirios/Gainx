@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Flutter
+.flutter-plugins
+.packages
+.pub-cache/
+.build/
+**/build/
+**/ios/Pods/
+.android/
+.idea/
+.vscode/
+*.iml
+
+# Generated
+.generated/
+
+# Logs
+pubspec.lock
