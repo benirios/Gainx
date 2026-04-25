@@ -85,15 +85,34 @@
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| AUTH-01–03 | Phase 1 | — |
-| DEAL-01–04 | Phase 2 | — |
-| NOTE-01–03 | Phase 2 | — |
-| FILE-01–02 | Phase 2 | — |
-| OM-01–03 | Phase 2 | — |
-| BUYER-01–04 | Phase 3 | — |
-| SEND-01–02 | Phase 3 | — |
-| TRACK-01–03 | Phase 3 | — |
-| ACT-01–02 | Phase 3 | — |
+| AUTH-01 | Phase 1 — Foundation | Pending |
+| AUTH-02 | Phase 1 — Foundation | Pending |
+| AUTH-03 | Phase 1 — Foundation | Pending |
+| DEAL-01 | Phase 2 — Deal Hub | Pending |
+| DEAL-02 | Phase 2 — Deal Hub | Pending |
+| DEAL-03 | Phase 2 — Deal Hub | Pending |
+| DEAL-04 | Phase 2 — Deal Hub | Pending |
+| NOTE-01 | Phase 2 — Deal Hub | Pending |
+| NOTE-02 | Phase 2 — Deal Hub | Pending |
+| NOTE-03 | Phase 2 — Deal Hub | Pending |
+| FILE-01 | Phase 2 — Deal Hub | Pending |
+| FILE-02 | Phase 2 — Deal Hub | Pending |
+| OM-01 | Phase 2 — Deal Hub | Pending |
+| OM-02 | Phase 2 — Deal Hub | Pending |
+| OM-03 | Phase 2 — Deal Hub | Pending |
+| BUYER-01 | Phase 3 — Buyers, Send, and Tracking | Pending |
+| BUYER-02 | Phase 3 — Buyers, Send, and Tracking | Pending |
+| BUYER-03 | Phase 3 — Buyers, Send, and Tracking | Pending |
+| BUYER-04 | Phase 3 — Buyers, Send, and Tracking | Pending |
+| SEND-01 | Phase 3 — Buyers, Send, and Tracking | Pending |
+| SEND-02 | Phase 3 — Buyers, Send, and Tracking | Pending |
+| TRACK-01 | Phase 3 — Buyers, Send, and Tracking | Pending |
+| TRACK-02 | Phase 3 — Buyers, Send, and Tracking | Pending |
+| TRACK-03 | Phase 3 — Buyers, Send, and Tracking | Pending |
+| ACT-01 | Phase 3 — Buyers, Send, and Tracking | Pending |
+| ACT-02 | Phase 3 — Buyers, Send, and Tracking | Pending |
+
+**Coverage: 22/22 v1 requirements mapped. No orphans.**
 
 ---
 
