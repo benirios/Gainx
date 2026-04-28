@@ -28,6 +28,7 @@ key-files:
     - "RealTools/supabase/migrations/001_initial_schema.sql"
     - "RealTools/supabase/migrations/002_rls_policies.sql"
     - "RealTools/supabase/migrations/003_indexes.sql"
+    - "RealTools/types/supabase.ts (regenerated from live schema)"
   modified: []
 
 key-decisions:
@@ -42,7 +43,7 @@ completed: 2026-04-27
 
 # Phase 01 Plan 02: Database Schema Migrations Summary
 
-**Three Supabase migration files created with complete DDL, RLS policies for all 6 tables, and performance indexes — awaiting Supabase CLI authentication + project link to push to live DB**
+**Three Supabase migration files pushed to live project, RLS on all 6 tables, types/supabase.ts regenerated from live schema**
 
 ## Performance
 
