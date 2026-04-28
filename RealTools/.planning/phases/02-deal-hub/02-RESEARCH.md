@@ -635,7 +635,7 @@ CREATE POLICY "Users can delete own files"
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Storage bucket creation method**
    - What we know: Buckets must exist before uploads; `deal-files` (private), `om-images` (public); schema migrations don't create buckets
