@@ -30,14 +30,19 @@
 
 ### File Uploads
 
-- [ ] **FILE-01**: User can upload files to a deal (stored in Supabase Storage)
-- [ ] **FILE-02**: User can view and download uploaded files from the Deal Hub
+- [x] **FILE-01
+**: User can upload files to a deal (stored in Supabase Storage)
+- [x] **FILE-02
+**: User can view and download uploaded files from the Deal Hub
 
 ### Offering Memorandum
 
-- [ ] **OM-01**: User can generate a hosted OM HTML page from deal data and uploaded images
-- [ ] **OM-02**: OM page is publicly accessible at /om/[deal-id] without requiring auth (for buyers)
-- [ ] **OM-03**: OM page includes: deal title, property details, description, and images
+- [x] **OM-01
+**: User can generate a hosted OM HTML page from deal data and uploaded images
+- [x] **OM-02
+**: OM page is publicly accessible at /om/[deal-id] without requiring auth (for buyers)
+- [x] **OM-03
+**: OM page includes: deal title, property details, description, and images
 
 ### Buyers CRM
 

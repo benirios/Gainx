@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-02-PLAN.md — Deal Hub page + Notes CRUD
-last_updated: "2026-04-28T21:53:13.269Z"
+stopped_at: Completed 02-03-PLAN.md — File upload/download/delete + public OM page
+last_updated: "2026-04-28T22:00:52.495Z"
 last_activity: 2026-04-28 -- Phase --phase execution started
 progress:
   total_phases: 3
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 8
-  completed_plans: 7
-  percent: 88
+  completed_plans: 8
+  percent: 100
 ---
 
 # Project State
@@ -30,7 +30,7 @@ Plan: 1 of --name
 Status: Executing Phase --phase
 Last activity: 2026-04-28 -- Phase --phase execution started
 
-Progress: [█████████░] 88%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -54,6 +54,7 @@ Progress: [█████████░] 88%
 *Updated after each plan completion*
 | Phase 02-deal-hub P01 | 6 | 2 tasks | 5 files |
 | Phase 02-deal-hub P02 | 6 | 2 tasks | 6 files |
+| Phase 02-deal-hub P03 | 3 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -72,6 +73,8 @@ Recent decisions affecting current work:
 - Cast supabase.from() as any at mutation call sites to bypass supabase-js 2.104.x PostgrestVersion inference bug (Relation=never); use explicit Database Insert/Update types for data safety
 - Renamed notes.body → notes.content and added updated_at via migration 006 to align actual DB schema with plan spec
 - Applied supabase.from() as any cast on SELECT queries inside Promise.all — inference bug affects read queries in tuple resolution too, not just mutations
+- Added user_id column to deal_files via migration 007 — table lacked it but plan required it for IDOR protection (T-03-02); RLS via deals join retained as additional layer
+- OM page uses createSupabaseServiceClient (sync, no cookies) exclusively — createSupabaseServerClient throws in unauthenticated context
 
 ### Pending Todos
 
@@ -94,8 +97,8 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-04-28T21:53:13.262Z
-Stopped at: Completed 02-02-PLAN.md — Deal Hub page + Notes CRUD
+Last session: 2026-04-28T22:00:52.489Z
+Stopped at: Completed 02-03-PLAN.md — File upload/download/delete + public OM page
 Resume file: None
 
 **Planned Phase:** 02 (deal-hub) — 4 plans — 2026-04-28T06:13:00.000Z
