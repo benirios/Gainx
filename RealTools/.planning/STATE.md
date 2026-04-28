@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-PLAN.md — Deal CRUD, Server Actions, live dashboard
-last_updated: "2026-04-28T21:44:05.589Z"
+stopped_at: Completed 02-02-PLAN.md — Deal Hub page + Notes CRUD
+last_updated: "2026-04-28T21:53:13.269Z"
 last_activity: 2026-04-28 -- Phase --phase execution started
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 8
-  completed_plans: 6
-  percent: 75
+  completed_plans: 7
+  percent: 88
 ---
 
 # Project State
@@ -30,7 +30,7 @@ Plan: 1 of --name
 Status: Executing Phase --phase
 Last activity: 2026-04-28 -- Phase --phase execution started
 
-Progress: [████████░░] 75%
+Progress: [█████████░] 88%
 
 ## Performance Metrics
 
@@ -53,6 +53,7 @@ Progress: [████████░░] 75%
 
 *Updated after each plan completion*
 | Phase 02-deal-hub P01 | 6 | 2 tasks | 5 files |
+| Phase 02-deal-hub P02 | 6 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -69,6 +70,8 @@ Recent decisions affecting current work:
 - [Phase 2]: Two-bucket Supabase Storage strategy — `deal-files` (private, signed URLs) and `om-images` (public)
 - [Phase 3]: URL-based tracking is PRIMARY signal; pixel is secondary — label UI as "engagement signals"
 - Cast supabase.from() as any at mutation call sites to bypass supabase-js 2.104.x PostgrestVersion inference bug (Relation=never); use explicit Database Insert/Update types for data safety
+- Renamed notes.body → notes.content and added updated_at via migration 006 to align actual DB schema with plan spec
+- Applied supabase.from() as any cast on SELECT queries inside Promise.all — inference bug affects read queries in tuple resolution too, not just mutations
 
 ### Pending Todos
 
@@ -91,8 +94,8 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-04-28T21:44:05.583Z
-Stopped at: Completed 02-01-PLAN.md — Deal CRUD, Server Actions, live dashboard
+Last session: 2026-04-28T21:53:13.262Z
+Stopped at: Completed 02-02-PLAN.md — Deal Hub page + Notes CRUD
 Resume file: None
 
 **Planned Phase:** 02 (deal-hub) — 4 plans — 2026-04-28T06:13:00.000Z

@@ -21,9 +21,12 @@
 
 ### Notes
 
-- [ ] **NOTE-01**: User can add a note to a deal
-- [ ] **NOTE-02**: User can edit their own notes on a deal
-- [ ] **NOTE-03**: User can delete their own notes on a deal
+- [x] **NOTE-01
+**: User can add a note to a deal
+- [x] **NOTE-02
+**: User can edit their own notes on a deal
+- [x] **NOTE-03
+**: User can delete their own notes on a deal
 
 ### File Uploads
 
