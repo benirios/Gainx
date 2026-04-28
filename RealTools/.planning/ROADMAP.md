@@ -28,8 +28,14 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A logged-in broker can log out from any page and is redirected to the login screen
   4. Visiting /om/[any-id] in a browser where no broker session exists does NOT redirect to login — the page renders (even if empty data) without auth interference
   5. All database tables (deals, notes, buyers, deal_buyers, activities, deal_files) exist in Supabase with RLS enabled and correct user-scoping policies
-**Plans**: TBD
+**Plans**: 4 plans
 **UI hint**: yes
+
+Plans:
+- [x] 01-01-PLAN.md — Project scaffold + Supabase client factories
+- [x] 01-02-PLAN.md — Database schema migrations (001/002/003)
+- [x] 01-03-PLAN.md — Middleware + auth pages (login/signup/callback)
+- [x] 01-04-PLAN.md — App shell (sidebar + route group layout + placeholder pages)
 
 ### Phase 2: Deal Hub
 **Goal**: A broker has a complete deal workspace — they can create and manage deals, attach notes and files, and share a public hosted OM page with buyers, all within a single Deal Hub view per property.
@@ -41,8 +47,14 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Broker can add, edit, and delete notes on a deal from the Deal Hub page
   4. Broker can upload files to a deal (stored in Supabase Storage) and download them from the Deal Hub via signed URLs
   5. A public OM page exists at /om/[deal-id] showing deal title, property details, description, and images — accessible in a browser without being logged in
-**Plans**: TBD
+**Plans**: 4 plans
 **UI hint**: yes
+
+Plans:
+- [ ] 02-00-PLAN.md — Wave 0 setup: shadcn components, next.config.ts, Storage buckets + RLS migration, sidebar fix
+- [ ] 02-01-PLAN.md — Wave 1: Deals CRUD + dashboard (deal-actions, deal-card, deal-form-modal, delete-deal-dialog)
+- [ ] 02-02-PLAN.md — Wave 2: Deal Hub page + Notes CRUD (note-actions, note-item, notes-section, deals/[id]/page)
+- [ ] 02-03-PLAN.md — Wave 3: Files + OM page (file-actions, files-section, extend deals/[id]/page, om/[id]/page)
 
 ### Phase 3: Buyers, Send, and Tracking
 **Goal**: The core product differentiator is live — broker manages a buyer pool, selects buyers for a deal, sends the OM link via email with per-buyer tracking tokens, and sees who opened the OM in an activity log.
@@ -64,6 +76,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
-| 2. Deal Hub | 0/TBD | Not started | - |
+| 1. Foundation | 4/4 | Complete | 2026-04-27 |
+| 2. Deal Hub | 0/4 | Ready to execute | - |
 | 3. Buyers, Send, and Tracking | 0/TBD | Not started | - |
