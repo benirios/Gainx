@@ -21,7 +21,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { createDealAction, updateDealAction, type DealState } from '@/lib/actions/deal-actions'
+import { createDealAction, updateDealAction } from '@/lib/actions/deal-actions'
+import { type DealState } from '@/lib/schemas/deal'
 import { toast } from 'sonner'
 
 type Deal = {

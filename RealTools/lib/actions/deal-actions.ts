@@ -2,36 +2,13 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { z } from 'zod'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { DealSchema, type DealState } from '@/lib/schemas/deal'
 import type { Database } from '@/types/supabase'
 
-// Explicit table types to work around supabase-js 2.104.x __InternalSupabase
-// PostgrestVersion inference issue that causes from() to return Relation=never.
 type DealInsert = Database['public']['Tables']['deals']['Insert']
 type DealUpdate = Database['public']['Tables']['deals']['Update']
 type DealFileRow = Database['public']['Tables']['deal_files']['Row']
-
-export const DealSchema = z.object({
-  title:       z.string().min(2, 'Deal title is required'),
-  address:     z.string().min(5, 'Address is required'),
-  price:       z.string().min(1, 'Asking price is required'),
-  status:      z.enum(['active', 'negotiating', 'closed']).default('active'),
-  description: z.string().optional(),
-})
-
-export type DealFormValues = z.infer<typeof DealSchema>
-
-export type DealState = {
-  errors?: {
-    title?:       string[]
-    address?:     string[]
-    price?:       string[]
-    status?:      string[]
-    description?: string[]
-    general?:     string[]
-  }
-}
 
 export async function createDealAction(
   _prevState: DealState,
