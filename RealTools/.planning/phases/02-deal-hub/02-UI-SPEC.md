@@ -53,11 +53,18 @@ Inherits Phase 1 scale exactly. No new sizes introduced.
 | Role | Size | Weight | Line Height | Usage |
 |------|------|--------|-------------|-------|
 | Display | 24px (text-2xl) | 600 (semibold) | 1.2 | OM page deal title (public facing) |
-| Heading | 20px (text-xl) | 600 (semibold) | 1.2 | Deal Hub page title, modal dialog title, dashboard page heading ("Deals") |
+| Heading | 20px (text-xl) | 600 (semibold) | 1.2 | Deal Hub page title, modal dialog title, dashboard page heading ("Deals"), OM page address line, OM page property detail values |
 | Body | 16px (text-base) | 400 (regular) | 1.5 | Deal card title, form input text, notes text, file names, OM page body prose |
-| Label | 14px (text-sm) | 400 (regular) | 1.5 | Form labels, section sub-headings, status badge text, deal price/address on card, muted metadata |
+| Label | 14px (text-sm) | 400 (regular) | 1.5 | Form labels, section sub-headings, status badge text, deal price/address on card, muted metadata, OM page property detail labels (uppercase tracking-wide), OM page footer |
 
 Font weights declared: regular (400) and semibold (600) only. No other weights.
+
+**OM page typography mapping (all within 4-size scale):**
+- Deal title: 24px Display (was 32px — collapsed to scale)
+- Address: 20px Heading (was 18px — collapsed to scale)
+- Property detail labels: 14px Label uppercase tracking-wide (was 12px — collapsed to scale)
+- Property detail values: 20px Heading semibold
+- Footer: 14px Label muted (was 12px — collapsed to scale)
 
 ---
 
@@ -170,10 +177,11 @@ Structure (top to bottom):
   - Right: "Add Note" button — `variant="ghost"` with Lucide `Plus` icon, label "Add Note", 14px `text-zinc-400 hover:text-zinc-50`
 - Add note inline form (hidden by default, reveals on "Add Note" click — client component toggle):
   - Textarea: `placeholder="Write a note…"`, `rows={3}`
-  - Action row below textarea: "Save" button (white accent, small) + "Cancel" text button, `gap-2`, `justify-end`
+  - Action row below textarea: "Save Note" button (white accent, small) + "Discard" text button (`variant="ghost"`), `gap-2`, `justify-end`
 - Notes list (reverse chronological):
   - Each note row: `bg-zinc-800/50 rounded-lg px-4 py-3` — note body (16px `text-zinc-50`), timestamp (14px `text-zinc-400`) below body
-  - Inline actions on hover: Lucide `Pencil` icon button (edit inline — replaces note body with textarea pre-filled) + Lucide `Trash2` icon button (triggers AlertDialog delete confirmation)
+  - Inline actions on hover: Lucide `Pencil` icon button (`aria-label="Edit note"`, edit inline — replaces note body with textarea pre-filled) + Lucide `Trash2` icon button (`aria-label="Delete note"`, triggers AlertDialog delete confirmation)
+  - Edit inline action row: "Save Note" button (white accent, small) + "Discard" text button (`variant="ghost"`), `gap-2`, `justify-end`
   - Empty state (no notes): "No notes yet." — 14px `text-zinc-400`, centered in section
 
 **Separator** (48px vertical margin above and below)
@@ -186,7 +194,7 @@ Structure (top to bottom):
 - File list:
   - Each file row: `flex items-center justify-between bg-zinc-800/50 rounded-lg px-4 py-3` (44px min height)
   - Left: Lucide `FileText` icon (`size-4 text-zinc-400`) + file name (16px `text-zinc-50`), 8px gap
-  - Right: "Download" link (opens signed URL in new tab) — Lucide `Download` icon + "Download" label, 14px `text-zinc-400 hover:text-zinc-50`; Lucide `Trash2` icon button for delete (triggers AlertDialog)
+  - Right: "Download" link (opens signed URL in new tab) — Lucide `Download` icon + "Download" label, 14px `text-zinc-400 hover:text-zinc-50`; Lucide `Trash2` icon button (`aria-label="Delete file"`) for delete (triggers AlertDialog)
   - Empty state (no files): "No files uploaded yet." — 14px `text-zinc-400`, centered in section
 
 ### /om/[deal-id] — Public OM Page
@@ -196,10 +204,10 @@ Layout: public page, no sidebar, no auth. `min-h-screen bg-white text-zinc-900` 
 Structure (top to bottom):
 1. Top bar: `bg-zinc-900 text-white px-8 py-4` — "RealTools" logo text left (16px semibold), deal status badge right
 2. Hero section: `px-8 py-12 border-b border-zinc-200`
-   - Deal title — 32px semibold `text-zinc-900`, line-height 1.2
-   - Address — 18px regular `text-zinc-500`, 8px below title
+   - Deal title — 24px semibold `text-zinc-900`, line-height 1.2 (Display scale)
+   - Address — 20px regular `text-zinc-500`, 8px below title (Heading scale)
 3. Property details grid: `px-8 py-8 grid grid-cols-2 md:grid-cols-3 gap-6 bg-zinc-50 border-b border-zinc-200`
-   - Each detail: label (12px uppercase tracking-wide `text-zinc-400`) + value (20px semibold `text-zinc-900`)
+   - Each detail: label (14px uppercase tracking-wide `text-zinc-400`, Label scale) + value (20px semibold `text-zinc-900`, Heading scale)
    - Details shown: Asking Price, Property Type (derived from address/description if available), Status
 4. Description section: `px-8 py-8 border-b border-zinc-200`
    - Heading: "Property Overview" — 20px semibold `text-zinc-900`, 24px below
@@ -207,7 +215,7 @@ Structure (top to bottom):
 5. Images section (if images exist in `om-images` bucket): `px-8 py-8`
    - Heading: "Property Images" — 20px semibold `text-zinc-900`, 24px below
    - Image grid: `grid grid-cols-1 md:grid-cols-2 gap-4`, images `rounded-lg object-cover aspect-video w-full`
-6. Footer: `px-8 py-6 border-t border-zinc-200 bg-zinc-50 text-center` — "Powered by RealTools" — 12px `text-zinc-400`
+6. Footer: `px-8 py-6 border-t border-zinc-200 bg-zinc-50 text-center` — "Powered by RealTools" — 14px `text-zinc-400` (Label scale)
 
 Note: OM page uses light mode deliberately (buyer-facing document aesthetic). The dark theme applies only to authenticated broker-facing pages.
 
@@ -238,14 +246,14 @@ Used for: delete deal, delete note, delete file. Same pattern for all three.
 AlertDialog content:
 - Title: "Delete [Deal / Note / File]?" — 16px semibold
 - Description: context-specific (see Copywriting Contract)
-- Footer: Cancel button (`variant="outline"`) + destructive confirm button (`variant="destructive"`, `bg-red-500 hover:bg-red-600 text-white`)
+- Footer: "Keep" button (`variant="outline"`) + destructive confirm button (`variant="destructive"`, `bg-red-500 hover:bg-red-600 text-white`)
 - Confirm button shows loading state (`Loader2 animate-spin`) while server action runs
 - On success: toast "Deleted." — list revalidates
 - On error: toast "Failed to delete. Please try again."
 
 ### Note Inline Edit
 
-Edit mode activates on Pencil icon click. The note body text is replaced with a pre-filled Textarea. "Save" button submits (server action, zod validation: min 1 char). "Cancel" restores read mode without saving. On save success: read mode restores with updated text, toast "Note updated."
+Edit mode activates on Pencil icon click (`aria-label="Edit note"`). The note body text is replaced with a pre-filled Textarea. "Save Note" button submits (server action, zod validation: min 1 char). "Discard" restores read mode without saving. On save success: read mode restores with updated text, toast "Note updated."
 
 ### File Upload
 
@@ -289,8 +297,12 @@ Clicking the deal card body (anywhere except the status badge) navigates to `/de
 | Edit button label | Edit |
 | Notes section heading | Notes |
 | Add note button label | Add Note |
-| Note save button | Save |
-| Note cancel button | Cancel |
+| Note save button (add inline form) | Save Note |
+| Note discard button (add inline form) | Discard |
+| Note save button (edit inline) | Save Note |
+| Note discard button (edit inline) | Discard |
+| Edit note icon button aria-label | Edit note |
+| Delete note icon button aria-label | Delete note |
 | Note updated toast | Note updated. |
 | Note saved toast | Note added. |
 | Empty state — notes | No notes yet. |
@@ -300,6 +312,7 @@ Clicking the deal card body (anywhere except the status badge) navigates to `/de
 | File too large error toast | File too large. Maximum 50MB. |
 | File upload success toast | File uploaded. |
 | Download button label | Download |
+| Delete file icon button aria-label | Delete file |
 | Empty state — files | No files uploaded yet. |
 | Delete deal confirmation title | Delete Deal? |
 | Delete deal confirmation body | This will permanently delete this deal and all associated notes and files. This cannot be undone. |
@@ -308,7 +321,7 @@ Clicking the deal card body (anywhere except the status badge) navigates to `/de
 | Delete file confirmation title | Delete File? |
 | Delete file confirmation body | This file will be permanently deleted from storage. |
 | Delete confirm button | Delete |
-| Delete cancel button | Cancel |
+| Delete dialog dismiss button | Keep |
 | Deleted success toast | Deleted. |
 | Delete error toast | Failed to delete. Please try again. |
 | OM page footer | Powered by RealTools |
