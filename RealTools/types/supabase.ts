@@ -175,7 +175,7 @@ export type Database = {
           created_at: string | null
           description: string | null
           id: string
-          price: number | null
+          price: string | null
           status: string
           title: string
           updated_at: string | null
@@ -186,7 +186,7 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: string
-          price?: number | null
+          price?: string | null
           status?: string
           title: string
           updated_at?: string | null
@@ -197,7 +197,7 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: string
-          price?: number | null
+          price?: string | null
           status?: string
           title?: string
           updated_at?: string | null
@@ -207,24 +207,27 @@ export type Database = {
       }
       notes: {
         Row: {
-          body: string
+          content: string
           created_at: string | null
           deal_id: string
           id: string
+          updated_at: string | null
           user_id: string
         }
         Insert: {
-          body: string
+          content: string
           created_at?: string | null
           deal_id: string
           id?: string
+          updated_at?: string | null
           user_id: string
         }
         Update: {
-          body?: string
+          content?: string
           created_at?: string | null
           deal_id?: string
           id?: string
+          updated_at?: string | null
           user_id?: string
         }
         Relationships: [
