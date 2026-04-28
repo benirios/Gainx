@@ -8,10 +8,12 @@ import { StatusBadge } from '@/components/deals/deal-card'
 import { DealFormModal } from '@/components/deals/deal-form-modal'
 import { DeleteDealDialog } from '@/components/deals/delete-deal-dialog'
 import { NotesSection } from '@/components/notes/notes-section'
+import { FilesSection } from '@/components/files/files-section'
 import type { Database } from '@/types/supabase'
 
 type DealRow = Database['public']['Tables']['deals']['Row']
 type NoteRow = Database['public']['Tables']['notes']['Row']
+type DealFileRow = Database['public']['Tables']['deal_files']['Row']
 
 export default async function DealHubPage({
   params,
@@ -24,9 +26,9 @@ export default async function DealHubPage({
   if (!user) redirect('/auth/login')
 
   // Parallel fetch — never fetch per-component (RESEARCH.md Anti-Pattern)
-  // Both queries use `as any` cast to bypass supabase-js 2.104.x PostgrestVersion=never inference bug
+  // All queries use `as any` cast to bypass supabase-js 2.104.x PostgrestVersion=never inference bug
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [dealResult, notesResult] = await Promise.all([
+  const [dealResult, notesResult, filesResult] = await Promise.all([
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (supabase.from('deals') as any)
       .select('*')
@@ -38,12 +40,28 @@ export default async function DealHubPage({
       .select('*')
       .eq('deal_id', id)
       .order('created_at', { ascending: false }) as Promise<{ data: NoteRow[] | null; error: unknown }>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (supabase.from('deal_files') as any)
+      .select('*')
+      .eq('deal_id', id)
+      .order('created_at', { ascending: false }) as Promise<{ data: DealFileRow[] | null; error: unknown }>,
   ])
 
   if (!dealResult.data) notFound()
 
   const deal = dealResult.data
   const notes: NoteRow[] = notesResult.data ?? []
+
+  // Generate signed URLs server-side — 1-hour expiry, one request per file
+  const rawFiles = filesResult.data ?? []
+  const filesWithUrls = await Promise.all(
+    rawFiles.map(async (f) => {
+      const { data } = await supabase.storage
+        .from('deal-files')
+        .createSignedUrl(f.storage_path, 3600)
+      return { ...f, signedUrl: data?.signedUrl ?? null }
+    })
+  )
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -102,8 +120,8 @@ export default async function DealHubPage({
 
       <Separator className="my-12" />
 
-      {/* Section 3: Files — added in Wave 3 (02-03-PLAN.md) */}
-      {/* FilesSection placeholder: Wave 3 inserts <FilesSection files={filesWithUrls} dealId={deal.id} userId={user.id} /> here */}
+      {/* Section 3: Files */}
+      <FilesSection files={filesWithUrls} dealId={deal.id} userId={user.id} />
     </div>
   )
 }
