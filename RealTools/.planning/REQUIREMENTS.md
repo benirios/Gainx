@@ -10,10 +10,14 @@
 
 ### Deal Management
 
-- [ ] **DEAL-01**: User can create a deal with title, address, price, and description
-- [ ] **DEAL-02**: User can view, edit, and delete their own deals
-- [ ] **DEAL-03**: User can set deal status: active, negotiating, or closed
-- [ ] **DEAL-04**: User sees a dashboard listing all their deals with status and a New Deal button
+- [x] **DEAL-01
+**: User can create a deal with title, address, price, and description
+- [x] **DEAL-02
+**: User can view, edit, and delete their own deals
+- [x] **DEAL-03
+**: User can set deal status: active, negotiating, or closed
+- [x] **DEAL-04
+**: User sees a dashboard listing all their deals with status and a New Deal button
 
 ### Notes
 
