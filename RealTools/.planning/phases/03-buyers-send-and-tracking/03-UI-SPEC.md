@@ -1,10 +1,11 @@
 ---
 phase: 3
 slug: buyers-send-and-tracking
-status: draft
+status: approved
 shadcn_initialized: true
 preset: radix-nova / neutral / cssVariables
 created: 2026-04-28
+reviewed_at: 2026-04-30
 ---
 
 # Phase 3 — UI Design Contract
@@ -145,7 +146,7 @@ New components required for Phase 3. Each maps to an established Phase 2 bluepri
 - Validation: name required (min 1 char), email required (valid format). Field errors render as `text-sm text-red-500` below the input.
 - Submit label (create): "Save Buyer"
 - Submit label (edit): "Save Buyer"
-- Cancel: ghost button "Cancel"
+- Cancel: ghost button "Discard"
 - Loading state: `<Loader2 className="mr-2 h-4 w-4 animate-spin" />` + "Saving…" on submit button; all fields disabled
 - Success: modal closes + `toast.success("Buyer saved.")`
 
@@ -182,8 +183,8 @@ New components required for Phase 3. Each maps to an established Phase 2 bluepri
   - Buyers with no previous send: no badge
 - Empty buyer pool state: "No buyers yet. Add buyers from the Buyers page first." centered in the checklist area
 - Submit: "Send to [N] buyers" — disabled when 0 checked — `bg-white text-zinc-950 hover:bg-zinc-100`
-- Cancel: "Cancel" ghost button
-- Loading state: "Sending…" + `<Loader2>` on submit; all checkboxes and Cancel disabled
+- Cancel: "Close" ghost button
+- Loading state: "Sending…" + `<Loader2>` on submit; all checkboxes and Close disabled
 - Success: modal closes + `toast.success("OM sent to [N] buyers.")`
 - Error: `toast.error("Failed to send. Please try again.")`
 
