@@ -26,14 +26,15 @@ RealTools now has:
 
 **v1.1 Phase 4 complete:** Reference Visual Foundation established on 2026-05-01. Global dark reference tokens, serif display typography, pill button primitives, dark form/card/dialog/toast/badge primitives, and no-background-pattern guardrails are in place.
 
-## Current Milestone: v1.1 Reference UI Refactor
+## Current Milestone: v1.2 Light Dashboard UI Refactor
 
-**Goal:** Refactor all RealTools user-facing UI to match the provided reference screenshot's premium dark CRE visual style, excluding the screenshot's background pattern.
+**Goal:** Refactor all RealTools user-facing UI again to match the provided Nexus-style light SaaS dashboard reference while preserving existing broker workflows.
 
 **Target features:**
-- Apply the reference visual system across authentication, dashboard, deal hub, buyers, profile, modals, tables, forms, activity, files, notes, and hosted OM pages.
-- Preserve existing functionality while restyling typography, spacing, navigation, surfaces, buttons, inputs, badges, dialogs, and empty/loading/error states.
-- Validate responsive behavior and visual consistency across desktop and mobile without adopting the reference background network.
+- Replace the current dark v1.1 direction with a soft light shell, sidebar, topbar, cards, forms, tables, dialogs, empty/loading/error states, and activity surfaces.
+- Apply the reference's off-white page background, white cards, subtle dividers, low-contrast gray text, soft shadows, rounded controls, pale icon treatments, and pastel teal/purple/blue accents across RealTools surfaces.
+- Adapt the dashboard and deal workspace toward a polished SaaS analytics feel without adding fake analytics features outside RealTools' deal-management scope.
+- Preserve all v1.0 behavior, including auth, deals, notes, files, buyers, send OM, public OM, tracking, and activity log.
 
 ## Requirements
 
@@ -55,8 +56,9 @@ RealTools now has:
 
 ### Active
 
-- [ ] Apply the Phase 4 reference visual foundation across all user-facing RealTools surfaces, excluding the background pattern.
-- [ ] Preserve all shipped v1.0 behavior during the visual refactor.
+- [ ] Apply the Nexus-style light SaaS dashboard visual system across all user-facing RealTools surfaces.
+- [ ] Replace the v1.1 dark reference direction with a soft light layout, navigation, card, form, table, dialog, and state treatment.
+- [ ] Preserve all shipped v1.0 workflows during the visual refactor.
 - [ ] Complete live UAT for Phase 3: Resend delivery, open tracking, and activity timeline.
 
 ### Out of Scope
@@ -100,10 +102,12 @@ RealTools now has:
 | Service role writes activities for tracking and telemetry | Public/open tracking and activity backfill cannot rely on browser user session | ✓ Shipped v1.0 |
 | Use Cormorant Garamond for display typography and Geist for operational text | Matches the reference screenshot's premium serif display voice while keeping app text readable | ✓ Established v1.1 Phase 4 |
 | Do not recreate the reference screenshot's background network pattern | User explicitly excluded the background from the requested style match | ✓ Enforced v1.1 Phase 4 |
+| Start v1.2 before formally completing v1.1 | User explicitly chose to proceed with a new UI refactor despite v1.1 Phase 6 and verification state remaining incomplete | — Pending |
+| Use the provided Nexus-style light dashboard screenshot as the v1.2 visual source of truth | The user requested another UI refactor following that reference image | — Pending |
 
 ## Next Milestone Goals
 
-After v1.1, gather broker feedback on the refreshed product UI and resolve any remaining Phase 3 UAT findings or deployment packaging concerns.
+After v1.2, gather broker feedback on the light dashboard direction and resolve any remaining Phase 3 UAT findings or deployment packaging concerns.
 
 ## Evolution
 
@@ -123,4 +127,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-01 after Phase 4 Reference Visual Foundation*
+*Last updated: 2026-05-02 after starting v1.2 Light Dashboard UI Refactor*
