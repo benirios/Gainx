@@ -4,7 +4,7 @@ milestone: v1.1
 milestone_name: Reference UI Refactor
 status: ready_to_plan
 last_updated: "2026-05-01T18:52:21.226Z"
-last_activity: 2026-05-01 -- Phase 4 execution started
+last_activity: 2026-05-01 -- Phase 4 complete; Phase 5 ready to plan
 progress:
   total_phases: 3
   completed_phases: 1
@@ -20,7 +20,7 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-01)
 
 **Core value:** Every deal has one central workspace — broker never has to hunt across email, spreadsheets, and Drive to find deal status or contact buyers.
-**Current focus:** Phase 4 — Reference Visual Foundation
+**Current focus:** Phase 5 — Product App Surface Refactor
 
 ## Current Position
 
@@ -67,4 +67,4 @@ Items acknowledged and deferred at milestone close on 2026-05-01:
 
 ## Session Continuity
 
-Resume with `$gsd-execute-phase 4` to implement the Reference Visual Foundation plans, or `$gsd-verify-work 03` to complete deferred live UAT first.
+Resume with `$gsd-plan-phase 5` to plan the Product App Surface Refactor phase, or `$gsd-verify-work 03` to complete deferred live UAT first.
