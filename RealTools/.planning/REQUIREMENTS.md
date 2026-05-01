@@ -10,7 +10,7 @@
 - [x] **UI-05**: User sees a light Nexus-style RealTools interface with off-white page backgrounds, white surfaces, subtle borders, soft shadows, muted gray text, and pastel teal/purple/blue accents.
 - [x] **UI-06**: User sees consistent rounded controls, compact icon-led actions, pale icon containers, restrained hover/focus states, and low-contrast dividers across shared UI primitives.
 - [x] **UI-07**: User sees typography, spacing, card density, and visual hierarchy tuned for a calm SaaS dashboard rather than the previous dark premium style.
-- [ ] **UI-08**: User sees loading, empty, error, disabled, hover, and focus states that follow the light reference style without causing layout shift or text overlap.
+- [x] **UI-08**: User sees loading, empty, error, disabled, hover, and focus states that follow the light reference style without causing layout shift or text overlap.
 
 ### App Shell And Dashboard
 
@@ -66,7 +66,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | UI-05 | Phase 7 | Complete |
 | UI-06 | Phase 7 | Complete |
 | UI-07 | Phase 7 | Complete |
-| UI-08 | Phase 7 | Pending |
+| UI-08 | Phase 7 | Complete |
 | APP-04 | Phase 8 | Pending |
 | APP-05 | Phase 8 | Pending |
 | APP-06 | Phase 8 | Pending |
