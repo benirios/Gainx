@@ -1,67 +1,96 @@
-# Roadmap: RealTools v1.1 Reference UI Refactor
+# Roadmap: RealTools v1.2 Light Dashboard UI Refactor
 
 ## Overview
 
-RealTools v1.1 is a behavior-preserving UI refactor. The milestone refreshes every user-facing surface to match the provided reference screenshot's premium dark CRE style while explicitly excluding the screenshot's background network pattern. Phase numbering continues from the shipped v1.0 milestone, so this roadmap starts at Phase 4.
+RealTools v1.2 is a behavior-preserving UI refactor that moves the product from the unfinished v1.1 dark premium direction to the provided Nexus-style light SaaS dashboard reference. The milestone keeps the v1.0 product surface intact while refreshing the visual system, authenticated workspace, public/auth surfaces, and verification pass.
+
+Phase numbering continues from the previous roadmap, so this milestone starts at Phase 7.
 
 ## Phases
 
 **Phase Numbering:**
-- Integer phases (4, 5, 6): Planned v1.1 milestone work
-- Decimal phases (5.1, 5.2): Urgent insertions if needed
+- Integer phases (7, 8, 9): Planned v1.2 milestone work
+- Decimal phases (8.1, 8.2): Urgent insertions if needed
 
-- [x] **Phase 4: Reference Visual Foundation** - Establish global tokens, typography, surfaces, and shared UI primitives matching the reference style. (completed 2026-05-01)
-- [ ] **Phase 5: Product App Surface Refactor** - Restyle the authenticated broker workspace: dashboard, deal hub, buyers, profile, forms, dialogs, tables, notes, files, send OM, and activity.
-- [ ] **Phase 6: Public/Auth Surfaces and Responsive QA** - Restyle auth, landing, and public OM pages, then verify responsive quality and critical v1.0 workflows.
+- [ ] **Phase 7: Light Visual Foundation** - Replace the dark reference foundation with light tokens, shared primitives, layout rules, and state styling based on the Nexus-style reference.
+- [ ] **Phase 8: Authenticated Workspace Refactor** - Restyle the app shell, dashboard, Deal Hub, buyers, profile, forms, dialogs, tables, notes, files, send-OM flow, and activity surfaces.
+- [ ] **Phase 9: Public Surfaces and Verification** - Restyle auth/root/public OM surfaces, verify responsive quality, and complete critical workflow plus deferred live UAT checks.
 
 ## Phase Details
 
-### Phase 4: Reference Visual Foundation
-**Goal**: The app has a coherent visual system based on the reference screenshot: premium dark palette, serif display typography, muted supporting text, pill controls, subtle borders, and consistent surface styling without copying the excluded background pattern.
-**Depends on**: v1.0 complete
-**Requirements**: UI-01, UI-02, UI-03, UI-04
+### Phase 7: Light Visual Foundation
+**Goal**: The app has a coherent light SaaS visual system based on the reference image: off-white page backgrounds, white cards, subtle borders, soft shadows, muted grays, pale icons, rounded controls, and pastel teal/purple/blue accents.
+**Depends on**: v1.2 milestone start
+**Requirements**: UI-05, UI-06, UI-07, UI-08
 **Success Criteria** (what must be TRUE):
-  1. Global CSS variables and base styles define the refreshed dark palette, typography scale, borders, focus rings, and selection/scrollbar behavior.
-  2. Shared UI primitives (`button`, `card`, `input`, `textarea`, `select`, `checkbox`, `badge`, `dialog`, `alert-dialog`, `separator`, `sonner`, `tag-input`) visually align with the reference style.
-  3. Brand/display typography uses a serif voice where appropriate, while supporting text remains muted and readable.
-  4. Common surfaces avoid nested-card clutter and use consistent spacing, subtle borders, and dark premium contrast.
-  5. No implementation depends on recreating the reference background network pattern.
+  1. Global tokens, base styles, typography, radii, borders, focus rings, shadows, and color variables express the light reference direction.
+  2. Shared UI primitives use rounded light controls, pale icon treatments, subtle separators, muted text, and pastel accents consistently.
+  3. The previous dark theme direction no longer drives the default app appearance.
+  4. Loading, empty, error, disabled, hover, and focus states are styled in the light system without layout shift.
+  5. Visual rules explicitly avoid copying Nexus branding/content or inventing unsupported product analytics.
 **Plans**: TBD
 **UI hint**: yes
 
-### Phase 5: Product App Surface Refactor
-**Goal**: The authenticated broker workspace looks and feels like the reference style while preserving all shipped v1.0 workflows.
-**Depends on**: Phase 4
-**Requirements**: APP-01, APP-02, APP-03
+### Phase 8: Authenticated Workspace Refactor
+**Goal**: The authenticated broker workspace looks and feels like the reference dashboard while preserving all shipped RealTools workflows.
+**Depends on**: Phase 7
+**Requirements**: APP-04, APP-05, APP-06, DEAL-01, DEAL-02, DEAL-03
 **Success Criteria** (what must be TRUE):
-  1. Dashboard, sidebar, deal cards, Deal Hub, buyers table, and profile page use the refreshed visual system consistently.
-  2. Deal, note, file, buyer, delete, and send-OM dialogs/forms are restyled without changing validation, actions, or data behavior.
-  3. Status badges, buyer tags, metadata rows, file rows, notes, and activity timeline items remain readable and visually consistent.
-  4. Existing authenticated navigation and broker workflows still work after the refactor.
-  5. Empty, loading, error, disabled, hover, and focus states are present and styled across core app surfaces.
+  1. Sidebar, topbar, navigation, user/profile affordances, and primary app layout match the light SaaS shell direction.
+  2. Dashboard cards, deal summaries, activity previews, and workflow shortcuts align with the reference's card density and muted visual hierarchy without fake metrics.
+  3. Deal Hub, buyers, profile, notes, files, send-OM, and activity log surfaces use consistent light cards, tables, badges, tags, rows, and metadata treatments.
+  4. Deal, note, file, buyer, delete, and send-OM dialogs/forms are restyled without changing validation, actions, or data behavior.
+  5. Existing authenticated navigation and broker workflows still work after the refactor.
 **Plans**: TBD
 **UI hint**: yes
 
-### Phase 6: Public/Auth Surfaces and Responsive QA
-**Goal**: Public and unauthenticated surfaces match the refreshed reference style, and the milestone is verified across responsive layouts and critical v1.0 behavior.
-**Depends on**: Phase 5
-**Requirements**: SURF-01, SURF-02, SURF-03, QA-01, QA-02, QA-03
+### Phase 9: Public Surfaces and Verification
+**Goal**: Public and unauthenticated surfaces match the light reference direction, and the full UI refactor is verified across responsive layouts and critical workflows.
+**Depends on**: Phase 8
+**Requirements**: SURF-04, SURF-05, SURF-06, QA-04, QA-05, QA-06
 **Success Criteria** (what must be TRUE):
-  1. Login and signup pages match the refreshed visual system and preserve existing auth behavior.
-  2. The root/landing page reflects the reference style without copying the excluded background pattern.
-  3. Public OM pages preserve unauthenticated access, tracking routes, and buyer-facing readability while adopting the refreshed style.
-  4. Desktop and mobile screenshots show no text overlap, clipped controls, broken layouts, or unreadable contrast.
+  1. Login and signup pages match the light visual system and preserve Supabase email/password behavior.
+  2. The root/landing page reflects the light dashboard direction without becoming a marketing-only detour.
+  3. Public OM pages preserve unauthenticated access, tracking routes, and buyer-facing readability while adopting the light style.
+  4. Desktop and mobile screenshots show no text overlap, clipped controls, unreadable contrast, broken layouts, or accidental dark-theme remnants.
   5. Critical v1.0 workflows pass after the refactor: auth, deal CRUD, notes, file upload/download, buyer CRUD, send OM, public OM open, tracking, and activity review.
+  6. Deferred Phase 3 live UAT is completed or explicitly documented with remaining blockers.
 **Plans**: TBD
 **UI hint**: yes
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 4 -> 5 -> 6
+Phases execute in numeric order: 7 -> 8 -> 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 4. Reference Visual Foundation | 3/3 | Complete    | 2026-05-01 |
-| 5. Product App Surface Refactor | 0/TBD | Not started | - |
-| 6. Public/Auth Surfaces and Responsive QA | 0/TBD | Not started | - |
+| 7. Light Visual Foundation | 0/TBD | Not started | - |
+| 8. Authenticated Workspace Refactor | 0/TBD | Not started | - |
+| 9. Public Surfaces and Verification | 0/TBD | Not started | - |
+
+## Requirement Coverage
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| UI-05 | Phase 7 | Pending |
+| UI-06 | Phase 7 | Pending |
+| UI-07 | Phase 7 | Pending |
+| UI-08 | Phase 7 | Pending |
+| APP-04 | Phase 8 | Pending |
+| APP-05 | Phase 8 | Pending |
+| APP-06 | Phase 8 | Pending |
+| DEAL-01 | Phase 8 | Pending |
+| DEAL-02 | Phase 8 | Pending |
+| DEAL-03 | Phase 8 | Pending |
+| SURF-04 | Phase 9 | Pending |
+| SURF-05 | Phase 9 | Pending |
+| SURF-06 | Phase 9 | Pending |
+| QA-04 | Phase 9 | Pending |
+| QA-05 | Phase 9 | Pending |
+| QA-06 | Phase 9 | Pending |
+
+**Coverage:**
+- v1.2 requirements: 16 total
+- Mapped to phases: 16
+- Unmapped: 0

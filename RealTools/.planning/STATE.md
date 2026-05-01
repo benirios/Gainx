@@ -3,10 +3,10 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Light Dashboard UI Refactor
 status: planning
-last_updated: "2026-05-01T23:34:32.039Z"
-last_activity: 2026-05-01
+last_updated: "2026-05-02T00:00:00.000Z"
+last_activity: 2026-05-02 -- v1.2 roadmap created
 progress:
-  total_phases: 0
+  total_phases: 3
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -17,17 +17,17 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-01)
+See: .planning/PROJECT.md (updated 2026-05-02)
 
 **Core value:** Every deal has one central workspace — broker never has to hunt across email, spreadsheets, and Drive to find deal status or contact buyers.
-**Current focus:** Phase 05 — Product App Surface Refactor
+**Current focus:** Phase 07 — Light Visual Foundation
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 07 (Light Visual Foundation) — Not started
 Plan: —
-Status: Defining requirements
-Last activity: 2026-05-01 — Milestone v1.2 started
+Status: Roadmap created; ready to discuss or plan Phase 07
+Last activity: 2026-05-02 — Milestone v1.2 roadmap created
 
 ## Accumulated Context
 
@@ -45,6 +45,7 @@ Recent decisions affecting future work:
 - Use private `deal-files` and public `om-images` buckets.
 - URL-based tracking is the primary OM engagement signal; pixel is secondary.
 - `supabase.from()` casts remain until the Supabase inference bug is removed or upgraded away.
+- v1.2 intentionally supersedes the unfinished v1.1 dark UI direction with a Nexus-style light dashboard reference.
 
 ### Pending Todos
 
@@ -67,4 +68,4 @@ Items acknowledged and deferred at milestone close on 2026-05-01:
 
 ## Session Continuity
 
-Resume with `$gsd-plan-phase 5` to plan the Product App Surface Refactor phase, or `$gsd-verify-work 03` to complete deferred live UAT first.
+Resume with `$gsd-discuss-phase 7` to clarify the Light Visual Foundation approach, or `$gsd-plan-phase 7` to plan directly.

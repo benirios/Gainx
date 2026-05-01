@@ -63,28 +63,28 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| UI-05 | TBD | Pending |
-| UI-06 | TBD | Pending |
-| UI-07 | TBD | Pending |
-| UI-08 | TBD | Pending |
-| APP-04 | TBD | Pending |
-| APP-05 | TBD | Pending |
-| APP-06 | TBD | Pending |
-| DEAL-01 | TBD | Pending |
-| DEAL-02 | TBD | Pending |
-| DEAL-03 | TBD | Pending |
-| SURF-04 | TBD | Pending |
-| SURF-05 | TBD | Pending |
-| SURF-06 | TBD | Pending |
-| QA-04 | TBD | Pending |
-| QA-05 | TBD | Pending |
-| QA-06 | TBD | Pending |
+| UI-05 | Phase 7 | Pending |
+| UI-06 | Phase 7 | Pending |
+| UI-07 | Phase 7 | Pending |
+| UI-08 | Phase 7 | Pending |
+| APP-04 | Phase 8 | Pending |
+| APP-05 | Phase 8 | Pending |
+| APP-06 | Phase 8 | Pending |
+| DEAL-01 | Phase 8 | Pending |
+| DEAL-02 | Phase 8 | Pending |
+| DEAL-03 | Phase 8 | Pending |
+| SURF-04 | Phase 9 | Pending |
+| SURF-05 | Phase 9 | Pending |
+| SURF-06 | Phase 9 | Pending |
+| QA-04 | Phase 9 | Pending |
+| QA-05 | Phase 9 | Pending |
+| QA-06 | Phase 9 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 16 total
-- Mapped to phases: 0
-- Unmapped: 16
+- Mapped to phases: 16
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-05-02*
-*Last updated: 2026-05-02 after v1.2 requirements definition*
+*Last updated: 2026-05-02 after v1.2 roadmap creation*
