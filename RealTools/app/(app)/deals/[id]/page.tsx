@@ -30,7 +30,6 @@ export default async function DealHubPage({
 
   // Parallel fetch — never fetch per-component (RESEARCH.md Anti-Pattern)
   // All queries use `as any` cast to bypass supabase-js 2.104.x PostgrestVersion=never inference bug
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [dealResult, notesResult, filesResult, buyersResult, dealBuyersResult] = await Promise.all([
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (supabase.from('deals') as any)
