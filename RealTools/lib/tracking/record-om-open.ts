@@ -25,24 +25,20 @@ export async function recordOmOpenByToken(token: string): Promise<void> {
 
   const supabase = createSupabaseServiceClient()
 
-  // Look up the deal_buyers row by tracking token
+  const openedAt = new Date().toISOString()
+
+  // Atomically claim the first open. URL tracking and the fallback pixel can
+  // arrive nearly together, so the null predicate must live in the UPDATE.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: dealBuyer } = await (supabase.from('deal_buyers') as any)
-    .select('deal_id, buyer_id, om_opened_at')
+    .update({ om_opened_at: openedAt })
     .eq('tracking_token', token)
-    .single() as { data: Pick<DealBuyerRow, 'deal_id' | 'buyer_id' | 'om_opened_at'> | null }
+    .is('om_opened_at', null)
+    .select('deal_id, buyer_id')
+    .single() as { data: Pick<DealBuyerRow, 'deal_id' | 'buyer_id'> | null }
 
-  // Unknown token — no-op (T-03-08: do not reveal token validity)
+  // Unknown or already-opened token — no-op (T-03-08/T-03-09)
   if (!dealBuyer) return
-
-  // Idempotency guard: only record on first open (T-03-09)
-  if (dealBuyer.om_opened_at) return
-
-  // Record the open timestamp
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await (supabase.from('deal_buyers') as any)
-    .update({ om_opened_at: new Date().toISOString() })
-    .eq('tracking_token', token)
 
   // Fetch buyer metadata for the activity event (D-09)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
