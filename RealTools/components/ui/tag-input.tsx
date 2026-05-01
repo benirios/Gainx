@@ -50,7 +50,7 @@ export function TagInput({
 
   return (
     <div
-      className="flex flex-wrap gap-1.5 items-center min-h-[40px] bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 cursor-text"
+      className="flex min-h-11 cursor-text flex-wrap items-center gap-1.5 rounded-[14px] border border-input bg-secondary px-3 py-2"
       onClick={() => inputRef.current?.focus()}
     >
       {/* Serialized hidden input for form submission */}
@@ -60,7 +60,7 @@ export function TagInput({
       {tags.map((tag) => (
         <Badge
           key={tag}
-          className="bg-zinc-700 text-zinc-300 text-xs rounded-full px-2 py-0.5 flex items-center gap-1 hover:bg-zinc-700"
+          className="flex items-center gap-1.5"
         >
           {tag}
           {!disabled && (
@@ -70,7 +70,7 @@ export function TagInput({
                 e.stopPropagation()
                 removeTag(tag)
               }}
-              className="text-zinc-400 hover:text-zinc-50 ml-0.5 leading-none"
+              className="ml-0.5 leading-none text-muted-foreground hover:text-foreground"
               aria-label={`Remove tag ${tag}`}
             >
               <X className="size-3" />
@@ -91,7 +91,7 @@ export function TagInput({
             if (inputValue) addTag(inputValue)
           }}
           placeholder={tags.length === 0 ? placeholder : ''}
-          className="flex-1 min-w-[120px] border-0 bg-transparent p-0 h-auto text-zinc-50 placeholder:text-zinc-500 focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="h-auto min-w-[120px] flex-1 border-0 bg-transparent p-0 text-foreground placeholder:text-[#6f7485] focus-visible:ring-0 focus-visible:ring-offset-0"
           disabled={disabled}
         />
       )}
