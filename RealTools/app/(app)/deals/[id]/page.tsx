@@ -9,11 +9,14 @@ import { DealFormModal } from '@/components/deals/deal-form-modal'
 import { DeleteDealDialog } from '@/components/deals/delete-deal-dialog'
 import { NotesSection } from '@/components/notes/notes-section'
 import { FilesSection } from '@/components/files/files-section'
+import { SendOmModal } from '@/components/deals/send-om-modal'
 import type { Database } from '@/types/supabase'
 
 type DealRow = Database['public']['Tables']['deals']['Row']
 type NoteRow = Database['public']['Tables']['notes']['Row']
 type DealFileRow = Database['public']['Tables']['deal_files']['Row']
+type BuyerRow = Database['public']['Tables']['buyers']['Row']
+type DealBuyerRow = Database['public']['Tables']['deal_buyers']['Row']
 
 export default async function DealHubPage({
   params,
@@ -28,7 +31,7 @@ export default async function DealHubPage({
   // Parallel fetch — never fetch per-component (RESEARCH.md Anti-Pattern)
   // All queries use `as any` cast to bypass supabase-js 2.104.x PostgrestVersion=never inference bug
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [dealResult, notesResult, filesResult] = await Promise.all([
+  const [dealResult, notesResult, filesResult, buyersResult, dealBuyersResult] = await Promise.all([
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (supabase.from('deals') as any)
       .select('*')
@@ -45,12 +48,26 @@ export default async function DealHubPage({
       .select('*')
       .eq('deal_id', id)
       .order('created_at', { ascending: false }) as Promise<{ data: DealFileRow[] | null; error: unknown }>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (supabase.from('buyers') as any)
+      .select('*')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false }) as Promise<{ data: BuyerRow[] | null; error: unknown }>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (supabase.from('deal_buyers') as any)
+      .select('buyer_id, om_sent_at')
+      .eq('deal_id', id) as Promise<{
+        data: Pick<DealBuyerRow, 'buyer_id' | 'om_sent_at'>[] | null
+        error: unknown
+      }>,
   ])
 
   if (!dealResult.data) notFound()
 
   const deal = dealResult.data
   const notes: NoteRow[] = notesResult.data ?? []
+  const buyers: BuyerRow[] = buyersResult.data ?? []
+  const dealBuyers = dealBuyersResult.data ?? []
 
   // Generate signed URLs server-side — 1-hour expiry, one request per file
   const rawFiles = filesResult.data ?? []
@@ -80,6 +97,11 @@ export default async function DealHubPage({
           <StatusBadge status={deal.status} />
         </div>
         <div className="flex items-center gap-2">
+          <SendOmModal
+            dealId={deal.id}
+            buyers={buyers}
+            dealBuyers={dealBuyers}
+          />
           <DealFormModal
             deal={deal}
             trigger={
