@@ -57,7 +57,7 @@ completed: 2026-05-01
 
 Each task was committed atomically:
 
-1. **Task 1: Create send OM backend pipeline** - `a3fb06a` (feat)
+1. **Task 1: Create send OM backend pipeline** - `a3fb06a`, `e754633` (feat, fix)
 2. **Task 2: Build Send OM modal with sent badges and re-send support** - `431d922` (feat)
 3. **Task 3: Wire Send OM modal into Deal Hub data flow** - `7ae38c9` (feat)
 
@@ -87,10 +87,18 @@ Each task was committed atomically:
 - **Verification:** `npx tsc --noEmit`; grep verified `batch.send` and `om_sent` paths.
 - **Committed in:** `a3fb06a`
 
+**2. [Rule 1 - Bug] Avoided Resend import crash without API key**
+- **Found during:** Milestone close live smoke test
+- **Issue:** `new Resend(process.env.RESEND_API_KEY)` threw at module import when the API key was missing, so the Deal Hub action crashed before `sendOmAction` could return the friendly validation error.
+- **Fix:** Changed `lib/resend.ts` to lazily create the Resend client only when an API key exists; `sendOmAction` now returns the intended missing-key validation error.
+- **Files modified:** `lib/resend.ts`, `lib/actions/send-om-action.ts`
+- **Verification:** `npx tsc --noEmit`; `npm run lint -- lib/resend.ts lib/actions/send-om-action.ts`
+- **Committed in:** `e754633`
+
 ---
 
-**Total deviations:** 1 auto-fixed (1 correctness)
-**Impact on plan:** Activity and sent-status semantics are more accurate. No scope expansion.
+**Total deviations:** 2 auto-fixed (1 correctness, 1 bug)
+**Impact on plan:** Activity semantics are more accurate and the missing API key path now fails gracefully. No scope expansion.
 
 ## Issues Encountered
 
