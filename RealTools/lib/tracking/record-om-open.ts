@@ -23,7 +23,6 @@ type BuyerRow = Database['public']['Tables']['buyers']['Row']
 export async function recordOmOpenByToken(token: string): Promise<void> {
   if (!token) return
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const supabase = createSupabaseServiceClient()
 
   // Look up the deal_buyers row by tracking token
