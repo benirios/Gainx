@@ -1,4 +1,9 @@
 import 'server-only'
 import { Resend } from 'resend'
 
-export const resend = new Resend(process.env.RESEND_API_KEY)
+export function createResendClient() {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) return null
+
+  return new Resend(apiKey)
+}

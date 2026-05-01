@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { createSupabaseServiceClient } from '@/lib/supabase/service'
 import { buildOmEmailHtml, buildOmEmailText } from '@/lib/email/om-email'
-import { resend } from '@/lib/resend'
+import { createResendClient } from '@/lib/resend'
 import type { Database } from '@/types/supabase'
 
 type DealRow = Database['public']['Tables']['deals']['Row']
@@ -61,6 +61,11 @@ export async function sendOmAction(
   }
 
   if (!process.env.RESEND_API_KEY) {
+    return { errors: { general: ['Missing RESEND_API_KEY. Add it before sending OM emails.'] } }
+  }
+
+  const resend = createResendClient()
+  if (!resend) {
     return { errors: { general: ['Missing RESEND_API_KEY. Add it before sending OM emails.'] } }
   }
 
