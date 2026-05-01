@@ -1,34 +1,40 @@
-# Requirements: RealTools v1.1 Reference UI Refactor
+# Requirements: RealTools v1.2 Light Dashboard UI Refactor
 
-**Defined:** 2026-05-01
+**Defined:** 2026-05-02
 **Core Value:** Every deal has one central workspace — broker never has to hunt across email, spreadsheets, and Drive to find deal status or contact buyers.
 
-## v1.1 Requirements
+## v1.2 Requirements
 
 ### Visual System
 
-- [x] **UI-01**: User sees a premium dark RealTools interface that matches the provided reference screenshot's typography, contrast, border, spacing, and control styling, excluding the background pattern.
-- [x] **UI-02**: User sees consistent serif brand/display typography and muted sans-serif supporting text across headings, navigation, labels, descriptions, and calls to action.
-- [x] **UI-03**: User sees consistent pill-shaped primary actions, subdued secondary actions, subtle borders, and restrained hover/focus states across buttons and links.
-- [x] **UI-04**: User sees consistent dark surface styling across cards, panels, tables, forms, dialogs, and empty states without nested-card clutter.
+- [ ] **UI-05**: User sees a light Nexus-style RealTools interface with off-white page backgrounds, white surfaces, subtle borders, soft shadows, muted gray text, and pastel teal/purple/blue accents.
+- [ ] **UI-06**: User sees consistent rounded controls, compact icon-led actions, pale icon containers, restrained hover/focus states, and low-contrast dividers across shared UI primitives.
+- [ ] **UI-07**: User sees typography, spacing, card density, and visual hierarchy tuned for a calm SaaS dashboard rather than the previous dark premium style.
+- [ ] **UI-08**: User sees loading, empty, error, disabled, hover, and focus states that follow the light reference style without causing layout shift or text overlap.
 
-### Product App
+### App Shell And Dashboard
 
-- [ ] **APP-01**: User can use the dashboard, deal cards, deal hub, buyers table, profile page, and sidebar in the refreshed reference style without losing existing workflows.
-- [ ] **APP-02**: User can create, edit, delete, and review deals, notes, files, buyers, send-OM flows, and activity events through restyled forms, dialogs, tables, and timeline components.
-- [ ] **APP-03**: User sees status badges, tags, metadata, and activity items restyled to match the reference's muted premium visual language while remaining readable.
+- [ ] **APP-04**: User can navigate the authenticated app through a light sidebar/topbar shell that matches the reference's compact SaaS layout while preserving existing routes and actions.
+- [ ] **APP-05**: User can scan the dashboard through light metric cards, deal summaries, activity previews, and broker workflow shortcuts that feel visually aligned with the reference without inventing unsupported analytics.
+- [ ] **APP-06**: User can use dashboard filters, buttons, menus, badges, and cards in the light visual system without losing existing deal-management behavior.
+
+### Deal Workspace
+
+- [ ] **DEAL-01**: User can use the Deal Hub in the light reference style, including deal header, metadata, status, notes, files, buyers, send-OM entry points, and activity log.
+- [ ] **DEAL-02**: User can create, edit, delete, and review deals, notes, files, buyers, and send-OM flows through restyled forms, dialogs, tables, and timeline components.
+- [ ] **DEAL-03**: User sees buyer tags, deal statuses, file rows, notes, and activity events styled with readable muted contrast and pastel accents.
 
 ### Public And Auth Surfaces
 
-- [ ] **SURF-01**: User sees login and signup pages restyled to match the reference visual system.
-- [ ] **SURF-02**: Buyer sees public OM pages restyled to match the reference visual system while preserving unauthenticated access and tracking behavior.
-- [ ] **SURF-03**: User sees the unauthenticated landing/root page restyled to match the reference visual system without copying the excluded background pattern.
+- [ ] **SURF-04**: User sees login and signup pages restyled to match the light dashboard visual system while preserving Supabase email/password auth behavior.
+- [ ] **SURF-05**: Buyer sees public OM pages restyled to match the light reference system while preserving unauthenticated access, OM readability, and tracking behavior.
+- [ ] **SURF-06**: User sees the unauthenticated root/landing page restyled to match the light reference system without adding marketing-only content that delays access to the product.
 
-### Responsive QA
+### Verification
 
-- [ ] **QA-01**: User can complete critical v1.0 workflows after the refactor: auth, deal CRUD, notes, file upload/download, buyer CRUD, send OM, public OM open, tracking, and activity review.
-- [ ] **QA-02**: User sees the refreshed UI without text overlap, clipped controls, unreadable contrast, or broken layout on mobile and desktop viewports.
-- [ ] **QA-03**: User-facing loading, empty, error, disabled, focus, and hover states follow the refreshed visual system.
+- [ ] **QA-04**: User can complete critical v1.0 workflows after the refactor: auth, deal CRUD, notes, file upload/download, buyer CRUD, send OM, public OM open, tracking, and activity review.
+- [ ] **QA-05**: User sees the refreshed UI without text overlap, clipped controls, unreadable contrast, broken layout, or accidental dark-theme remnants on mobile and desktop viewports.
+- [ ] **QA-06**: User can complete the deferred Phase 3 live UAT scenarios for Resend delivery, browser open tracking, and activity-log confirmation.
 
 ## Future Requirements
 
@@ -41,36 +47,44 @@
 
 ## Out of Scope
 
+Explicitly excluded. Documented to prevent scope creep.
+
 | Feature | Reason |
 |---------|--------|
-| Reference background network pattern | User explicitly excluded the background from the style match. |
-| New product capabilities | This milestone is a visual refactor; workflow behavior should stay stable. |
+| New analytics product capabilities | The reference contains analytics widgets, but this milestone is a visual refactor and should not invent unsupported metrics. |
 | Billing, teams, pipelines, and PDF export | Previously deferred product scope; not required for the UI refactor. |
-| Brand rename or logo redesign beyond styling fit | The goal is to match style choices, not redefine the product identity. |
+| Brand rename to Nexus or copied reference content | The image is a style reference, not a product or content migration. |
+| Rebuilding v1.1 dark direction | v1.2 replaces that direction with a light dashboard system. |
+| Large CRM expansion | Complex CRM workflows remain out of scope for the MVP. |
 
 ## Traceability
 
+Which phases cover which requirements. Updated during roadmap creation.
+
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| UI-01 | Phase 4 | Complete |
-| UI-02 | Phase 4 | Complete |
-| UI-03 | Phase 4 | Complete |
-| UI-04 | Phase 4 | Complete |
-| APP-01 | Phase 5 | Pending |
-| APP-02 | Phase 5 | Pending |
-| APP-03 | Phase 5 | Pending |
-| SURF-01 | Phase 6 | Pending |
-| SURF-02 | Phase 6 | Pending |
-| SURF-03 | Phase 6 | Pending |
-| QA-01 | Phase 6 | Pending |
-| QA-02 | Phase 6 | Pending |
-| QA-03 | Phase 6 | Pending |
+| UI-05 | TBD | Pending |
+| UI-06 | TBD | Pending |
+| UI-07 | TBD | Pending |
+| UI-08 | TBD | Pending |
+| APP-04 | TBD | Pending |
+| APP-05 | TBD | Pending |
+| APP-06 | TBD | Pending |
+| DEAL-01 | TBD | Pending |
+| DEAL-02 | TBD | Pending |
+| DEAL-03 | TBD | Pending |
+| SURF-04 | TBD | Pending |
+| SURF-05 | TBD | Pending |
+| SURF-06 | TBD | Pending |
+| QA-04 | TBD | Pending |
+| QA-05 | TBD | Pending |
+| QA-06 | TBD | Pending |
 
 **Coverage:**
-- v1.1 requirements: 13 total
-- Mapped to phases: 13
-- Unmapped: 0
+- v1.2 requirements: 16 total
+- Mapped to phases: 0
+- Unmapped: 16
 
 ---
-*Requirements defined: 2026-05-01*
-*Last updated: 2026-05-01 after v1.1 requirements definition*
+*Requirements defined: 2026-05-02*
+*Last updated: 2026-05-02 after v1.2 requirements definition*
