@@ -1,8 +1,15 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Cormorant_Garamond, Geist } from 'next/font/google'
 import './globals.css'
+import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ['latin'] })
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-display',
+})
 
 export const metadata: Metadata = {
   title: 'RealTools',
@@ -15,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={cn("dark", "font-sans", geist.variable, cormorant.variable)}>
+      <body>{children}</body>
     </html>
   )
 }
