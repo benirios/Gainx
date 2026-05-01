@@ -10,7 +10,7 @@ RealTools v1.1 is a behavior-preserving UI refactor. The milestone refreshes eve
 - Integer phases (4, 5, 6): Planned v1.1 milestone work
 - Decimal phases (5.1, 5.2): Urgent insertions if needed
 
-- [ ] **Phase 4: Reference Visual Foundation** - Establish global tokens, typography, surfaces, and shared UI primitives matching the reference style.
+- [x] **Phase 4: Reference Visual Foundation** - Establish global tokens, typography, surfaces, and shared UI primitives matching the reference style. (completed 2026-05-01)
 - [ ] **Phase 5: Product App Surface Refactor** - Restyle the authenticated broker workspace: dashboard, deal hub, buyers, profile, forms, dialogs, tables, notes, files, send OM, and activity.
 - [ ] **Phase 6: Public/Auth Surfaces and Responsive QA** - Restyle auth, landing, and public OM pages, then verify responsive quality and critical v1.0 workflows.
 
@@ -62,6 +62,6 @@ Phases execute in numeric order: 4 -> 5 -> 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 4. Reference Visual Foundation | 0/TBD | Ready to plan | - |
+| 4. Reference Visual Foundation | 3/3 | Complete   | 2026-05-01 |
 | 5. Product App Surface Refactor | 0/TBD | Not started | - |
 | 6. Public/Auth Surfaces and Responsive QA | 0/TBD | Not started | - |
