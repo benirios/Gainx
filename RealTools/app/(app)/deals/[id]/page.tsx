@@ -99,18 +99,18 @@ export default async function DealHubPage({
       {/* Back link */}
       <Link
         href="/dashboard"
-        className="inline-flex items-center text-sm text-zinc-400 hover:text-zinc-50 transition-colors mb-4"
+        className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
       >
         ← Back to Deals
       </Link>
 
       {/* Section 1: Deal details */}
-      <div className="flex items-center justify-between mt-4 mb-6">
-        <div className="flex items-center gap-3">
-          <h1 className="text-xl font-semibold text-zinc-50">{deal.title}</h1>
+      <div className="flex items-start justify-between mt-4 mb-6 gap-4">
+        <div className="flex items-center gap-3 min-w-0">
+          <h1 className="font-heading text-[28px] font-semibold text-foreground leading-tight">{deal.title}</h1>
           <StatusBadge status={deal.status} />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <SendOmModal
             dealId={deal.id}
             buyers={buyers}
@@ -119,7 +119,7 @@ export default async function DealHubPage({
           <DealFormModal
             deal={deal}
             trigger={
-              <Button variant="outline" className="border-zinc-700 text-zinc-50 hover:bg-zinc-800">
+              <Button variant="outline" size="sm" className="border-border text-foreground hover:bg-muted">
                 Edit
               </Button>
             }
@@ -128,22 +128,22 @@ export default async function DealHubPage({
         </div>
       </div>
 
-      <Card className="bg-zinc-900 border-zinc-800 mb-6">
+      <Card className="bg-card border-border mb-6">
         <CardContent className="pt-6">
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
-              <p className="text-sm text-zinc-400">Address</p>
-              <p className="text-base text-zinc-50">{deal.address ?? '—'}</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Address</p>
+              <p className="text-base text-foreground">{deal.address ?? '—'}</p>
             </div>
             <div>
-              <p className="text-sm text-zinc-400">Asking price</p>
-              <p className="text-base text-zinc-50">{deal.price ?? '—'}</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Asking price</p>
+              <p className="text-base text-foreground">{deal.price ?? '—'}</p>
             </div>
           </div>
           {deal.description && (
             <div>
-              <p className="text-sm text-zinc-400 mb-1">Description</p>
-              <p className="text-base text-zinc-50 leading-relaxed">{deal.description}</p>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Description</p>
+              <p className="text-base text-foreground leading-relaxed">{deal.description}</p>
             </div>
           )}
         </CardContent>

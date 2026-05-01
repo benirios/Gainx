@@ -37,11 +37,11 @@ export function NotesSection({ notes, dealId }: { notes: Note[]; dealId: string 
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-base font-semibold text-zinc-50">Notes</h2>
+        <h2 className="font-heading text-[20px] font-semibold text-foreground">Notes</h2>
         <Button
           variant="ghost"
           size="sm"
-          className="text-zinc-400 hover:text-zinc-50"
+          className="text-muted-foreground hover:text-foreground"
           onClick={() => setShowAdd(!showAdd)}
         >
           <Plus className="size-4 mr-1" />
@@ -56,21 +56,21 @@ export function NotesSection({ notes, dealId }: { notes: Note[]; dealId: string 
             name="content"
             placeholder="Write a note…"
             rows={3}
-            className="bg-zinc-800 border-zinc-700 text-zinc-50 placeholder:text-zinc-500 w-full"
+            className="bg-muted border-border text-foreground placeholder:text-muted-foreground w-full"
             disabled={isPending}
           />
           {state.errors?.content && (
-            <p className="text-sm text-red-500 mt-1">{state.errors.content[0]}</p>
+            <p className="text-sm text-destructive mt-1">{state.errors.content[0]}</p>
           )}
           {state.errors?.general && (
-            <p className="text-sm text-red-500 mt-1">{state.errors.general[0]}</p>
+            <p className="text-sm text-destructive mt-1">{state.errors.general[0]}</p>
           )}
           <div className="flex justify-end gap-2 mt-2">
             <Button
               type="button"
               variant="ghost"
               size="sm"
-              className="text-zinc-400 hover:text-zinc-50"
+              className="text-muted-foreground hover:text-foreground"
               onClick={() => setShowAdd(false)}
               disabled={isPending}
             >
@@ -79,7 +79,7 @@ export function NotesSection({ notes, dealId }: { notes: Note[]; dealId: string 
             <Button
               type="submit"
               size="sm"
-              className="bg-white text-zinc-950 hover:bg-zinc-100"
+              className="bg-accent text-accent-foreground hover:bg-accent/90"
               disabled={isPending}
             >
               {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Save Note'}
@@ -89,7 +89,7 @@ export function NotesSection({ notes, dealId }: { notes: Note[]; dealId: string 
       )}
 
       {notes.length === 0 && !showAdd ? (
-        <p className="text-sm text-zinc-400 text-center py-4">No notes yet.</p>
+        <p className="text-sm text-muted-foreground text-center py-4">No notes yet.</p>
       ) : (
         <div className="space-y-2">
           {notes.map((note) => (

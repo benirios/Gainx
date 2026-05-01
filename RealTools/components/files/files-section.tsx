@@ -83,9 +83,9 @@ export function FilesSection({
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-base font-semibold text-zinc-50">Files</h2>
+        <h2 className="font-heading text-[20px] font-semibold text-foreground">Files</h2>
         <label className="cursor-pointer">
-          <span className="inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-zinc-50 transition-colors px-2 py-1 rounded-md hover:bg-zinc-800">
+          <span className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-muted">
             {uploading ? (
               <>
                 <Loader2 className="size-4 animate-spin" />
@@ -108,7 +108,7 @@ export function FilesSection({
       </div>
 
       {files.length === 0 ? (
-        <p className="text-sm text-zinc-400 text-center py-4">No files uploaded yet.</p>
+        <p className="text-sm text-muted-foreground text-center py-4">No files uploaded yet.</p>
       ) : (
         <div className="space-y-2">
           {files.map((file) => (
@@ -139,10 +139,10 @@ function FileRow({ file }: { file: DealFile }) {
   }
 
   return (
-    <div className="flex items-center justify-between bg-zinc-800/50 rounded-lg px-4 py-3 min-h-[44px]">
+    <div className="flex items-center justify-between bg-muted/50 rounded-lg px-4 py-3 min-h-[44px] hover:bg-muted/70 transition-colors">
       <div className="flex items-center gap-2 min-w-0">
-        <FileText className="size-4 text-zinc-400 shrink-0" />
-        <span className="text-base text-zinc-50 truncate">{file.file_name}</span>
+        <FileText className="size-4 text-muted-foreground shrink-0" />
+        <span className="text-base text-foreground truncate">{file.file_name}</span>
       </div>
       <div className="flex items-center gap-2 shrink-0">
         {file.signedUrl && (
@@ -150,7 +150,8 @@ function FileRow({ file }: { file: DealFile }) {
             href={file.signedUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-zinc-50 transition-colors"
+            className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            aria-label={`Download ${file.file_name}`}
           >
             <Download className="size-4" />
             Download
@@ -161,27 +162,27 @@ function FileRow({ file }: { file: DealFile }) {
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8 text-zinc-400 hover:text-red-400"
+              className="h-8 w-8 text-muted-foreground hover:text-destructive"
               aria-label="Delete file"
             >
               <Trash2 className="size-4" />
             </Button>
           </AlertDialogTrigger>
-          <AlertDialogContent className="bg-zinc-900 border-zinc-800 text-zinc-50">
+          <AlertDialogContent className="bg-card border-border text-foreground">
             <AlertDialogHeader>
               <AlertDialogTitle>Delete File?</AlertDialogTitle>
-              <AlertDialogDescription className="text-zinc-400">
+              <AlertDialogDescription className="text-muted-foreground">
                 This file will be permanently deleted from storage.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel className="border-zinc-700 text-zinc-50 hover:bg-zinc-800">
+              <AlertDialogCancel className="border-border text-foreground hover:bg-muted">
                 Keep
               </AlertDialogCancel>
               <AlertDialogAction
                 onClick={handleDelete}
                 disabled={deletePending}
-                className="bg-red-500 hover:bg-red-600 text-white"
+                className="bg-destructive hover:bg-destructive/90 text-white"
               >
                 {deletePending ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Delete'}
               </AlertDialogAction>

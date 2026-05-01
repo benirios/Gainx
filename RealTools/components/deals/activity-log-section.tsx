@@ -42,19 +42,19 @@ function activityDescription(activity: ActivityRow) {
 export function ActivityLogSection({ activities }: { activities: ActivityRow[] }) {
   return (
     <div>
-      <h2 className="text-base font-semibold text-zinc-50 mb-4">Activity</h2>
+      <h2 className="font-heading text-[20px] font-semibold text-foreground mb-4">Activity</h2>
 
       {activities.length === 0 ? (
-        <p className="text-sm text-zinc-400 text-center py-4">No activity yet.</p>
+        <p className="text-sm text-muted-foreground text-center py-4">No activity yet.</p>
       ) : (
         <div className="space-y-2">
           {activities.map((activity) => (
             <div
               key={activity.id}
-              className="flex items-start justify-between gap-4 bg-zinc-800/50 rounded-lg px-4 py-3 min-h-[44px]"
+              className="flex items-center justify-between gap-4 bg-muted/50 rounded-lg px-4 py-3 min-h-[44px] hover:bg-muted/70 transition-colors"
             >
-              <span className="text-base text-zinc-50">{activityDescription(activity)}</span>
-              <time className="text-sm text-zinc-400 shrink-0" dateTime={activity.created_at ?? undefined}>
+              <span className="text-sm text-foreground">{activityDescription(activity)}</span>
+              <time className="text-xs text-muted-foreground shrink-0" dateTime={activity.created_at ?? undefined}>
                 {formatTimestamp(activity.created_at)}
               </time>
             </div>
