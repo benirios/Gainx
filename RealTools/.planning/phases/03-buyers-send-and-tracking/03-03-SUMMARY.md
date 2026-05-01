@@ -54,7 +54,7 @@ metrics:
 
 | Task | Name | Commit | Files |
 |------|------|--------|-------|
-| 1 | Build shared idempotent open recorder and pixel route | f3dfd1c, 9bdf1d0 | lib/tracking/record-om-open.ts, app/api/track/[token]/route.ts |
+| 1 | Build shared idempotent open recorder and pixel route | f3dfd1c, 9bdf1d0, dcd3549 | lib/tracking/record-om-open.ts, app/api/track/[token]/route.ts |
 | 2 | Add primary URL tracking and secondary pixel embed to OM page | 31813c1 | app/om/[id]/page.tsx |
 
 ## What Was Built
@@ -98,6 +98,13 @@ Public GET route handler (already excluded from middleware auth):
 - **Files modified:** lib/tracking/record-om-open.ts
 - **Commit:** 9bdf1d0
 
+**2. [Rule 1 - Bug] Made first-open recording atomic**
+- **Found during:** Phase 3 code review
+- **Issue:** URL tracking and the fallback pixel can arrive nearly together. The previous read-then-update null check could allow both requests to see `om_opened_at = null` and insert duplicate `om_opened` activities.
+- **Fix:** Changed the recorder to claim first open with a conditional `update(...).is('om_opened_at', null).select(...)`; unknown or already-opened tokens return without activity insertion.
+- **Files modified:** lib/tracking/record-om-open.ts
+- **Commit:** dcd3549
+
 ## Known Stubs
 
 None — all tracking paths write real data to the database.
@@ -113,5 +120,5 @@ No new threat surfaces beyond what the plan's `<threat_model>` already covers. T
 - [x] `app/om/[id]/page.tsx` updated with `searchParams`, primary URL call, and pixel embed
 - [x] `npx tsc --noEmit` passes (0 errors)
 - [x] `npx eslint` passes (0 errors, 0 warnings)
-- [x] Commits f3dfd1c, 31813c1, 9bdf1d0 exist in git log
+- [x] Commits f3dfd1c, 31813c1, 9bdf1d0, dcd3549 exist in git log
 - [x] No unexpected file deletions across any commit
