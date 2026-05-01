@@ -20,18 +20,18 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      {/* Page header */}
+      {/* Page header — D-02: serif title, right-aligned action */}
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-xl font-semibold text-zinc-50">Deals</h1>
+        <h1 className="font-heading text-[28px] font-semibold text-foreground leading-tight">Deals</h1>
         <DealFormModal />
       </div>
 
       {dealList.length === 0 ? (
-        /* Empty state per D-03 + UI-SPEC Copywriting Contract */
+        /* Empty state — D-04: single-panel, one CTA, muted helper text */
         <div className="flex flex-col items-center justify-center py-24 text-center">
-          <h2 className="text-xl font-semibold text-zinc-50">No deals yet.</h2>
-          <p className="text-base text-zinc-400 mt-2 mb-6">
-            Create your first deal to get started.
+          <h2 className="font-heading text-xl font-semibold text-foreground">No deals yet.</h2>
+          <p className="text-sm text-muted-foreground mt-2 mb-6 max-w-sm">
+            Create a deal to start building the workspace, OM, buyers, and activity history in one place.
           </p>
           <DealFormModal />
         </div>
