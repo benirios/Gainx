@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { createSupabaseServiceClient } from '@/lib/supabase/service'
 import type { Database } from '@/types/supabase'
 
 // Explicit table types to work around supabase-js 2.104.x __InternalSupabase
@@ -55,6 +56,19 @@ export async function createNoteAction(
   const { error } = await (supabase.from('notes') as any).insert(insertData)
 
   if (error) return { errors: { general: ['Failed to save note. Please try again.'] } }
+
+  try {
+    const serviceClient = createSupabaseServiceClient()
+    // Best-effort telemetry: primary note creation has already succeeded.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await (serviceClient.from('activities') as any).insert({
+      deal_id: parsed.data.deal_id,
+      event_type: 'note_added',
+      metadata: {},
+    })
+  } catch {
+    // Do not block note creation on telemetry failure.
+  }
 
   revalidatePath(`/deals/${parsed.data.deal_id}`)
   return {}

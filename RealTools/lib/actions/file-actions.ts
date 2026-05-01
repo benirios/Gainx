@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { createSupabaseServiceClient } from '@/lib/supabase/service'
 import type { Database } from '@/types/supabase'
 
 type DealFileInsert = Database['public']['Tables']['deal_files']['Insert']
@@ -31,6 +32,21 @@ export async function insertDealFileAction({
   const { error } = await (supabase.from('deal_files') as any).insert(insertData)
 
   if (error) return { error: 'Failed to save file record. Please try again.' }
+
+  try {
+    const serviceClient = createSupabaseServiceClient()
+    // Best-effort telemetry: primary file record creation has already succeeded.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await (serviceClient.from('activities') as any).insert({
+      deal_id: dealId,
+      event_type: 'file_uploaded',
+      metadata: {
+        file_name: fileName,
+      },
+    })
+  } catch {
+    // Do not block file creation on telemetry failure.
+  }
 
   revalidatePath(`/deals/${dealId}`)
   return {}
