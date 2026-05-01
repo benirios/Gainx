@@ -19,9 +19,16 @@ export default async function BuyersPage() {
 
   return (
     <div className="p-8">
-      {/* Page header */}
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-semibold text-zinc-50">Buyers</h1>
+      {/* Page header — D-02: serif title, muted support copy, right-aligned action */}
+      <div className="flex items-start justify-between mb-8">
+        <div>
+          <h1 className="font-heading text-[28px] font-semibold leading-tight text-foreground">
+            Buyers
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Manage your buyer contacts and tags.
+          </p>
+        </div>
         {(buyers ?? []).length > 0 && <BuyerFormModal />}
       </div>
 

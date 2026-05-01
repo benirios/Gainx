@@ -58,22 +58,25 @@ export function BuyerFormModal({ buyer, trigger }: Props) {
       ) : (
         <Button
           onClick={() => setOpen(true)}
-          className="bg-white text-zinc-950 hover:bg-zinc-100"
+          className="bg-accent text-accent-foreground hover:bg-accent/90"
         >
           <Plus className="size-4 mr-2" />
           New Buyer
         </Button>
       )}
+      {/* D-12: content-fit modal width */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="bg-zinc-900 border-zinc-800 text-zinc-50 sm:max-w-md">
+        <DialogContent className="bg-card border-border text-foreground sm:max-w-[32rem]">
           <DialogHeader>
+            {/* D-02: serif dialog title via global h/[data-slot] styles */}
             <DialogTitle className="text-xl font-semibold">
               {isEdit ? 'Edit Buyer' : 'New Buyer'}
             </DialogTitle>
-            <DialogDescription className="text-sm text-zinc-400">
+            <DialogDescription className="text-sm text-muted-foreground">
               {isEdit ? 'Update the buyer details.' : 'Fill in the details below.'}
             </DialogDescription>
           </DialogHeader>
+          {/* D-09: single-column, space-y-4 (16px) */}
           <form action={formAction} className="space-y-4">
             {isEdit && (
               <input type="hidden" name="buyerId" value={buyer.id} />
@@ -81,68 +84,73 @@ export function BuyerFormModal({ buyer, trigger }: Props) {
 
             {/* Name */}
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-zinc-300">Name</Label>
+              <Label htmlFor="name" className="text-foreground/80">Name</Label>
               <Input
                 id="name"
                 name="name"
                 defaultValue={buyer?.name}
                 placeholder="Jane Smith"
-                className="bg-zinc-800 border-zinc-700 text-zinc-50 placeholder:text-zinc-500"
+                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50"
                 disabled={isPending}
               />
+              {/* D-11: inline field error */}
               {state.errors?.name && (
-                <p className="text-sm text-red-500">{state.errors.name[0]}</p>
+                <p className="text-xs text-destructive">{state.errors.name[0]}</p>
               )}
             </div>
 
             {/* Email */}
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-zinc-300">Email</Label>
+              <Label htmlFor="email" className="text-foreground/80">Email</Label>
               <Input
                 id="email"
                 name="email"
                 type="email"
                 defaultValue={buyer?.email}
                 placeholder="jane@acme.com"
-                className="bg-zinc-800 border-zinc-700 text-zinc-50 placeholder:text-zinc-500"
+                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50"
                 disabled={isPending}
               />
+              {/* D-11: inline field error */}
               {state.errors?.email && (
-                <p className="text-sm text-red-500">{state.errors.email[0]}</p>
+                <p className="text-xs text-destructive">{state.errors.email[0]}</p>
               )}
             </div>
 
             {/* Tags */}
             <div className="space-y-2">
-              <Label className="text-zinc-300">Tags</Label>
+              <Label className="text-foreground/80">Tags</Label>
               <TagInput
                 name="tags"
                 defaultValue={buyer?.tags ?? []}
                 disabled={isPending}
                 placeholder="Type a tag and press Enter"
               />
+              {/* D-11: inline field error */}
               {state.errors?.tags && (
-                <p className="text-sm text-red-500">{state.errors.tags[0]}</p>
+                <p className="text-xs text-destructive">{state.errors.tags[0]}</p>
               )}
             </div>
 
             {state.errors?.general && (
-              <p className="text-sm text-red-500">{state.errors.general[0]}</p>
+              <p className="text-xs text-destructive">{state.errors.general[0]}</p>
             )}
 
-            <DialogFooter className="flex justify-end gap-3">
+            {/* D-09: right-aligned actions with mobile stack fallback */}
+            <DialogFooter className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:gap-3 pt-2">
               <Button
                 type="button"
                 variant="ghost"
-                className="text-zinc-400 hover:text-zinc-50"
+                className="text-muted-foreground hover:text-foreground w-full sm:w-auto"
                 onClick={() => setOpen(false)}
                 disabled={isPending}
               >
                 Discard
               </Button>
+              {/* D-11: spinner-in-button loading state */}
               <Button
                 type="submit"
-                className="bg-white text-zinc-950 hover:bg-zinc-100"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto disabled:opacity-50"
                 disabled={isPending}
               >
                 {isPending ? (
