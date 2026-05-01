@@ -10,6 +10,7 @@ import { DeleteDealDialog } from '@/components/deals/delete-deal-dialog'
 import { NotesSection } from '@/components/notes/notes-section'
 import { FilesSection } from '@/components/files/files-section'
 import { SendOmModal } from '@/components/deals/send-om-modal'
+import { ActivityLogSection } from '@/components/deals/activity-log-section'
 import type { Database } from '@/types/supabase'
 
 type DealRow = Database['public']['Tables']['deals']['Row']
@@ -17,6 +18,7 @@ type NoteRow = Database['public']['Tables']['notes']['Row']
 type DealFileRow = Database['public']['Tables']['deal_files']['Row']
 type BuyerRow = Database['public']['Tables']['buyers']['Row']
 type DealBuyerRow = Database['public']['Tables']['deal_buyers']['Row']
+type ActivityRow = Database['public']['Tables']['activities']['Row']
 
 export default async function DealHubPage({
   params,
@@ -30,7 +32,14 @@ export default async function DealHubPage({
 
   // Parallel fetch — never fetch per-component (RESEARCH.md Anti-Pattern)
   // All queries use `as any` cast to bypass supabase-js 2.104.x PostgrestVersion=never inference bug
-  const [dealResult, notesResult, filesResult, buyersResult, dealBuyersResult] = await Promise.all([
+  const [
+    dealResult,
+    notesResult,
+    filesResult,
+    buyersResult,
+    dealBuyersResult,
+    activitiesResult,
+  ] = await Promise.all([
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (supabase.from('deals') as any)
       .select('*')
@@ -59,6 +68,11 @@ export default async function DealHubPage({
         data: Pick<DealBuyerRow, 'buyer_id' | 'om_sent_at'>[] | null
         error: unknown
       }>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (supabase.from('activities') as any)
+      .select('*')
+      .eq('deal_id', id)
+      .order('created_at', { ascending: false }) as Promise<{ data: ActivityRow[] | null; error: unknown }>,
   ])
 
   if (!dealResult.data) notFound()
@@ -67,6 +81,7 @@ export default async function DealHubPage({
   const notes: NoteRow[] = notesResult.data ?? []
   const buyers: BuyerRow[] = buyersResult.data ?? []
   const dealBuyers = dealBuyersResult.data ?? []
+  const activities: ActivityRow[] = activitiesResult.data ?? []
 
   // Generate signed URLs server-side — 1-hour expiry, one request per file
   const rawFiles = filesResult.data ?? []
@@ -143,6 +158,11 @@ export default async function DealHubPage({
 
       {/* Section 3: Files */}
       <FilesSection files={filesWithUrls} dealId={deal.id} userId={user.id} />
+
+      <Separator className="my-12" />
+
+      {/* Section 4: Activity */}
+      <ActivityLogSection activities={activities} />
     </div>
   )
 }
