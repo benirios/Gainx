@@ -24,6 +24,15 @@ RealTools now has:
 
 **Deferred verification debt:** Live Phase 3 UAT remains pending for Resend delivery and browser-driven tracking/activity confirmation.
 
+## Current Milestone: v1.1 Reference UI Refactor
+
+**Goal:** Refactor all RealTools user-facing UI to match the provided reference screenshot's premium dark CRE visual style, excluding the screenshot's background pattern.
+
+**Target features:**
+- Apply the reference visual system across authentication, dashboard, deal hub, buyers, profile, modals, tables, forms, activity, files, notes, and hosted OM pages.
+- Preserve existing functionality while restyling typography, spacing, navigation, surfaces, buttons, inputs, badges, dialogs, and empty/loading/error states.
+- Validate responsive behavior and visual consistency across desktop and mobile without adopting the reference background network.
+
 ## Requirements
 
 ### Validated
@@ -43,8 +52,9 @@ RealTools now has:
 
 ### Active
 
+- [ ] Refactor all user-facing RealTools UI to match the reference screenshot's style choices, excluding the background pattern.
+- [ ] Preserve all shipped v1.0 behavior during the visual refactor.
 - [ ] Complete live UAT for Phase 3: Resend delivery, open tracking, and activity timeline.
-- [ ] Prepare next milestone requirements from product feedback.
 
 ### Out of Scope
 
@@ -88,11 +98,24 @@ RealTools now has:
 
 ## Next Milestone Goals
 
-Define the next milestone with `$gsd-new-milestone` after live UAT. Likely inputs:
+After v1.1, gather broker feedback on the refreshed product UI and resolve any remaining Phase 3 UAT findings or deployment packaging concerns.
 
-- Resolve any Phase 3 UAT findings.
-- Improve deployment packaging root warning if needed.
-- Add product polish based on broker feedback.
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `$gsd-transition`):
+1. Requirements invalidated? -> Move to Out of Scope with reason
+2. Requirements validated? -> Move to Validated with phase reference
+3. New requirements emerged? -> Add to Active
+4. Decisions to log? -> Add to Key Decisions
+5. "What This Is" still accurate? -> Update if drifted
+
+**After each milestone** (via `$gsd-complete-milestone`):
+1. Full review of all sections
+2. Core Value check -> still the right priority?
+3. Audit Out of Scope -> reasons still valid?
+4. Update Context with current state
 
 ---
-*Last updated: 2026-05-01 after v1.0 milestone*
+*Last updated: 2026-05-01 after starting v1.1 Reference UI Refactor milestone*
