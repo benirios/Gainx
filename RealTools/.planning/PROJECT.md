@@ -2,85 +2,97 @@
 
 ## What This Is
 
-RealTools is an MVP SaaS for commercial real estate brokers that consolidates the full deal lifecycle into a single workspace per property — the Deal Hub. Brokers create a deal, generate an Offering Memorandum, match and send to buyers, and track engagement, all without leaving one page.
+RealTools is an MVP SaaS for individual commercial real estate brokers that consolidates the deal lifecycle into one workspace per property. Brokers can create deals, manage notes and files, publish a hosted Offering Memorandum, manage buyers, send tracked OM links through email, and review engagement in the Deal Hub activity log.
 
 ## Core Value
 
 Every deal has one central workspace — broker never has to hunt across email, spreadsheets, and Drive to find deal status or contact buyers.
 
+## Current State
+
+**v1.0 milestone shipped:** 2026-05-01
+
+RealTools now has:
+
+- Supabase email/password authentication with protected app routes and public `/om/*` plus `/api/track/*` exclusions.
+- Complete v1 database schema with RLS across deals, notes, buyers, deal_buyers, activities, and deal_files.
+- Deal dashboard and Deal Hub with deal CRUD, status badges, notes, files, signed downloads, and hosted public OM pages.
+- Buyers CRM with tag support.
+- Send OM flow through Resend with per-buyer tracking tokens.
+- URL-primary and pixel-secondary OM open tracking.
+- Activity log for OM sent/opened, note added, and file uploaded events.
+
+**Deferred verification debt:** Live Phase 3 UAT remains pending for Resend delivery and browser-driven tracking/activity confirmation.
+
 ## Requirements
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ User can sign up and log in with email/password — v1.0
+- ✓ User can create a deal with title, address, price, description, and status — v1.0
+- ✓ User can view a Deal Hub page as the central workspace for each deal — v1.0
+- ✓ User can add, edit, and delete notes on a deal — v1.0
+- ✓ User can upload files to a deal through Supabase Storage — v1.0
+- ✓ User can generate a hosted HTML OM page from deal data and uploaded images — v1.0
+- ✓ OM is publicly accessible at `/om/[deal-id]` without broker auth — v1.0
+- ✓ User can create, view, edit, and delete buyers with name, email, and tags — v1.0
+- ✓ User can manually select buyers for a deal — v1.0
+- ✓ System can send tracked OM links through Resend — v1.0 implementation, live UAT pending
+- ✓ System records first OM open per buyer/deal using URL tracking and pixel fallback — v1.0 implementation, live UAT pending
+- ✓ Deal Hub shows a per-deal activity log — v1.0 implementation, live UAT pending
 
 ### Active
 
-- [ ] User can sign up and log in with email/password
-- [ ] User can create a deal (title, address, price, description, status)
-- [ ] User can view a Deal Hub page as the central workspace for each deal
-- [ ] User can add, edit, and delete notes on a deal
-- [ ] User can upload files to a deal (Supabase Storage)
-- [ ] User can set deal status: active, negotiating, closed
-- [ ] User can generate an OM as a hosted HTML page from deal data + uploaded images
-- [ ] OM is accessible via a unique public URL (/om/[deal-id])
-- [ ] User can create buyers with name, email, and tags (e.g. retail, multifamily, budget range)
-- [ ] User can select buyers for a deal manually or filter by tag
-- [ ] User can send the OM link via email to selected buyers
-- [ ] System tracks per-buyer whether they opened the OM (tracking pixel or flag)
-- [ ] User sees an activity log per deal (OM sent, note added, file uploaded events)
-- [ ] Dashboard shows list of all deals with New Deal button
+- [ ] Complete live UAT for Phase 3: Resend delivery, open tracking, and activity timeline.
+- [ ] Prepare next milestone requirements from product feedback.
 
 ### Out of Scope
 
-- PDF export — HTML OM only for v1; PDF adds complexity without proportional value
-- Team/multi-user features — single broker per account
-- Billing system — no payments or subscriptions in v1
-- Complex CRM features — no pipelines, tasks, forecasting
-- OAuth / magic link auth — email/password only for v1
+- PDF export — HTML OM only for v1; PDF adds complexity without proportional value.
+- Team/multi-user features — single broker per account.
+- Billing system — no payments or subscriptions in v1.
+- Complex CRM features — no pipelines, tasks, forecasting.
+- OAuth / magic link auth — email/password only for v1.
+- Buyer tag-based filtering before send — deferred to v2; manual selection is v1.
+- Real-time activity log — polling/refresh is sufficient for v1.
 
 ## Context
 
-**Problem being solved:** Brokers today juggle email, Excel, Google Drive, and InDesign/Word for every deal. No single source of truth. OMs take hours to produce manually. CRMs like Salesforce and HubSpot are too generic and complex for CRE deal flow.
+**Problem being solved:** Brokers today juggle email, Excel, Google Drive, and InDesign/Word for every deal. No single source of truth. OMs take hours to produce manually. Generic CRMs are too broad for CRE deal flow.
 
-**OM flow:** Broker generates OM → gets a hosted public page URL → sends link to selected buyers via email → system records per-buyer open events via tracking pixel.
+**OM flow:** Broker generates OM → gets hosted public page URL → sends tracked link to selected buyers via email → system records per-buyer first open events → broker reviews activity in Deal Hub.
 
-**Target user:** Individual commercial real estate broker (no team features needed in v1).
+**Target user:** Individual commercial real estate broker.
 
-**Data models:** users, deals, notes, buyers, deal_buyers (relation), activities
+**Data models:** users, deals, notes, buyers, deal_buyers, activities, deal_files.
 
 ## Constraints
 
-- **Tech Stack**: Next.js App Router, Supabase (Auth + DB + Storage), TailwindCSS, Resend — no deviations
-- **Scope**: No billing, no teams, no PDF — keep it minimal and working end-to-end
-- **Auth**: Supabase email/password only
-- **OM format**: Clean HTML page, no PDF generation
+- **Tech Stack:** Next.js App Router, Supabase Auth/DB/Storage, TailwindCSS, Resend.
+- **Scope:** No billing, teams, PDF, or complex CRM workflows in v1.
+- **Auth:** Supabase email/password only.
+- **OM format:** Clean hosted HTML page.
+- **Security:** Service-role key only in `server-only` modules; use `getUser()` server-side; RLS policy coverage for every table.
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Hosted OM page (/om/[deal-id]) | Buyers open in browser; enables tracking pixel; no email attachment issues | — Pending |
-| Per-buyer open tracking | Broker needs to know which specific buyer engaged, not just aggregate | — Pending |
-| Supabase Storage for files | Already in stack; no extra vendor for file handling | — Pending |
-| Tags as array on buyers table | Flexible, lightweight — no separate tags table needed for v1 | — Pending |
+| Hosted OM page at `/om/[deal-id]` | Buyers open in browser; enables tracking pixel and public sharing | ✓ Shipped v1.0 |
+| Per-buyer tracking tokens in `deal_buyers` | Broker needs engagement per buyer, not aggregate views | ✓ Shipped v1.0 |
+| URL-based tracking is primary, pixel is secondary | More reliable than email-client pixel loading alone | ✓ Shipped v1.0 |
+| Supabase Storage uses private deal files and public OM images buckets | Preserves broker file privacy while allowing public OM media | ✓ Shipped v1.0 |
+| Tags stay as `text[]` on buyers | Lightweight and flexible for v1 | ✓ Shipped v1.0 |
+| Cast `supabase.from()` as `any` at query/mutation sites | Work around supabase-js 2.104.x PostgrestVersion inference bug while keeping explicit Database types | ⚠ Revisit after Supabase upgrade |
+| Service role writes activities for tracking and telemetry | Public/open tracking and activity backfill cannot rely on browser user session | ✓ Shipped v1.0 |
 
-## Evolution
+## Next Milestone Goals
 
-This document evolves at phase transitions and milestone boundaries.
+Define the next milestone with `$gsd-new-milestone` after live UAT. Likely inputs:
 
-**After each phase transition** (via `/gsd-transition`):
-1. Requirements invalidated? → Move to Out of Scope with reason
-2. Requirements validated? → Move to Validated with phase reference
-3. New requirements emerged? → Add to Active
-4. Decisions to log? → Add to Key Decisions
-5. "What This Is" still accurate? → Update if drifted
-
-**After each milestone** (via `/gsd-complete-milestone`):
-1. Full review of all sections
-2. Core Value check — still the right priority?
-3. Audit Out of Scope — reasons still valid?
-4. Update Context with current state
+- Resolve any Phase 3 UAT findings.
+- Improve deployment packaging root warning if needed.
+- Add product polish based on broker feedback.
 
 ---
-*Last updated: 2026-04-24 after initialization*
+*Last updated: 2026-05-01 after v1.0 milestone*
