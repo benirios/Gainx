@@ -49,10 +49,10 @@ Exceptions: icon-only controls may be 32/36/40px; nav and interactive row target
 
 | Role | Size | Weight | Line Height |
 |------|------|--------|-------------|
-| Body | 15px | 400 | 1.55 |
 | Label | 12px | 600 | 1.2 |
-| Heading | 40px desktop / 32px mobile | 500 | 1.05 |
-| Display | 28px | 500 | 1.05 |
+| Body | 16px | 400 | 1.5 |
+| Section heading | 20px | 600 | 1.25 |
+| Page heading | 28px | 600 | 1.2 |
 
 ---
 
@@ -66,6 +66,14 @@ Exceptions: icon-only controls may be 32/36/40px; nav and interactive row target
 | Destructive | `#ef6f6c` | Destructive actions and inline destructive feedback only |
 
 Accent reserved for: focus-visible rings, active sidebar item text/border, Send OM primary emphasis border, and subtle premium dividers/highlights only.
+
+---
+
+## Visual Hierarchy & Focal Point (Authenticated Screens)
+
+- Primary focal point: page header row (serif page heading + one primary action on the right, e.g., `Send OM` or `New Deal`).
+- Secondary focal point: first data surface directly below the header (dashboard deal list/card group, or Deal Hub summary panel).
+- Tertiary information (metadata, timestamps, helper copy, secondary actions) must remain visually muted to preserve scan priority for the first two focal layers.
 
 ---
 
