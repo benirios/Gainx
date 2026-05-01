@@ -42,45 +42,45 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --font-heading: var(--font-display);
+  --font-heading: var(--font-sans);
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 :root {
-  --radius: 1rem;
-  --card: #111827;
-  --card-foreground: #f7f5ef;
-  --popover: #111827;
-  --popover-foreground: #f7f5ef;
-  --primary: #171c2a;
-  --primary-foreground: #f7f5ef;
-  --secondary: #0d1320;
-  --secondary-foreground: #d7d1c4;
-  --muted: #171c2a;
-  --muted-foreground: #9ba0b2;
-  --accent: #d7d1c4;
-  --accent-foreground: #090d17;
-  --destructive: #ef6f6c;
-  --border: #2b3040;
-  --input: #2b3040;
-  --ring: #d7d1c4;
-  --chart-1: #d7d1c4;
-  --chart-2: #9ba0b2;
-  --chart-3: #6f7485;
-  --chart-4: #5f6575;
-  --chart-5: #2b3040;
-  --sidebar: #0d1320;
-  --sidebar-foreground: #d7d1c4;
-  --sidebar-primary: #171c2a;
-  --sidebar-primary-foreground: #f7f5ef;
-  --sidebar-accent: #171c2a;
-  --sidebar-accent-foreground: #f7f5ef;
-  --sidebar-border: #2b3040;
-  --sidebar-ring: #d7d1c4;
-  --background: #090d17;
-  --foreground: #f7f5ef;
+  --radius: 0.5rem;
+  --background: #f7f8fb;
+  --foreground: #4b5363;
+  --card: #ffffff;
+  --card-foreground: #4b5363;
+  --popover: #ffffff;
+  --popover-foreground: #4b5363;
+  --primary: #8b7ae6;
+  --primary-foreground: #ffffff;
+  --secondary: #fbfcfe;
+  --secondary-foreground: #525a6a;
+  --muted: #f0f3f7;
+  --muted-foreground: #9aa3b2;
+  --accent: #f0eeff;
+  --accent-foreground: #6759c7;
+  --destructive: #e45b6a;
+  --border: #e7eaf0;
+  --input: #eef1f6;
+  --ring: #8b7ae6;
+  --chart-1: #8b7ae6;
+  --chart-2: #55d6cf;
+  --chart-3: #7db4f5;
+  --chart-4: #cfd6e3;
+  --chart-5: #eef1f6;
+  --sidebar: #fbfcfe;
+  --sidebar-foreground: #6b7280;
+  --sidebar-primary: #f0eeff;
+  --sidebar-primary-foreground: #6759c7;
+  --sidebar-accent: #f3f5f9;
+  --sidebar-accent-foreground: #4b5363;
+  --sidebar-border: #e7eaf0;
+  --sidebar-ring: #8b7ae6;
 }
 
 .dark {
@@ -123,7 +123,7 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.55;
     letter-spacing: 0;
   }
@@ -137,7 +137,6 @@
   [data-slot="card-title"],
   [data-slot="dialog-title"],
   [data-slot="alert-dialog-title"] {
-    font-family: var(--font-display), Georgia, serif;
     letter-spacing: 0;
   }
   ::selection {
