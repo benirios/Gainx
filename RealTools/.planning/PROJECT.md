@@ -24,6 +24,8 @@ RealTools now has:
 
 **Deferred verification debt:** Live Phase 3 UAT remains pending for Resend delivery and browser-driven tracking/activity confirmation.
 
+**v1.1 Phase 4 complete:** Reference Visual Foundation established on 2026-05-01. Global dark reference tokens, serif display typography, pill button primitives, dark form/card/dialog/toast/badge primitives, and no-background-pattern guardrails are in place.
+
 ## Current Milestone: v1.1 Reference UI Refactor
 
 **Goal:** Refactor all RealTools user-facing UI to match the provided reference screenshot's premium dark CRE visual style, excluding the screenshot's background pattern.
@@ -49,10 +51,11 @@ RealTools now has:
 - ✓ System can send tracked OM links through Resend — v1.0 implementation, live UAT pending
 - ✓ System records first OM open per buyer/deal using URL tracking and pixel fallback — v1.0 implementation, live UAT pending
 - ✓ Deal Hub shows a per-deal activity log — v1.0 implementation, live UAT pending
+- ✓ Reference visual foundation tokens and shared UI primitives match the premium dark screenshot style, excluding the background pattern — v1.1 Phase 4
 
 ### Active
 
-- [ ] Refactor all user-facing RealTools UI to match the reference screenshot's style choices, excluding the background pattern.
+- [ ] Apply the Phase 4 reference visual foundation across all user-facing RealTools surfaces, excluding the background pattern.
 - [ ] Preserve all shipped v1.0 behavior during the visual refactor.
 - [ ] Complete live UAT for Phase 3: Resend delivery, open tracking, and activity timeline.
 
@@ -95,6 +98,8 @@ RealTools now has:
 | Tags stay as `text[]` on buyers | Lightweight and flexible for v1 | ✓ Shipped v1.0 |
 | Cast `supabase.from()` as `any` at query/mutation sites | Work around supabase-js 2.104.x PostgrestVersion inference bug while keeping explicit Database types | ⚠ Revisit after Supabase upgrade |
 | Service role writes activities for tracking and telemetry | Public/open tracking and activity backfill cannot rely on browser user session | ✓ Shipped v1.0 |
+| Use Cormorant Garamond for display typography and Geist for operational text | Matches the reference screenshot's premium serif display voice while keeping app text readable | ✓ Established v1.1 Phase 4 |
+| Do not recreate the reference screenshot's background network pattern | User explicitly excluded the background from the requested style match | ✓ Enforced v1.1 Phase 4 |
 
 ## Next Milestone Goals
 
@@ -118,4 +123,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-01 after starting v1.1 Reference UI Refactor milestone*
+*Last updated: 2026-05-01 after Phase 4 Reference Visual Foundation*
