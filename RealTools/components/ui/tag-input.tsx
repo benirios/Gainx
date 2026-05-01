@@ -50,7 +50,7 @@ export function TagInput({
 
   return (
     <div
-      className="flex min-h-11 cursor-text flex-wrap items-center gap-1.5 rounded-[14px] border border-input bg-secondary px-3 py-2"
+      className="flex min-h-10 cursor-text flex-wrap items-center gap-1.5 rounded-lg border border-input bg-card px-3 py-2"
       onClick={() => inputRef.current?.focus()}
     >
       {/* Serialized hidden input for form submission */}
@@ -91,7 +91,7 @@ export function TagInput({
             if (inputValue) addTag(inputValue)
           }}
           placeholder={tags.length === 0 ? placeholder : ''}
-          className="h-auto min-w-[120px] flex-1 border-0 bg-transparent p-0 text-foreground placeholder:text-[#6f7485] focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="h-auto min-w-[120px] flex-1 border-0 bg-transparent p-0 text-foreground placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
           disabled={disabled}
         />
       )}
