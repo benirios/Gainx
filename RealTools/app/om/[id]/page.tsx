@@ -1,4 +1,5 @@
 import { createSupabaseServiceClient } from '@/lib/supabase/service'
+import { recordOmOpenByToken } from '@/lib/tracking/record-om-open'
 // DO NOT import createSupabaseServerClient — it calls cookies() which fails for unauthenticated requests
 // Middleware matcher explicitly excludes /om/* so no auth is attempted on this route
 
@@ -6,12 +7,21 @@ export const dynamic = 'force-dynamic'
 
 export default async function OmPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>
+  searchParams: Promise<{ ref?: string }>
 }) {
   const { id } = await params
+  const { ref } = await searchParams
   // sync factory — NOT awaited
   const supabase = createSupabaseServiceClient()
+
+  // URL-based tracking (PRIMARY signal — D-12 / TRACK-01 / TRACK-03)
+  // Called on every page load when ref is present; recordOmOpenByToken is idempotent.
+  if (ref) {
+    await recordOmOpenByToken(ref)
+  }
 
   const { data: deal } = await supabase
     .from('deals')
@@ -121,6 +131,18 @@ export default async function OmPage({
       <footer className="px-8 py-6 border-t border-zinc-200 bg-zinc-50 text-center">
         <p className="text-sm text-zinc-400">Powered by RealTools</p>
       </footer>
+
+      {/* Tracking pixel (SECONDARY signal — D-13 / TRACK-02) — only when ref present */}
+      {ref && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={`/api/track/${ref}`}
+          width="1"
+          height="1"
+          style={{ display: 'none' }}
+          alt=""
+        />
+      )}
     </main>
   )
 }
