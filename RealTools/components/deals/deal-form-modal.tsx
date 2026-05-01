@@ -67,19 +67,19 @@ export function DealFormModal({ deal, trigger }: Props) {
       ) : (
         <Button
           onClick={() => setOpen(true)}
-          className="bg-white text-zinc-950 hover:bg-zinc-100"
+          className="bg-accent text-background hover:bg-accent/90"
         >
           <Plus className="size-4 mr-2" />
           New Deal
         </Button>
       )}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="bg-zinc-900 border-zinc-800 text-zinc-50 sm:max-w-md">
+        <DialogContent className="bg-card border-border text-foreground sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold">
+            <DialogTitle className="font-heading text-xl font-semibold text-foreground">
               {isEdit ? 'Edit Deal' : 'New Deal'}
             </DialogTitle>
-            <DialogDescription className="text-sm text-zinc-400">
+            <DialogDescription className="text-sm text-muted-foreground">
               {isEdit ? 'Update the deal details.' : 'Fill in the details below.'}
             </DialogDescription>
           </DialogHeader>
@@ -89,58 +89,58 @@ export function DealFormModal({ deal, trigger }: Props) {
             )}
             {/* Deal title */}
             <div className="space-y-2">
-              <Label htmlFor="title" className="text-zinc-300">Deal title</Label>
+              <Label htmlFor="title" className="text-foreground/80">Deal title</Label>
               <Input
                 id="title"
                 name="title"
                 defaultValue={deal?.title}
                 placeholder="123 Main St Retail Center"
-                className="bg-zinc-800 border-zinc-700 text-zinc-50 placeholder:text-zinc-500"
+                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isPending}
               />
               {state.errors?.title && (
-                <p className="text-sm text-red-500">{state.errors.title[0]}</p>
+                <p className="text-sm text-destructive">{state.errors.title[0]}</p>
               )}
             </div>
             {/* Address */}
             <div className="space-y-2">
-              <Label htmlFor="address" className="text-zinc-300">Address</Label>
+              <Label htmlFor="address" className="text-foreground/80">Address</Label>
               <Input
                 id="address"
                 name="address"
                 defaultValue={deal?.address ?? ''}
                 placeholder="123 Main St, City, State ZIP"
-                className="bg-zinc-800 border-zinc-700 text-zinc-50 placeholder:text-zinc-500"
+                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isPending}
               />
               {state.errors?.address && (
-                <p className="text-sm text-red-500">{state.errors.address[0]}</p>
+                <p className="text-sm text-destructive">{state.errors.address[0]}</p>
               )}
             </div>
             {/* Asking price */}
             <div className="space-y-2">
-              <Label htmlFor="price" className="text-zinc-300">Asking price</Label>
+              <Label htmlFor="price" className="text-foreground/80">Asking price</Label>
               <Input
                 id="price"
                 name="price"
                 type="text"
                 defaultValue={deal?.price ?? ''}
                 placeholder="$4,500,000"
-                className="bg-zinc-800 border-zinc-700 text-zinc-50 placeholder:text-zinc-500"
+                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isPending}
               />
               {state.errors?.price && (
-                <p className="text-sm text-red-500">{state.errors.price[0]}</p>
+                <p className="text-sm text-destructive">{state.errors.price[0]}</p>
               )}
             </div>
             {/* Status */}
             <div className="space-y-2">
-              <Label className="text-zinc-300">Status</Label>
+              <Label className="text-foreground/80">Status</Label>
               <Select name="status" defaultValue={deal?.status ?? 'active'} disabled={isPending}>
-                <SelectTrigger className="bg-zinc-800 border-zinc-700 text-zinc-50">
+                <SelectTrigger className="bg-muted border-border text-foreground disabled:opacity-50 disabled:cursor-not-allowed">
                   <SelectValue placeholder="Select status" />
                 </SelectTrigger>
-                <SelectContent className="bg-zinc-900 border-zinc-800 text-zinc-50">
+                <SelectContent className="bg-card border-border text-foreground">
                   <SelectItem value="active">Active</SelectItem>
                   <SelectItem value="negotiating">Negotiating</SelectItem>
                   <SelectItem value="closed">Closed</SelectItem>
@@ -149,25 +149,25 @@ export function DealFormModal({ deal, trigger }: Props) {
             </div>
             {/* Description */}
             <div className="space-y-2">
-              <Label htmlFor="description" className="text-zinc-300">Description</Label>
+              <Label htmlFor="description" className="text-foreground/80">Description</Label>
               <Textarea
                 id="description"
                 name="description"
                 rows={4}
                 defaultValue={deal?.description ?? ''}
                 placeholder="Describe the property, opportunity, and key highlights…"
-                className="bg-zinc-800 border-zinc-700 text-zinc-50 placeholder:text-zinc-500"
+                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isPending}
               />
             </div>
             {state.errors?.general && (
-              <p className="text-sm text-red-500">{state.errors.general[0]}</p>
+              <p className="text-sm text-destructive">{state.errors.general[0]}</p>
             )}
-            <DialogFooter className="flex justify-end gap-3">
+            <DialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2">
               <Button
                 type="button"
                 variant="ghost"
-                className="text-zinc-400 hover:text-zinc-50"
+                className="text-muted-foreground hover:text-foreground"
                 onClick={() => setOpen(false)}
                 disabled={isPending}
               >
@@ -175,7 +175,7 @@ export function DealFormModal({ deal, trigger }: Props) {
               </Button>
               <Button
                 type="submit"
-                className="bg-white text-zinc-950 hover:bg-zinc-100"
+                className="bg-accent text-background hover:bg-accent/90"
                 disabled={isPending}
               >
                 {isPending ? (

@@ -72,17 +72,17 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
     <>
       <Button
         type="button"
-        className="bg-white text-zinc-950 hover:bg-zinc-100"
+        className="bg-accent text-background hover:bg-accent/90"
         onClick={() => setOpen(true)}
       >
         <Send className="size-4 mr-1" />
         Send OM
       </Button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="bg-zinc-900 border-zinc-800 text-zinc-50 sm:max-w-xl">
+        <DialogContent className="bg-card border-border text-foreground sm:max-w-xl">
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold">Send OM</DialogTitle>
-            <DialogDescription className="text-sm text-zinc-400">
+            <DialogTitle className="font-heading text-xl font-semibold text-foreground">Send OM</DialogTitle>
+            <DialogDescription className="text-sm text-muted-foreground">
               Select buyers for this deal.
             </DialogDescription>
           </DialogHeader>
@@ -91,11 +91,11 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
             <input type="hidden" name="buyerIds" value={JSON.stringify(selectedBuyerIds)} />
 
             {buyers.length === 0 ? (
-              <p className="text-sm text-zinc-400 text-center py-6">
+              <p className="text-sm text-muted-foreground text-center py-6">
                 No buyers available.
               </p>
             ) : (
-              <div className="max-h-[360px] overflow-y-auto divide-y divide-zinc-800 rounded-lg border border-zinc-800">
+              <div className="max-h-[360px] overflow-y-auto divide-y divide-border rounded-lg border border-border">
                 {buyers.map((buyer) => {
                   const sentAt = sentByBuyerId.get(buyer.id)
                   const checked = selectedBuyerIds.includes(buyer.id)
@@ -103,20 +103,20 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
                   return (
                     <label
                       key={buyer.id}
-                      className="flex cursor-pointer items-center gap-3 px-4 py-3 hover:bg-zinc-800/60"
+                      className="flex cursor-pointer items-center gap-3 px-4 py-3 hover:bg-muted/60"
                     >
                       <Checkbox
                         checked={checked}
                         onCheckedChange={(value) => toggleBuyer(buyer.id, value === true)}
                         disabled={isPending}
-                        className="border-zinc-600 data-[state=checked]:bg-white data-[state=checked]:text-zinc-950"
+                        className="border-border data-[state=checked]:bg-accent data-[state=checked]:text-background disabled:opacity-50 disabled:cursor-not-allowed"
                       />
                       <span className="min-w-0 flex-1">
-                        <span className="block truncate text-base text-zinc-50">{buyer.name}</span>
-                        <span className="block truncate text-sm text-zinc-400">{buyer.email}</span>
+                        <span className="block truncate text-base text-foreground">{buyer.name}</span>
+                        <span className="block truncate text-sm text-muted-foreground">{buyer.email}</span>
                       </span>
                       {sentAt && (
-                        <Badge className="bg-zinc-700 text-zinc-300 hover:bg-zinc-700">
+                        <Badge className="bg-muted text-muted-foreground hover:bg-muted">
                           Sent
                         </Badge>
                       )}
@@ -127,20 +127,20 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
             )}
 
             {state.errors?.dealId && (
-              <p className="text-sm text-red-500">{state.errors.dealId[0]}</p>
+              <p className="text-sm text-destructive">{state.errors.dealId[0]}</p>
             )}
             {state.errors?.buyerIds && (
-              <p className="text-sm text-red-500">{state.errors.buyerIds[0]}</p>
+              <p className="text-sm text-destructive">{state.errors.buyerIds[0]}</p>
             )}
             {state.errors?.general && (
-              <p className="text-sm text-red-500">{state.errors.general[0]}</p>
+              <p className="text-sm text-destructive">{state.errors.general[0]}</p>
             )}
 
-            <DialogFooter className="flex justify-end gap-3">
+            <DialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2">
               <Button
                 type="button"
                 variant="ghost"
-                className="text-zinc-400 hover:text-zinc-50"
+                className="text-muted-foreground hover:text-foreground"
                 onClick={() => setOpen(false)}
                 disabled={isPending}
               >
@@ -148,7 +148,7 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
               </Button>
               <Button
                 type="submit"
-                className="bg-white text-zinc-950 hover:bg-zinc-100"
+                className="bg-accent text-background hover:bg-accent/90"
                 disabled={isPending || buyers.length === 0 || selectedBuyerIds.length === 0}
               >
                 {isPending ? (

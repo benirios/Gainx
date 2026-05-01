@@ -37,27 +37,29 @@ export function DeleteDealDialog({ dealId }: { dealId: string }) {
         <Button
           variant="ghost"
           size="icon"
-          className="text-zinc-400 hover:text-red-400"
+          className="text-muted-foreground hover:text-destructive"
           aria-label="Delete deal"
         >
           <Trash2 className="size-4" />
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className="bg-zinc-900 border-zinc-800 text-zinc-50">
+      <AlertDialogContent className="bg-card border-border text-foreground">
         <AlertDialogHeader>
-          <AlertDialogTitle>Delete Deal?</AlertDialogTitle>
-          <AlertDialogDescription className="text-zinc-400">
+          <AlertDialogTitle className="font-heading text-xl font-semibold text-foreground">
+            Delete Deal?
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-muted-foreground">
             This will permanently delete this deal and all associated notes and files. This cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel className="border-zinc-700 text-zinc-50 hover:bg-zinc-800">
+        <AlertDialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-end gap-2">
+          <AlertDialogCancel className="border-border text-foreground hover:bg-muted">
             Keep
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={handleDelete}
             disabled={pending}
-            className="bg-red-500 hover:bg-red-600 text-white"
+            className="bg-destructive/20 text-destructive border border-destructive/40 hover:bg-destructive/30 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Delete'}
           </AlertDialogAction>
