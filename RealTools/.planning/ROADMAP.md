@@ -12,7 +12,7 @@ Phase numbering continues from the previous roadmap, so this milestone starts at
 - Integer phases (7, 8, 9): Planned v1.2 milestone work
 - Decimal phases (8.1, 8.2): Urgent insertions if needed
 
-- [ ] **Phase 7: Light Visual Foundation** - Replace the dark reference foundation with light tokens, shared primitives, layout rules, and state styling based on the Nexus-style reference.
+- [x] **Phase 7: Light Visual Foundation** - Replace the dark reference foundation with light tokens, shared primitives, layout rules, and state styling based on the Nexus-style reference. (completed 2026-05-02)
 - [ ] **Phase 8: Authenticated Workspace Refactor** - Restyle the app shell, dashboard, Deal Hub, buyers, profile, forms, dialogs, tables, notes, files, send-OM flow, and activity surfaces.
 - [ ] **Phase 9: Public Surfaces and Verification** - Restyle auth/root/public OM surfaces, verify responsive quality, and complete critical workflow plus deferred live UAT checks.
 
@@ -65,7 +65,7 @@ Phases execute in numeric order: 7 -> 8 -> 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 7. Light Visual Foundation | 0/TBD | Not started | - |
+| 7. Light Visual Foundation | 3/3 | Complete | 2026-05-02 |
 | 8. Authenticated Workspace Refactor | 0/TBD | Not started | - |
 | 9. Public Surfaces and Verification | 0/TBD | Not started | - |
 
@@ -73,10 +73,10 @@ Phases execute in numeric order: 7 -> 8 -> 9
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| UI-05 | Phase 7 | Pending |
-| UI-06 | Phase 7 | Pending |
-| UI-07 | Phase 7 | Pending |
-| UI-08 | Phase 7 | Pending |
+| UI-05 | Phase 7 | Complete |
+| UI-06 | Phase 7 | Complete |
+| UI-07 | Phase 7 | Complete |
+| UI-08 | Phase 7 | Complete |
 | APP-04 | Phase 8 | Pending |
 | APP-05 | Phase 8 | Pending |
 | APP-06 | Phase 8 | Pending |
