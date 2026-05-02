@@ -208,6 +208,132 @@ export type Database = {
         }
         Relationships: []
       }
+      listing_import_targets: {
+        Row: {
+          city: string
+          country: string
+          created_at: string | null
+          id: string
+          is_active: boolean
+          search_term: string
+          source: string
+          state: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          city: string
+          country?: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean
+          search_term: string
+          source: string
+          state: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          city?: string
+          country?: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean
+          search_term?: string
+          source?: string
+          state?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      listings: {
+        Row: {
+          address_text: string | null
+          city: string | null
+          commercial_type: string | null
+          confidence: number | null
+          country: string
+          created_at: string | null
+          description: string | null
+          first_seen_at: string | null
+          id: string
+          images: string[] | null
+          is_commercial: boolean | null
+          last_seen_at: string | null
+          lat: number | null
+          lng: number | null
+          location_text: string | null
+          neighborhood: string | null
+          price_amount: number | null
+          price_text: string | null
+          raw_payload: Json | null
+          reasoning: string | null
+          source: string
+          source_url: string
+          state: string | null
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          address_text?: string | null
+          city?: string | null
+          commercial_type?: string | null
+          confidence?: number | null
+          country?: string
+          created_at?: string | null
+          description?: string | null
+          first_seen_at?: string | null
+          id?: string
+          images?: string[] | null
+          is_commercial?: boolean | null
+          last_seen_at?: string | null
+          lat?: number | null
+          lng?: number | null
+          location_text?: string | null
+          neighborhood?: string | null
+          price_amount?: number | null
+          price_text?: string | null
+          raw_payload?: Json | null
+          reasoning?: string | null
+          source: string
+          source_url: string
+          state?: string | null
+          title: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          address_text?: string | null
+          city?: string | null
+          commercial_type?: string | null
+          confidence?: number | null
+          country?: string
+          created_at?: string | null
+          description?: string | null
+          first_seen_at?: string | null
+          id?: string
+          images?: string[] | null
+          is_commercial?: boolean | null
+          last_seen_at?: string | null
+          lat?: number | null
+          lng?: number | null
+          location_text?: string | null
+          neighborhood?: string | null
+          price_amount?: number | null
+          price_text?: string | null
+          raw_payload?: Json | null
+          reasoning?: string | null
+          source?: string
+          source_url?: string
+          state?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       notes: {
         Row: {
           content: string
