@@ -21,7 +21,7 @@
 ### Deal Workspace
 
 - [x] **DEAL-01**: User can use the Deal Hub in the light reference style, including deal header, metadata, status, notes, files, buyers, send-OM entry points, and activity log.
-- [ ] **DEAL-02**: User can create, edit, delete, and review deals, notes, files, buyers, and send-OM flows through restyled forms, dialogs, tables, and timeline components.
+- [x] **DEAL-02**: User can create, edit, delete, and review deals, notes, files, buyers, and send-OM flows through restyled forms, dialogs, tables, and timeline components.
 - [x] **DEAL-03**: User sees buyer tags, deal statuses, file rows, notes, and activity events styled with readable muted contrast and pastel accents.
 
 ### Public And Auth Surfaces
@@ -71,7 +71,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | APP-05 | Phase 8 | Complete |
 | APP-06 | Phase 8 | Complete |
 | DEAL-01 | Phase 8 | Complete |
-| DEAL-02 | Phase 8 | Pending |
+| DEAL-02 | Phase 8 | Complete |
 | DEAL-03 | Phase 8 | Complete |
 | SURF-04 | Phase 9 | Pending |
 | SURF-05 | Phase 9 | Pending |
