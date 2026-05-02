@@ -41,7 +41,7 @@ Phase numbering continues from the existing project history, so this milestone s
   3. User can import Facebook Marketplace records manually or by CSV with the same normalized listing fields.
   4. User can review run status, created records, updated duplicates, skipped records, and failures.
   5. The implementation avoids anti-bot evasion and keeps source failures non-fatal.
-**Plans**: TBD
+**Plans**: 11-01 Import Run Schema And Status Helpers; 11-02 Controlled OLX Ingestion Backend; 11-03 Manual Import And Ingestion Admin UI
 **UI hint**: yes
 
 ### Phase 12: Classification And Geocoding
@@ -80,7 +80,7 @@ Phases execute in numeric order: 10 -> 11 -> 12 -> 13
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 10. Listing Data Foundation | 2/2 | Complete | 2026-05-03 |
-| 11. Source Ingestion MVP | 0/TBD | Not started | - |
+| 11. Source Ingestion MVP | 0/3 | Planned | - |
 | 12. Classification And Geocoding | 0/TBD | Not started | - |
 | 13. Opportunity Map MVP | 0/TBD | Not started | - |
 
