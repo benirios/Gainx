@@ -10,10 +10,10 @@ export function Sidebar() {
           <Image
             src="/realtools-logo.png"
             alt="RealTools"
-            width={148}
-            height={84}
+            width={170}
+            height={97}
             priority
-            className="h-11 w-auto object-contain"
+            className="h-12 w-auto object-contain"
           />
           <p className="text-xs text-muted-foreground">Deal workspace</p>
         </div>

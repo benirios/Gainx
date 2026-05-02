@@ -65,10 +65,10 @@ export default async function OmPage({
         <Image
           src="/realtools-logo.png"
           alt="RealTools"
-          width={128}
-          height={73}
+          width={150}
+          height={85}
           priority
-          className="h-9 w-auto object-contain"
+          className="h-11 w-auto object-contain"
         />
         <span
           className={[

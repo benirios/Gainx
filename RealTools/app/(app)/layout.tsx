@@ -29,10 +29,10 @@ export default async function AppLayout({
             <Image
               src="/realtools-logo.png"
               alt="RealTools"
-              width={128}
-              height={73}
+              width={150}
+              height={85}
               priority
-              className="h-9 w-auto object-contain md:hidden"
+              className="h-11 w-auto object-contain md:hidden"
             />
             <div>
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
