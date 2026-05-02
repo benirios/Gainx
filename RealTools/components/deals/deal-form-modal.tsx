@@ -67,7 +67,6 @@ export function DealFormModal({ deal, trigger }: Props) {
       ) : (
         <Button
           onClick={() => setOpen(true)}
-          className="bg-accent text-background hover:bg-accent/90"
         >
           <Plus className="size-4 mr-2" />
           New Deal
@@ -76,7 +75,7 @@ export function DealFormModal({ deal, trigger }: Props) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="bg-card border-border text-foreground sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="font-heading text-xl font-semibold text-foreground">
+            <DialogTitle className="text-xl font-semibold text-foreground">
               {isEdit ? 'Edit Deal' : 'New Deal'}
             </DialogTitle>
             <DialogDescription className="text-sm text-muted-foreground">
@@ -89,13 +88,12 @@ export function DealFormModal({ deal, trigger }: Props) {
             )}
             {/* Deal title */}
             <div className="space-y-2">
-              <Label htmlFor="title" className="text-foreground/80">Deal title</Label>
+              <Label htmlFor="title" className="text-sm font-medium text-foreground">Deal title</Label>
               <Input
                 id="title"
                 name="title"
                 defaultValue={deal?.title}
                 placeholder="123 Main St Retail Center"
-                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isPending}
               />
               {state.errors?.title && (
@@ -104,13 +102,12 @@ export function DealFormModal({ deal, trigger }: Props) {
             </div>
             {/* Address */}
             <div className="space-y-2">
-              <Label htmlFor="address" className="text-foreground/80">Address</Label>
+              <Label htmlFor="address" className="text-sm font-medium text-foreground">Address</Label>
               <Input
                 id="address"
                 name="address"
                 defaultValue={deal?.address ?? ''}
                 placeholder="123 Main St, City, State ZIP"
-                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isPending}
               />
               {state.errors?.address && (
@@ -119,14 +116,13 @@ export function DealFormModal({ deal, trigger }: Props) {
             </div>
             {/* Asking price */}
             <div className="space-y-2">
-              <Label htmlFor="price" className="text-foreground/80">Asking price</Label>
+              <Label htmlFor="price" className="text-sm font-medium text-foreground">Asking price</Label>
               <Input
                 id="price"
                 name="price"
                 type="text"
                 defaultValue={deal?.price ?? ''}
                 placeholder="$4,500,000"
-                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isPending}
               />
               {state.errors?.price && (
@@ -135,9 +131,9 @@ export function DealFormModal({ deal, trigger }: Props) {
             </div>
             {/* Status */}
             <div className="space-y-2">
-              <Label className="text-foreground/80">Status</Label>
+              <Label className="text-sm font-medium text-foreground">Status</Label>
               <Select name="status" defaultValue={deal?.status ?? 'active'} disabled={isPending}>
-                <SelectTrigger className="bg-muted border-border text-foreground disabled:opacity-50 disabled:cursor-not-allowed">
+                <SelectTrigger>
                   <SelectValue placeholder="Select status" />
                 </SelectTrigger>
                 <SelectContent className="bg-card border-border text-foreground">
@@ -149,14 +145,13 @@ export function DealFormModal({ deal, trigger }: Props) {
             </div>
             {/* Description */}
             <div className="space-y-2">
-              <Label htmlFor="description" className="text-foreground/80">Description</Label>
+              <Label htmlFor="description" className="text-sm font-medium text-foreground">Description</Label>
               <Textarea
                 id="description"
                 name="description"
                 rows={4}
                 defaultValue={deal?.description ?? ''}
                 placeholder="Describe the property, opportunity, and key highlights…"
-                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isPending}
               />
             </div>
@@ -175,7 +170,6 @@ export function DealFormModal({ deal, trigger }: Props) {
               </Button>
               <Button
                 type="submit"
-                className="bg-accent text-background hover:bg-accent/90"
                 disabled={isPending}
               >
                 {isPending ? (

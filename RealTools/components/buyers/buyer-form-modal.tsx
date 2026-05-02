@@ -58,17 +58,14 @@ export function BuyerFormModal({ buyer, trigger }: Props) {
       ) : (
         <Button
           onClick={() => setOpen(true)}
-          className="bg-accent text-accent-foreground hover:bg-accent/90"
         >
           <Plus className="size-4 mr-2" />
           New Buyer
         </Button>
       )}
-      {/* D-12: content-fit modal width */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="bg-card border-border text-foreground sm:max-w-[32rem]">
           <DialogHeader>
-            {/* D-02: serif dialog title via global h/[data-slot] styles */}
             <DialogTitle className="text-xl font-semibold">
               {isEdit ? 'Edit Buyer' : 'New Buyer'}
             </DialogTitle>
@@ -76,57 +73,48 @@ export function BuyerFormModal({ buyer, trigger }: Props) {
               {isEdit ? 'Update the buyer details.' : 'Fill in the details below.'}
             </DialogDescription>
           </DialogHeader>
-          {/* D-09: single-column, space-y-4 (16px) */}
           <form action={formAction} className="space-y-4">
             {isEdit && (
               <input type="hidden" name="buyerId" value={buyer.id} />
             )}
 
-            {/* Name */}
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-foreground/80">Name</Label>
+              <Label htmlFor="name" className="text-sm font-medium text-foreground">Name</Label>
               <Input
                 id="name"
                 name="name"
                 defaultValue={buyer?.name}
                 placeholder="Jane Smith"
-                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50"
                 disabled={isPending}
               />
-              {/* D-11: inline field error */}
               {state.errors?.name && (
                 <p className="text-xs text-destructive">{state.errors.name[0]}</p>
               )}
             </div>
 
-            {/* Email */}
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-foreground/80">Email</Label>
+              <Label htmlFor="email" className="text-sm font-medium text-foreground">Email</Label>
               <Input
                 id="email"
                 name="email"
                 type="email"
                 defaultValue={buyer?.email}
                 placeholder="jane@acme.com"
-                className="bg-muted border-border text-foreground placeholder:text-muted-foreground disabled:opacity-50"
                 disabled={isPending}
               />
-              {/* D-11: inline field error */}
               {state.errors?.email && (
                 <p className="text-xs text-destructive">{state.errors.email[0]}</p>
               )}
             </div>
 
-            {/* Tags */}
             <div className="space-y-2">
-              <Label className="text-foreground/80">Tags</Label>
+              <Label className="text-sm font-medium text-foreground">Tags</Label>
               <TagInput
                 name="tags"
                 defaultValue={buyer?.tags ?? []}
                 disabled={isPending}
                 placeholder="Type a tag and press Enter"
               />
-              {/* D-11: inline field error */}
               {state.errors?.tags && (
                 <p className="text-xs text-destructive">{state.errors.tags[0]}</p>
               )}
@@ -136,7 +124,6 @@ export function BuyerFormModal({ buyer, trigger }: Props) {
               <p className="text-xs text-destructive">{state.errors.general[0]}</p>
             )}
 
-            {/* D-09: right-aligned actions with mobile stack fallback */}
             <DialogFooter className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:gap-3 pt-2">
               <Button
                 type="button"
@@ -147,10 +134,9 @@ export function BuyerFormModal({ buyer, trigger }: Props) {
               >
                 Discard
               </Button>
-              {/* D-11: spinner-in-button loading state */}
               <Button
                 type="submit"
-                className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto disabled:opacity-50"
+                className="w-full sm:w-auto disabled:opacity-50"
                 disabled={isPending}
               >
                 {isPending ? (

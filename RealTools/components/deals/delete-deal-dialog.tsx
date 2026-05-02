@@ -45,7 +45,7 @@ export function DeleteDealDialog({ dealId }: { dealId: string }) {
       </AlertDialogTrigger>
       <AlertDialogContent className="bg-card border-border text-foreground">
         <AlertDialogHeader>
-          <AlertDialogTitle className="font-heading text-xl font-semibold text-foreground">
+          <AlertDialogTitle className="text-xl font-semibold text-foreground">
             Delete Deal?
           </AlertDialogTitle>
           <AlertDialogDescription className="text-muted-foreground">
@@ -59,7 +59,7 @@ export function DeleteDealDialog({ dealId }: { dealId: string }) {
           <AlertDialogAction
             onClick={handleDelete}
             disabled={pending}
-            className="bg-destructive/20 text-destructive border border-destructive/40 hover:bg-destructive/30 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-destructive text-white hover:bg-destructive/90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Delete'}
           </AlertDialogAction>

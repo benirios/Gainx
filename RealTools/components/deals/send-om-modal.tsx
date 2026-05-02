@@ -72,7 +72,6 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
     <>
       <Button
         type="button"
-        className="bg-accent text-background hover:bg-accent/90"
         onClick={() => setOpen(true)}
       >
         <Send className="size-4 mr-1" />
@@ -81,7 +80,7 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="bg-card border-border text-foreground sm:max-w-xl">
           <DialogHeader>
-            <DialogTitle className="font-heading text-xl font-semibold text-foreground">Send OM</DialogTitle>
+            <DialogTitle className="text-xl font-semibold text-foreground">Send OM</DialogTitle>
             <DialogDescription className="text-sm text-muted-foreground">
               Select buyers for this deal.
             </DialogDescription>
@@ -95,7 +94,7 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
                 No buyers available.
               </p>
             ) : (
-              <div className="max-h-[360px] overflow-y-auto divide-y divide-border rounded-lg border border-border">
+              <div className="max-h-[360px] overflow-y-auto divide-y divide-border rounded-lg border border-border bg-card">
                 {buyers.map((buyer) => {
                   const sentAt = sentByBuyerId.get(buyer.id)
                   const checked = selectedBuyerIds.includes(buyer.id)
@@ -103,20 +102,20 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
                   return (
                     <label
                       key={buyer.id}
-                      className="flex cursor-pointer items-center gap-3 px-4 py-3 hover:bg-muted/60"
+                      className="flex cursor-pointer items-center gap-3 bg-[#fbfcfe] px-4 py-3 hover:bg-[#f8fafc]"
                     >
                       <Checkbox
                         checked={checked}
                         onCheckedChange={(value) => toggleBuyer(buyer.id, value === true)}
                         disabled={isPending}
-                        className="border-border data-[state=checked]:bg-accent data-[state=checked]:text-background disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="border-border data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed"
                       />
                       <span className="min-w-0 flex-1">
                         <span className="block truncate text-base text-foreground">{buyer.name}</span>
                         <span className="block truncate text-sm text-muted-foreground">{buyer.email}</span>
                       </span>
                       {sentAt && (
-                        <Badge className="bg-muted text-muted-foreground hover:bg-muted">
+                        <Badge className="bg-[#eaf3ff] text-[#497db7] border border-[#cfe4ff] hover:bg-[#eaf3ff]">
                           Sent
                         </Badge>
                       )}
@@ -148,7 +147,6 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
               </Button>
               <Button
                 type="submit"
-                className="bg-accent text-background hover:bg-accent/90"
                 disabled={isPending || buyers.length === 0 || selectedBuyerIds.length === 0}
               >
                 {isPending ? (

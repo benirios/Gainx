@@ -37,23 +37,19 @@ export function DeleteBuyerDialog({ buyerId }: { buyerId: string }) {
         <Button
           variant="ghost"
           size="icon"
-          className="h-8 w-8 text-zinc-400 hover:text-red-400"
+          className="h-8 w-8 text-muted-foreground hover:text-destructive"
           aria-label="Delete buyer"
         >
           <Trash2 className="size-4" />
         </Button>
       </AlertDialogTrigger>
-      {/* D-12: content-fit modal width */}
       <AlertDialogContent className="bg-card border-border text-foreground sm:max-w-[32rem]">
         <AlertDialogHeader>
-          {/* serif title via global [data-slot="alert-dialog-title"] rule */}
           <AlertDialogTitle>Delete Buyer?</AlertDialogTitle>
-          {/* D-11: subdued destructive copy */}
           <AlertDialogDescription className="text-muted-foreground">
             This cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        {/* D-09: right-aligned actions, mobile stack fallback */}
         <AlertDialogFooter className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:gap-3">
           <AlertDialogCancel
             className="border-border text-foreground hover:bg-muted w-full sm:w-auto disabled:opacity-50"
@@ -61,7 +57,6 @@ export function DeleteBuyerDialog({ buyerId }: { buyerId: string }) {
           >
             Keep
           </AlertDialogCancel>
-          {/* D-11: subdued destructive — border+tint, no saturated fill */}
           <AlertDialogAction
             onClick={handleDelete}
             disabled={pending}
