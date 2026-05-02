@@ -18,11 +18,10 @@ export default async function BuyersPage() {
     .order('name', { ascending: true }) as { data: Pick<BuyerRow, 'id' | 'name' | 'email' | 'tags'>[] | null }
 
   return (
-    <div className="p-8">
-      {/* Page header — D-02: serif title, muted support copy, right-aligned action */}
-      <div className="flex items-start justify-between mb-8">
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="font-heading text-[28px] font-semibold leading-tight text-foreground">
+          <h1 className="text-2xl font-semibold leading-tight text-foreground">
             Buyers
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
@@ -32,7 +31,6 @@ export default async function BuyersPage() {
         {(buyers ?? []).length > 0 && <BuyerFormModal />}
       </div>
 
-      {/* Buyers table / empty state */}
       <BuyersTable buyers={buyers ?? []} />
     </div>
   )

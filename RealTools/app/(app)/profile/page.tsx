@@ -7,10 +7,9 @@ export default async function ProfilePage() {
   } = await supabase.auth.getUser()
 
   return (
-    <div className="p-8">
-      {/* Page header — D-02: serif title, muted support copy */}
-      <div className="mb-8">
-        <h1 className="font-heading text-[28px] font-semibold leading-tight text-foreground">
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-semibold leading-tight text-foreground">
           Profile
         </h1>
         <p className="text-sm text-muted-foreground mt-1">
@@ -18,8 +17,7 @@ export default async function ProfilePage() {
         </p>
       </div>
 
-      {/* Account info card */}
-      <div className="max-w-md rounded-lg border border-border bg-card p-6 space-y-4">
+      <div className="max-w-xl rounded-lg border border-border bg-card p-6 space-y-4 shadow-[0_12px_30px_rgba(35,45,72,0.05)]">
         <div className="space-y-1">
           <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Email

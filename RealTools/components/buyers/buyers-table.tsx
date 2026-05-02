@@ -19,8 +19,8 @@ type Props = {
 export function BuyersTable({ buyers }: Props) {
   if (buyers.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-16 text-center">
-        <h2 className="font-heading text-xl font-semibold text-foreground">No buyers yet.</h2>
+      <div className="flex flex-col items-center justify-center rounded-lg border border-border bg-card p-8 text-center shadow-[0_12px_30px_rgba(35,45,72,0.05)]">
+        <h2 className="text-lg font-semibold text-foreground">No buyers yet.</h2>
         <p className="text-sm text-muted-foreground mt-2 mb-6">
           Add your first buyer to get started.
         </p>
@@ -30,17 +30,15 @@ export function BuyersTable({ buyers }: Props) {
   }
 
   return (
-    <div className="w-full rounded-lg border border-border overflow-hidden">
-      {/* Table header — D-10 */}
-      <div className="grid grid-cols-[1fr_1fr_1fr_auto] gap-4 px-4 py-3 border-b border-border bg-muted/30">
-        <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Name</span>
-        <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Email</span>
-        <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Tags</span>
-        <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Actions</span>
+    <div className="w-full overflow-hidden rounded-lg border border-border bg-card shadow-[0_12px_30px_rgba(35,45,72,0.05)]">
+      <div className="hidden grid-cols-[1fr_1fr_1fr_auto] gap-4 border-b border-border bg-[#fbfcfe] px-4 py-3 md:grid">
+        <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Name</span>
+        <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Email</span>
+        <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Tags</span>
+        <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Actions</span>
       </div>
 
-      {/* Table rows — D-10: min-h-[44px], subtle hover */}
-      <div className="divide-y divide-border/50">
+      <div className="divide-y divide-border/70">
         {buyers.map((buyer) => {
           const tags = buyer.tags ?? []
           const visibleTags = tags.slice(0, 3)
@@ -49,20 +47,17 @@ export function BuyersTable({ buyers }: Props) {
           return (
             <div
               key={buyer.id}
-              className="grid grid-cols-[1fr_1fr_1fr_auto] gap-4 items-center px-4 py-3 min-h-[44px] hover:bg-muted/50 transition-colors"
+              className="grid min-h-12 gap-3 px-4 py-4 transition-colors hover:bg-[#f8fafc] md:grid-cols-[1fr_1fr_1fr_auto] md:items-center md:gap-4 md:py-3"
             >
-              {/* Name */}
               <span className="text-sm text-foreground truncate">{buyer.name}</span>
 
-              {/* Email */}
               <span className="text-sm text-muted-foreground truncate">{buyer.email}</span>
 
-              {/* Tags — D-14: neutral muted pills, max 3 + overflow indicator */}
               <div className="flex flex-wrap gap-1 items-center">
                 {visibleTags.map((tag) => (
                   <span
                     key={tag}
-                    className="bg-muted text-muted-foreground text-xs px-2 py-0.5 rounded-full border border-border/60"
+                    className="rounded-full border border-[#e7eaf0] bg-[#f3f5f9] px-2 py-0.5 text-xs text-[#6b7280]"
                   >
                     {tag}
                   </span>
@@ -74,8 +69,7 @@ export function BuyersTable({ buyers }: Props) {
                 )}
               </div>
 
-              {/* Actions — D-16: aria-label on icon controls */}
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex shrink-0 items-center gap-2 md:justify-end">
                 <BuyerFormModal
                   buyer={buyer}
                   trigger={
