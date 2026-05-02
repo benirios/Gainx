@@ -1,96 +1,113 @@
-# Roadmap: RealTools v1.2 Light Dashboard UI Refactor
+# Roadmap: RealTools v1.3 Brazil Commercial Listing Map
 
 ## Overview
 
-RealTools v1.2 is a behavior-preserving UI refactor that moves the product from the unfinished v1.1 dark premium direction to the provided Nexus-style light SaaS dashboard reference. The milestone keeps the v1.0 product surface intact while refreshing the visual system, authenticated workspace, public/auth surfaces, and verification pass.
+RealTools v1.3 adds a fast opportunity-sourcing MVP for Brazilian commercial real estate. The milestone does not try to scrape the entire country at once. It builds national data structures, runs controlled OLX ingestion by configured city/state/search terms, supports Facebook Marketplace through manual/CSV import, classifies likely `pontos comerciais`, geocodes listings, and shows them on a searchable Brazil map.
 
-Phase numbering continues from the previous roadmap, so this milestone starts at Phase 7.
+Phase numbering continues from the existing project history, so this milestone starts at Phase 10.
 
 ## Phases
 
 **Phase Numbering:**
-- Integer phases (7, 8, 9): Planned v1.2 milestone work
-- Decimal phases (8.1, 8.2): Urgent insertions if needed
+- Integer phases (10, 11, 12, 13): Planned v1.3 milestone work
+- Decimal phases (12.1, 12.2): Urgent insertions if needed
 
-- [x] **Phase 7: Light Visual Foundation** - Replace the dark reference foundation with light tokens, shared primitives, layout rules, and state styling based on the Nexus-style reference. (completed 2026-05-02)
-- [x] **Phase 8: Authenticated Workspace Refactor** - Restyle the app shell, dashboard, Deal Hub, buyers, profile, forms, dialogs, tables, notes, files, send-OM flow, and activity surfaces. (completed 2026-05-02)
-- [ ] **Phase 9: Public Surfaces and Verification** - Restyle auth/root/public OM surfaces, verify responsive quality, and complete critical workflow plus deferred live UAT checks.
+- [ ] **Phase 10: Listing Data Foundation** - Add the national listing schema, ingestion configuration model, deduplication, and basic admin review surfaces.
+- [ ] **Phase 11: Source Ingestion MVP** - Build controlled OLX ingestion and Facebook manual/CSV import, with source run status and failure visibility.
+- [ ] **Phase 12: Classification And Geocoding** - Classify commercial listings with Portuguese rules plus optional AI fallback, geocode locations, and retain failed records for review.
+- [ ] **Phase 13: Opportunity Map MVP** - Display geocoded listings on a map with popups, filters, and a demo-ready validation pass.
 
 ## Phase Details
 
-### Phase 7: Light Visual Foundation
-**Goal**: The app has a coherent light SaaS visual system based on the reference image: off-white page backgrounds, white cards, subtle borders, soft shadows, muted grays, pale icons, rounded controls, and pastel teal/purple/blue accents.
-**Depends on**: v1.2 milestone start
-**Requirements**: UI-05, UI-06, UI-07, UI-08
+### Phase 10: Listing Data Foundation
+**Goal**: RealTools can store and manage national Brazilian listing records independently from the existing deal workspace.
+**Depends on**: v1.3 milestone start
+**Requirements**: DATA-01, DATA-02, DATA-03
 **Success Criteria** (what must be TRUE):
-  1. Global tokens, base styles, typography, radii, borders, focus rings, shadows, and color variables express the light reference direction.
-  2. Shared UI primitives use rounded light controls, pale icon treatments, subtle separators, muted text, and pastel accents consistently.
-  3. The previous dark theme direction no longer drives the default app appearance.
-  4. Loading, empty, error, disabled, hover, and focus states are styled in the light system without layout shift.
-  5. Visual rules explicitly avoid copying Nexus branding/content or inventing unsupported product analytics.
-**Plans**: 07-01 Global Light Theme Foundation; 07-02 Action And Form Primitive Refactor; 07-03 Surfaces Feedback And Foundation Audit
+  1. Supabase has a listings storage model that captures source, URL, title, description, price, location, address, images, country, state, city, neighborhood, coordinates, classification fields, and timestamps.
+  2. Re-importing the same source URL updates the existing listing instead of creating duplicates.
+  3. Ingestion targets can be configured by state, city, and search term for Brazil-wide expansion.
+  4. Existing deal, buyer, OM, tracking, and activity workflows remain untouched.
+**Plans**: TBD
+**UI hint**: no
+
+### Phase 11: Source Ingestion MVP
+**Goal**: RealTools can collect real listings from OLX and accept Facebook Marketplace records without fighting Facebook automation.
+**Depends on**: Phase 10
+**Requirements**: SRC-01, SRC-02, SRC-03, SRC-04
+**Success Criteria** (what must be TRUE):
+  1. User can run a controlled OLX ingestion for selected city/state/search configurations.
+  2. OLX ingestion extracts title, description when available, price, location, address when available, images, URL, and source.
+  3. User can import Facebook Marketplace records manually or by CSV with the same normalized listing fields.
+  4. User can review run status, created records, updated duplicates, skipped records, and failures.
+  5. The implementation avoids anti-bot evasion and keeps source failures non-fatal.
+**Plans**: TBD
 **UI hint**: yes
 
-### Phase 8: Authenticated Workspace Refactor
-**Goal**: The authenticated broker workspace looks and feels like the reference dashboard while preserving all shipped RealTools workflows.
-**Depends on**: Phase 7
-**Requirements**: APP-04, APP-05, APP-06, DEAL-01, DEAL-02, DEAL-03
+### Phase 12: Classification And Geocoding
+**Goal**: RealTools can identify likely commercial property listings and place usable records on the map.
+**Depends on**: Phase 11
+**Requirements**: CLS-01, CLS-02, CLS-03, CLS-04, GEO-01, GEO-02
 **Success Criteria** (what must be TRUE):
-  1. Sidebar, topbar, navigation, user/profile affordances, and primary app layout match the light SaaS shell direction.
-  2. Dashboard cards, deal summaries, activity previews, and workflow shortcuts align with the reference's card density and muted visual hierarchy without fake metrics.
-  3. Deal Hub, buyers, profile, notes, files, send-OM, and activity log surfaces use consistent light cards, tables, badges, tags, rows, and metadata treatments.
-  4. Deal, note, file, buyer, delete, and send-OM dialogs/forms are restyled without changing validation, actions, or data behavior.
-  5. Existing authenticated navigation and broker workflows still work after the refactor.
-**Plans**: 08-01 Authenticated Shell And Navigation; 08-02 Dashboard And Deal Cards; 08-03 Deal Hub Layout And Detail Sections; 08-04 Buyers And Profile Surfaces; 08-05 Dialogs And Workflow Forms
-**UI hint**: yes
+  1. Each listing receives `is_commercial`, `commercial_type`, `confidence`, and `reasoning`.
+  2. Portuguese keyword rules identify common commercial terms such as ponto comercial, loja, sala comercial, galpão, escritório, prédio comercial, terreno comercial, box, quiosque, and sobreloja.
+  3. Residential false positives are reduced with negative terms such as apartamento, casa, quarto, temporada, flat, kitnet, and residencial.
+  4. Optional AI classification is used only for ambiguous listings if configured.
+  5. Listings with enough location data receive cached latitude/longitude coordinates.
+  6. Listings that fail geocoding remain visible for review instead of being dropped.
+**Plans**: TBD
+**UI hint**: no
 
-### Phase 9: Public Surfaces and Verification
-**Goal**: Public and unauthenticated surfaces match the light reference direction, and the full UI refactor is verified across responsive layouts and critical workflows.
-**Depends on**: Phase 8
-**Requirements**: SURF-04, SURF-05, SURF-06, QA-04, QA-05, QA-06
+### Phase 13: Opportunity Map MVP
+**Goal**: Brokers can visually inspect Brazilian commercial opportunities on a map and filter down to useful records.
+**Depends on**: Phase 12
+**Requirements**: MAP-01, MAP-02, MAP-03, QA-01, QA-02
 **Success Criteria** (what must be TRUE):
-  1. Login and signup pages match the light visual system and preserve Supabase email/password behavior.
-  2. The root/landing page reflects the light dashboard direction without becoming a marketing-only detour.
-  3. Public OM pages preserve unauthenticated access, tracking routes, and buyer-facing readability while adopting the light style.
-  4. Desktop and mobile screenshots show no text overlap, clipped controls, unreadable contrast, broken layouts, or accidental dark-theme remnants.
-  5. Critical v1.0 workflows pass after the refactor: auth, deal CRUD, notes, file upload/download, buyer CRUD, send OM, public OM open, tracking, and activity review.
-  6. Deferred Phase 3 live UAT is completed or explicitly documented with remaining blockers.
+  1. User can view geocoded listings as pins on a Brazil map.
+  2. Clicking a pin shows title, price, location, source, commercial type, confidence, reasoning, and the listing URL.
+  3. User can filter by state, city, price range, source, commercial-only status, and commercial type.
+  4. User can review non-geocoded or low-confidence records from a table/list view.
+  5. MVP can be demonstrated with roughly 50-200 listings across multiple Brazilian cities.
+  6. Known limitations are documented clearly after the demo pass.
 **Plans**: TBD
 **UI hint**: yes
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 7 -> 8 -> 9
+Phases execute in numeric order: 10 -> 11 -> 12 -> 13
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 7. Light Visual Foundation | 3/3 | Complete | 2026-05-02 |
-| 8. Authenticated Workspace Refactor | 5/5 | Complete | 2026-05-02 |
-| 9. Public Surfaces and Verification | 0/TBD | Not started | - |
+| 10. Listing Data Foundation | 0/TBD | Not started | - |
+| 11. Source Ingestion MVP | 0/TBD | Not started | - |
+| 12. Classification And Geocoding | 0/TBD | Not started | - |
+| 13. Opportunity Map MVP | 0/TBD | Not started | - |
 
 ## Requirement Coverage
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| UI-05 | Phase 7 | Complete |
-| UI-06 | Phase 7 | Complete |
-| UI-07 | Phase 7 | Complete |
-| UI-08 | Phase 7 | Complete |
-| APP-04 | Phase 8 | Complete |
-| APP-05 | Phase 8 | Complete |
-| APP-06 | Phase 8 | Complete |
-| DEAL-01 | Phase 8 | Complete |
-| DEAL-02 | Phase 8 | Complete |
-| DEAL-03 | Phase 8 | Complete |
-| SURF-04 | Phase 9 | Pending |
-| SURF-05 | Phase 9 | Pending |
-| SURF-06 | Phase 9 | Pending |
-| QA-04 | Phase 9 | Pending |
-| QA-05 | Phase 9 | Pending |
-| QA-06 | Phase 9 | Pending |
+| DATA-01 | Phase 10 | Pending |
+| DATA-02 | Phase 10 | Pending |
+| DATA-03 | Phase 10 | Pending |
+| SRC-01 | Phase 11 | Pending |
+| SRC-02 | Phase 11 | Pending |
+| SRC-03 | Phase 11 | Pending |
+| SRC-04 | Phase 11 | Pending |
+| CLS-01 | Phase 12 | Pending |
+| CLS-02 | Phase 12 | Pending |
+| CLS-03 | Phase 12 | Pending |
+| CLS-04 | Phase 12 | Pending |
+| GEO-01 | Phase 12 | Pending |
+| GEO-02 | Phase 12 | Pending |
+| MAP-01 | Phase 13 | Pending |
+| MAP-02 | Phase 13 | Pending |
+| MAP-03 | Phase 13 | Pending |
+| QA-01 | Phase 13 | Pending |
+| QA-02 | Phase 13 | Pending |
 
 **Coverage:**
-- v1.2 requirements: 16 total
-- Mapped to phases: 16
+- v1.3 requirements: 18 total
+- Mapped to phases: 18
 - Unmapped: 0

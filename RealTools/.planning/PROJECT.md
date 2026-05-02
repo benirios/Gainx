@@ -2,11 +2,11 @@
 
 ## What This Is
 
-RealTools is an MVP SaaS for individual commercial real estate brokers that consolidates the deal lifecycle into one workspace per property. Brokers can create deals, manage notes and files, publish a hosted Offering Memorandum, manage buyers, send tracked OM links through email, and review engagement in the Deal Hub activity log.
+RealTools is an MVP SaaS for individual commercial real estate brokers. It started as a deal workspace for managing OMs, buyers, files, notes, tracked links, and deal activity. The next product expansion adds opportunity sourcing: aggregating Brazilian property listings, identifying likely commercial listings, and showing them on a map so brokers can find potential deals faster.
 
 ## Core Value
 
-Every deal has one central workspace — broker never has to hunt across email, spreadsheets, and Drive to find deal status or contact buyers.
+Every broker has one practical workspace to find, qualify, and manage commercial real estate opportunities without hunting across listing sites, Facebook posts, spreadsheets, email, and Drive.
 
 ## Current State
 
@@ -30,15 +30,18 @@ RealTools now has:
 
 **v1.2 Phase 8 complete:** Authenticated Workspace Refactor completed on 2026-05-02. The app shell, dashboard, Deal Hub, buyers, profile, notes, files, activity, send-OM, and workflow dialogs now use the light dashboard direction while preserving shipped broker workflows.
 
-## Current Milestone: v1.2 Light Dashboard UI Refactor
+**v1.2 Phase 9 deferred:** Public/auth/OM surface restyling and full post-refactor verification remain unfinished. The user explicitly chose to start the next product milestone before completing that cleanup phase.
 
-**Goal:** Refactor all RealTools user-facing UI again to match the provided Nexus-style light SaaS dashboard reference while preserving existing broker workflows.
+## Current Milestone: v1.3 Brazil Commercial Listing Map
+
+**Goal:** Build a fast national MVP that ingests Brazilian listing sources, detects likely `pontos comerciais`, geocodes them, and displays them on a searchable map.
 
 **Target features:**
-- Replace the current dark v1.1 direction with a soft light shell, sidebar, topbar, cards, forms, tables, dialogs, empty/loading/error states, and activity surfaces.
-- Apply the reference's off-white page background, white cards, subtle dividers, low-contrast gray text, soft shadows, rounded controls, pale icon treatments, and pastel teal/purple/blue accents across RealTools surfaces.
-- Adapt the dashboard and deal workspace toward a polished SaaS analytics feel without adding fake analytics features outside RealTools' deal-management scope.
-- Preserve all v1.0 behavior, including auth, deals, notes, files, buyers, send OM, public OM, tracking, and activity log.
+- Ingest OLX Brazil listings for configurable states/cities/search terms instead of hardcoding Pernambuco-only scope.
+- Support Facebook Marketplace through manual or CSV import, not automated scraping, for the first MVP.
+- Classify listings as commercial or non-commercial using Portuguese keyword rules, with optional AI fallback only for ambiguous cases.
+- Geocode listings to coordinates and cache results.
+- Display listings on a map with pins, summary popups, and basic filters for state, city, price, source, and commercial type.
 
 ## Requirements
 
@@ -62,9 +65,12 @@ RealTools now has:
 
 ### Active
 
-- [ ] Apply the Phase 7 light dashboard foundation across public/auth/root/OM surfaces.
-- [ ] Complete responsive visual QA and critical workflow verification after the UI refactor.
-- [ ] Complete live UAT for Phase 3: Resend delivery, open tracking, and activity timeline.
+- [ ] User can ingest Brazilian listing records from OLX for configured cities/states and preserve title, description, price, location, address, images, URL, and source.
+- [ ] User can import Facebook Marketplace listings manually or by CSV when direct scraping is not viable.
+- [ ] System can classify whether a listing is a likely commercial property and explain the decision with confidence.
+- [ ] System can geocode listing locations and show successfully geocoded listings on a map.
+- [ ] User can filter the opportunity map by state, city, price, source, and commercial property type.
+- [ ] Deferred v1.2 public surface restyling and Phase 3 live UAT remain known cleanup work, not part of this milestone unless needed for demo readiness.
 
 ### Out of Scope
 
@@ -75,24 +81,32 @@ RealTools now has:
 - OAuth / magic link auth — email/password only for v1.
 - Buyer tag-based filtering before send — deferred to v2; manual selection is v1.
 - Real-time activity log — polling/refresh is sufficient for v1.
+- Full Facebook Marketplace automation — avoid platform/anti-scraping risk in the first opportunity-sourcing MVP.
+- Nationwide bulk scraping at scale — build national data structures, but ingest controlled city/state batches first.
+- Perfect address normalization — approximate map pins are acceptable for MVP validation.
+- ML model training — keyword rules and optional AI fallback are enough for Milestone 1.
 
 ## Context
 
-**Problem being solved:** Brokers today juggle email, Excel, Google Drive, and InDesign/Word for every deal. No single source of truth. OMs take hours to produce manually. Generic CRMs are too broad for CRE deal flow.
+**Problem being solved:** Brokers today juggle listing sites, Facebook Marketplace, WhatsApp, spreadsheets, email, Google Drive, and manual OM workflows. They need a faster way to find potential commercial opportunities, qualify them, and manage the resulting deal flow.
 
 **OM flow:** Broker generates OM → gets hosted public page URL → sends tracked link to selected buyers via email → system records per-buyer first open events → broker reviews activity in Deal Hub.
 
+**Opportunity sourcing flow:** Broker runs/imports listing searches → system stores raw listings → system classifies likely commercial properties → system geocodes listings → broker reviews opportunities on a national Brazil map.
+
 **Target user:** Individual commercial real estate broker.
 
-**Data models:** users, deals, notes, buyers, deal_buyers, activities, deal_files.
+**Data models:** users, deals, notes, buyers, deal_buyers, activities, deal_files, listings, listing_imports.
 
 ## Constraints
 
 - **Tech Stack:** Next.js App Router, Supabase Auth/DB/Storage, TailwindCSS, Resend.
+- **Opportunity stack:** Playwright for OLX ingestion, CSV/manual import for Facebook Marketplace, Supabase Postgres for listing storage, Leaflet/OpenStreetMap for maps, Nominatim/OpenStreetMap-style geocoding for MVP.
 - **Scope:** No billing, teams, PDF, or complex CRM workflows in v1.
 - **Auth:** Supabase email/password only.
 - **OM format:** Clean hosted HTML page.
 - **Security:** Service-role key only in `server-only` modules; use `getUser()` server-side; RLS policy coverage for every table.
+- **Scraping:** Keep volume controlled, source-specific, and resilient to failure. Do not build anti-bot evasion or unauthorized Facebook automation.
 
 ## Key Decisions
 
@@ -111,10 +125,14 @@ RealTools now has:
 | Use the provided Nexus-style light dashboard screenshot as the v1.2 visual source of truth | The user requested another UI refactor following that reference image | — Pending |
 | Default RealTools to the light dashboard foundation | Phase 7 replaced the default dark root class and dark shared primitive styling with light tokens and controls | ✓ Established v1.2 Phase 7 |
 | Apply the light dashboard foundation to authenticated workspace surfaces without behavior changes | Phase 8 refactored app shell, dashboard, Deal Hub, buyers, profile, notes, files, activity, send-OM, and dialogs while preserving existing workflows | ✓ Established v1.2 Phase 8 |
+| Start v1.3 before completing v1.2 Phase 9 | User prioritized the Brazil commercial listing map MVP over remaining public-surface UI cleanup | — Pending |
+| Build listing sourcing as national Brazil infrastructure with controlled initial city batches | Product scope should not be Pernambuco-only, but full-country scraping is not an MVP requirement | — Pending |
+| Use manual/CSV import for Facebook Marketplace in Milestone 1 | Automated Facebook scraping is high-friction and high-risk compared with proving the product workflow | — Pending |
+| Use keyword classification first, optional AI only for ambiguous listings | Faster, cheaper, easier to inspect, and good enough to identify likely `pontos comerciais` in early MVP data | — Pending |
 
 ## Next Milestone Goals
 
-After v1.2, gather broker feedback on the light dashboard direction and resolve any remaining Phase 3 UAT findings or deployment packaging concerns.
+After v1.3, validate whether brokers find the map useful with real Brazilian listings, then decide whether to expand source coverage, automate more ingestion, or connect opportunities back into the existing deal workspace.
 
 ## Evolution
 
@@ -134,4 +152,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-02 after Phase 8 Authenticated Workspace Refactor*
+*Last updated: 2026-05-03 at v1.3 Brazil Commercial Listing Map milestone start*

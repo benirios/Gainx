@@ -1,61 +1,73 @@
-# Requirements: RealTools v1.2 Light Dashboard UI Refactor
+# Requirements: RealTools v1.3 Brazil Commercial Listing Map
 
-**Defined:** 2026-05-02
-**Core Value:** Every deal has one central workspace — broker never has to hunt across email, spreadsheets, and Drive to find deal status or contact buyers.
+**Defined:** 2026-05-03
+**Core Value:** Every broker has one practical workspace to find, qualify, and manage commercial real estate opportunities without hunting across listing sites, Facebook posts, spreadsheets, email, and Drive.
 
-## v1.2 Requirements
+## v1.3 Requirements
 
-### Visual System
+### Listing Data Foundation
 
-- [x] **UI-05**: User sees a light Nexus-style RealTools interface with off-white page backgrounds, white surfaces, subtle borders, soft shadows, muted gray text, and pastel teal/purple/blue accents.
-- [x] **UI-06**: User sees consistent rounded controls, compact icon-led actions, pale icon containers, restrained hover/focus states, and low-contrast dividers across shared UI primitives.
-- [x] **UI-07**: User sees typography, spacing, card density, and visual hierarchy tuned for a calm SaaS dashboard rather than the previous dark premium style.
-- [x] **UI-08**: User sees loading, empty, error, disabled, hover, and focus states that follow the light reference style without causing layout shift or text overlap.
+- [ ] **DATA-01**: User can store Brazilian listing records with source, source URL, title, description, price, location, address, images, country, state, city, neighborhood, and timestamps.
+- [ ] **DATA-02**: User can deduplicate listings by source and URL so repeated imports update existing records instead of creating duplicates.
+- [ ] **DATA-03**: User can configure listing ingestion by Brazilian state, city, and search term without hardcoding Pernambuco-only scope.
 
-### App Shell And Dashboard
+### Source Ingestion
 
-- [x] **APP-04**: User can navigate the authenticated app through a light sidebar/topbar shell that matches the reference's compact SaaS layout while preserving existing routes and actions.
-- [x] **APP-05**: User can scan the dashboard through light metric cards, deal summaries, activity previews, and broker workflow shortcuts that feel visually aligned with the reference without inventing unsupported analytics.
-- [x] **APP-06**: User can use dashboard filters, buttons, menus, badges, and cards in the light visual system without losing existing deal-management behavior.
+- [ ] **SRC-01**: User can run controlled OLX Brazil ingestion for configured city/state/search combinations and save extracted listing records.
+- [ ] **SRC-02**: User can extract OLX title, description when available, price, location, address when available, images, URL, and source.
+- [ ] **SRC-03**: User can import Facebook Marketplace listings manually or by CSV when automated scraping is not viable.
+- [ ] **SRC-04**: User can review ingestion status, including successful records, skipped duplicates, and failed records.
 
-### Deal Workspace
+### Commercial Classification
 
-- [x] **DEAL-01**: User can use the Deal Hub in the light reference style, including deal header, metadata, status, notes, files, buyers, send-OM entry points, and activity log.
-- [x] **DEAL-02**: User can create, edit, delete, and review deals, notes, files, buyers, and send-OM flows through restyled forms, dialogs, tables, and timeline components.
-- [x] **DEAL-03**: User sees buyer tags, deal statuses, file rows, notes, and activity events styled with readable muted contrast and pastel accents.
+- [ ] **CLS-01**: User can see whether each listing is classified as likely commercial or non-commercial.
+- [ ] **CLS-02**: User can see a commercial type such as loja, galpão, escritório, sala comercial, prédio comercial, terreno comercial, box, quiosque, or unknown.
+- [ ] **CLS-03**: User can see a confidence score from 0 to 100 and a short reasoning string for the classification.
+- [ ] **CLS-04**: System can use Portuguese keyword rules first and optional AI fallback only for ambiguous listings.
 
-### Public And Auth Surfaces
+### Geocoding And Map
 
-- [ ] **SURF-04**: User sees login and signup pages restyled to match the light dashboard visual system while preserving Supabase email/password auth behavior.
-- [ ] **SURF-05**: Buyer sees public OM pages restyled to match the light reference system while preserving unauthenticated access, OM readability, and tracking behavior.
-- [ ] **SURF-06**: User sees the unauthenticated root/landing page restyled to match the light reference system without adding marketing-only content that delays access to the product.
+- [ ] **GEO-01**: System can convert listing location/address text into latitude and longitude where enough location data exists.
+- [ ] **GEO-02**: System can cache geocoding results and keep listings without coordinates available in a review table instead of dropping them.
+- [ ] **MAP-01**: User can view geocoded listings as pins on a Brazil map.
+- [ ] **MAP-02**: User can click a map pin to view title, price, location, classification, confidence, source, and listing URL.
+- [ ] **MAP-03**: User can filter listings by state, city, price range, source, commercial-only status, and commercial type.
 
-### Verification
+### MVP Review
 
-- [ ] **QA-04**: User can complete critical v1.0 workflows after the refactor: auth, deal CRUD, notes, file upload/download, buyer CRUD, send OM, public OM open, tracking, and activity review.
-- [ ] **QA-05**: User sees the refreshed UI without text overlap, clipped controls, unreadable contrast, broken layout, or accidental dark-theme remnants on mobile and desktop viewports.
-- [ ] **QA-06**: User can complete the deferred Phase 3 live UAT scenarios for Resend delivery, browser open tracking, and activity-log confirmation.
+- [ ] **QA-01**: User can validate the MVP with a controlled dataset of roughly 50-200 listings across multiple Brazilian cities.
+- [ ] **QA-02**: User can identify failed classifications, failed geocodes, and source ingestion problems quickly enough to fix or ignore them for demo purposes.
 
 ## Future Requirements
 
+### Source Expansion
+
+- **SRC-05**: User can ingest additional portals beyond OLX and Facebook Marketplace.
+- **SRC-06**: User can run scheduled recurring ingestion jobs.
+- **SRC-07**: User can receive alerts for new matching commercial listings.
+
 ### Product Expansion
 
-- **DASH-01**: User can see OM engagement summary cards on the dashboard.
-- **BUYER-05**: User can filter buyers by tags before sending an OM.
-- **OM-04**: User can export a PDF version of an OM.
-- **IMPORT-01**: User can import buyers from CSV.
+- **OPP-01**: User can save a listing as an opportunity and convert it into a deal workspace.
+- **OPP-02**: User can add broker notes, status, and follow-up tasks to sourced opportunities.
+- **OPP-03**: User can compare listing history or price changes over time.
+- **MAP-04**: User can draw or select map areas instead of filtering only by city/state.
 
 ## Out of Scope
 
-Explicitly excluded. Documented to prevent scope creep.
+Explicitly excluded for this milestone to protect speed.
 
 | Feature | Reason |
 |---------|--------|
-| New analytics product capabilities | The reference contains analytics widgets, but this milestone is a visual refactor and should not invent unsupported metrics. |
-| Billing, teams, pipelines, and PDF export | Previously deferred product scope; not required for the UI refactor. |
-| Brand rename to Nexus or copied reference content | The image is a style reference, not a product or content migration. |
-| Rebuilding v1.1 dark direction | v1.2 replaces that direction with a light dashboard system. |
-| Large CRM expansion | Complex CRM workflows remain out of scope for the MVP. |
+| Full Facebook Marketplace automation | High platform friction and risk; manual/CSV import proves the workflow faster. |
+| Scraping the entire country at once | Build national support, then ingest controlled city batches for MVP validation. |
+| Anti-bot evasion infrastructure | Too much risk and maintenance for a first MVP. |
+| Perfect address normalization | Approximate geocoding is acceptable for market discovery. |
+| Custom ML model training | Keyword rules plus optional AI fallback are enough to validate demand. |
+| Saved searches and alerts | Useful later, but not needed to prove the map workflow. |
+| Opportunity-to-deal conversion | Defer until sourced listings prove useful. |
+| Mobile app | Responsive web is enough for the MVP. |
+| Large-scale analytics | Focus on finding and viewing commercial opportunities first. |
 
 ## Traceability
 
@@ -63,28 +75,30 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| UI-05 | Phase 7 | Complete |
-| UI-06 | Phase 7 | Complete |
-| UI-07 | Phase 7 | Complete |
-| UI-08 | Phase 7 | Complete |
-| APP-04 | Phase 8 | Complete |
-| APP-05 | Phase 8 | Complete |
-| APP-06 | Phase 8 | Complete |
-| DEAL-01 | Phase 8 | Complete |
-| DEAL-02 | Phase 8 | Complete |
-| DEAL-03 | Phase 8 | Complete |
-| SURF-04 | Phase 9 | Pending |
-| SURF-05 | Phase 9 | Pending |
-| SURF-06 | Phase 9 | Pending |
-| QA-04 | Phase 9 | Pending |
-| QA-05 | Phase 9 | Pending |
-| QA-06 | Phase 9 | Pending |
+| DATA-01 | Phase 10 | Pending |
+| DATA-02 | Phase 10 | Pending |
+| DATA-03 | Phase 10 | Pending |
+| SRC-01 | Phase 11 | Pending |
+| SRC-02 | Phase 11 | Pending |
+| SRC-03 | Phase 11 | Pending |
+| SRC-04 | Phase 11 | Pending |
+| CLS-01 | Phase 12 | Pending |
+| CLS-02 | Phase 12 | Pending |
+| CLS-03 | Phase 12 | Pending |
+| CLS-04 | Phase 12 | Pending |
+| GEO-01 | Phase 12 | Pending |
+| GEO-02 | Phase 12 | Pending |
+| MAP-01 | Phase 13 | Pending |
+| MAP-02 | Phase 13 | Pending |
+| MAP-03 | Phase 13 | Pending |
+| QA-01 | Phase 13 | Pending |
+| QA-02 | Phase 13 | Pending |
 
 **Coverage:**
-- v1.2 requirements: 16 total
-- Mapped to phases: 16
+- v1.3 requirements: 18 total
+- Mapped to phases: 18
 - Unmapped: 0
 
 ---
-*Requirements defined: 2026-05-02*
-*Last updated: 2026-05-02 after v1.2 roadmap creation*
+*Requirements defined: 2026-05-03*
+*Last updated: 2026-05-03 after v1.3 roadmap creation*
