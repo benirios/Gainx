@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { Sidebar } from '@/components/sidebar'
+import { SidebarNav } from '@/components/sidebar-nav'
+import { LogoutButton } from '@/components/logout-button'
 
 export default async function AppLayout({
   children,
@@ -29,6 +31,12 @@ export default async function AppLayout({
             <p className="text-sm font-medium text-foreground">Workspace</p>
           </div>
         </header>
+        <div className="border-b border-border bg-sidebar md:hidden">
+          <SidebarNav />
+          <div className="px-3 pb-3">
+            <LogoutButton />
+          </div>
+        </div>
         <div className="flex-1 overflow-y-auto px-4 py-4 md:px-6 md:py-6 lg:px-8 lg:py-8">
           {children}
         </div>
