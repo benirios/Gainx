@@ -3,12 +3,15 @@ import { LogoutButton } from './logout-button'
 
 export function Sidebar() {
   return (
-    <aside className="w-60 bg-sidebar border-r border-sidebar-border flex flex-col">
-      <div className="px-6 py-6 border-b border-sidebar-border">
-        <span className="text-xl font-semibold text-sidebar-foreground tracking-wide">RealTools</span>
+    <aside className="hidden w-60 shrink-0 border-r border-sidebar-border bg-sidebar md:flex md:flex-col">
+      <div className="border-b border-sidebar-border px-4 py-5">
+        <span className="text-lg font-semibold text-sidebar-accent-foreground">
+          RealTools
+        </span>
+        <p className="mt-1 text-xs text-muted-foreground">Deal workspace</p>
       </div>
       <SidebarNav />
-      <div className="px-3 pb-6 pt-4 border-t border-sidebar-border">
+      <div className="border-t border-sidebar-border px-3 pb-4 pt-3">
         <LogoutButton />
       </div>
     </aside>
