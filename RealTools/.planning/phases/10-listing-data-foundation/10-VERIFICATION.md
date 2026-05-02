@@ -1,19 +1,19 @@
 # Phase 10 Verification: Listing Data Foundation
 
 **Verified:** 2026-05-03
-**Status:** human_needed
+**Status:** passed
 
 ## Result
 
-Phase 10 implementation is complete in code and static verification passes. Live Supabase schema application is blocked because the local environment is not authenticated with Supabase.
+Phase 10 implementation is complete. Static verification passes, and Supabase schema push has been verified from the authenticated environment.
 
 ## Requirements
 
 | Requirement | Result | Evidence |
 |-------------|--------|----------|
-| DATA-01 | Partial | `listings` schema and TypeScript types exist; live DB push blocked by missing Supabase token. |
-| DATA-02 | Partial | User-scoped `(user_id, source, source_url)` unique constraint and helper upsert conflict exist; live DB push blocked. |
-| DATA-03 | Partial | `listing_import_targets`, national constants, and target helper exist; live DB push blocked. |
+| DATA-01 | Passed | `listings` schema and TypeScript types exist; `supabase db push` reports the remote database is up to date. |
+| DATA-02 | Passed | User-scoped `(user_id, source, source_url)` unique constraint and helper upsert conflict exist. |
+| DATA-03 | Passed | `listing_import_targets`, national constants, and target helper exist. |
 
 ## Automated Verification
 
@@ -29,9 +29,9 @@ rg "BRAZIL_STATES|DEFAULT_LISTING_IMPORT_TARGETS|LISTING_SOURCES" lib/listings/c
 rg "onConflict: 'user_id,source,source_url'|onConflict: 'user_id,source,country,state,city,search_term'" lib/listings/ingestion.ts
 ```
 
-## Blocking Manual Step
+## Schema Push
 
-Attempted:
+Verified:
 
 ```bash
 supabase db push
@@ -41,16 +41,9 @@ Result:
 
 ```text
 Initialising login role...
-Access token not provided. Supply an access token by running supabase login or setting the SUPABASE_ACCESS_TOKEN environment variable.
+Connecting to remote database...
+Remote database is up to date.
 ```
-
-To finish Phase 10 verification, authenticate Supabase locally and rerun:
-
-```bash
-supabase db push
-```
-
-or provide `SUPABASE_ACCESS_TOKEN` in the environment.
 
 ## Files Verified
 
@@ -62,4 +55,4 @@ or provide `SUPABASE_ACCESS_TOKEN` in the environment.
 
 ## Decision
 
-Do not mark Phase 10 fully complete until the schema push succeeds or a project owner explicitly accepts the unapplied migration risk.
+Phase 10 is complete and ready to hand off to Phase 11.

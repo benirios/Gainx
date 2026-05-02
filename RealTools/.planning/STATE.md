@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Brazil Commercial Listing Map
-status: human_needed
+status: ready_to_plan
 last_updated: "2026-05-03T00:00:00.000Z"
-last_activity: 2026-05-03 -- Phase 10 implemented locally; Supabase schema push needs auth
+last_activity: 2026-05-03 -- Phase 10 complete, ready to plan Phase 11
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
   completed_plans: 2
-  percent: 0
+  percent: 25
 ---
 
 # Project State
@@ -20,14 +20,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-03)
 
 **Core value:** Every broker has one practical workspace to find, qualify, and manage commercial real estate opportunities without hunting across listing sites, Facebook posts, spreadsheets, email, and Drive.
-**Current focus:** Phase 10 — Listing Data Foundation
+**Current focus:** Phase 11 — Source Ingestion MVP
 
 ## Current Position
 
-Phase: 10 (Listing Data Foundation) — HUMAN NEEDED
-Plan: 2 of 2 implemented
-Status: Waiting on Supabase schema push auth
-Last activity: 2026-05-03 — Phase 10 code complete; waiting on Supabase auth for schema push
+Phase: 11 (Source Ingestion MVP)
+Plan: —
+Status: Ready to plan
+Last activity: 2026-05-03 — Phase 10 complete
 
 ## Accumulated Context
 
@@ -54,7 +54,7 @@ Recent decisions affecting future work:
 - The opportunity-sourcing MVP is national in data model and filters, but initial ingestion should use controlled city/state batches instead of trying to scrape all Brazil at once.
 - Facebook Marketplace automation is not part of Milestone 1; use manual or CSV import to avoid platform friction and keep execution fast.
 - Commercial classification should start with Portuguese keyword rules and use optional AI only for ambiguous listings.
-- Phase 10 created listing schema, generated-style types, validation schemas, national target constants, and ingestion upsert helpers.
+- Phase 10 created listing schema, generated-style types, validation schemas, national target constants, and ingestion upsert helpers. `supabase db push` reports the remote database is up to date.
 
 ### Pending Todos
 
@@ -64,7 +64,6 @@ None.
 
 - Phase 3 live UAT remains pending for Resend delivery, browser open tracking, and activity-log confirmation.
 - v1.2 Phase 9 public/auth/OM surface restyling remains deferred while v1.3 product sourcing work starts.
-- Phase 10 `supabase db push` is blocked until Supabase CLI authentication is available (`supabase login` or `SUPABASE_ACCESS_TOKEN`).
 - Upgrade Supabase to Pro before stakeholder demo if free tier pause risk matters.
 - Consider setting `outputFileTracingRoot` in Next config if deployment packaging uses traced output from this multi-lockfile parent workspace.
 
@@ -79,4 +78,4 @@ Items acknowledged and deferred at milestone close on 2026-05-01:
 
 ## Session Continuity
 
-Authenticate Supabase, then run `supabase db push` to finish Phase 10 verification.
+Resume with `$gsd-plan-phase 11` to plan Source Ingestion MVP.

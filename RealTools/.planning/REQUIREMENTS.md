@@ -7,9 +7,9 @@
 
 ### Listing Data Foundation
 
-- [ ] **DATA-01**: User can store Brazilian listing records with source, source URL, title, description, price, location, address, images, country, state, city, neighborhood, and timestamps.
-- [ ] **DATA-02**: User can deduplicate listings by source and URL so repeated imports update existing records instead of creating duplicates.
-- [ ] **DATA-03**: User can configure listing ingestion by Brazilian state, city, and search term without hardcoding Pernambuco-only scope.
+- [x] **DATA-01**: User can store Brazilian listing records with source, source URL, title, description, price, location, address, images, country, state, city, neighborhood, and timestamps.
+- [x] **DATA-02**: User can deduplicate listings by source and URL so repeated imports update existing records instead of creating duplicates.
+- [x] **DATA-03**: User can configure listing ingestion by Brazilian state, city, and search term without hardcoding Pernambuco-only scope.
 
 ### Source Ingestion
 
@@ -75,9 +75,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | Phase 10 | Pending |
-| DATA-02 | Phase 10 | Pending |
-| DATA-03 | Phase 10 | Pending |
+| DATA-01 | Phase 10 | Complete |
+| DATA-02 | Phase 10 | Complete |
+| DATA-03 | Phase 10 | Complete |
 | SRC-01 | Phase 11 | Pending |
 | SRC-02 | Phase 11 | Pending |
 | SRC-03 | Phase 11 | Pending |
