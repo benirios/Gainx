@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Light Dashboard UI Refactor
-status: ready_to_plan
-last_updated: "2026-05-02T10:05:00.000Z"
-last_activity: 2026-05-02 -- Phase 8 UI-SPEC approved, ready to plan Phase 8
+status: ready_to_execute
+last_updated: "2026-05-02T10:25:00.000Z"
+last_activity: 2026-05-02 -- Phase 8 planned, ready to execute
 progress:
   total_phases: 3
   completed_phases: 1
-  total_plans: 3
+  total_plans: 8
   completed_plans: 3
   percent: 33
 ---
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-05-02)
 ## Current Position
 
 Phase: 8
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-05-02 -- Phase 8 UI-SPEC approved
+Plan: 0/5 planned Phase 8 plans complete
+Status: Ready to execute
+Last activity: 2026-05-02 -- Phase 8 planned
 
 ## Accumulated Context
 
@@ -48,6 +48,7 @@ Recent decisions affecting future work:
 - v1.2 intentionally supersedes the unfinished v1.1 dark UI direction with a Nexus-style light dashboard reference.
 - Phase 7 completed the light foundation: root light tokens, default light theme, Geist operational typography, and shared light primitives.
 - Phase 8 UI design contract approved: authenticated workspace refactor must apply the Phase 7 light foundation to app shell, dashboard, Deal Hub, buyers, profile, forms, dialogs, notes, files, send-OM, and activity surfaces without behavior changes.
+- Phase 8 planned as five behavior-preserving UI execution slices: shell/nav, dashboard/cards, Deal Hub sections, buyers/profile, and dialogs/forms.
 
 ### Pending Todos
 
@@ -70,4 +71,4 @@ Items acknowledged and deferred at milestone close on 2026-05-01:
 
 ## Session Continuity
 
-Resume with `$gsd-plan-phase 8` to plan the Authenticated Workspace Refactor.
+Resume with `$gsd-execute-phase 8` to execute the Authenticated Workspace Refactor.

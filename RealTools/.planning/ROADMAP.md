@@ -28,7 +28,7 @@ Phase numbering continues from the previous roadmap, so this milestone starts at
   3. The previous dark theme direction no longer drives the default app appearance.
   4. Loading, empty, error, disabled, hover, and focus states are styled in the light system without layout shift.
   5. Visual rules explicitly avoid copying Nexus branding/content or inventing unsupported product analytics.
-**Plans**: TBD
+**Plans**: 07-01 Global Light Theme Foundation; 07-02 Action And Form Primitive Refactor; 07-03 Surfaces Feedback And Foundation Audit
 **UI hint**: yes
 
 ### Phase 8: Authenticated Workspace Refactor
@@ -41,7 +41,7 @@ Phase numbering continues from the previous roadmap, so this milestone starts at
   3. Deal Hub, buyers, profile, notes, files, send-OM, and activity log surfaces use consistent light cards, tables, badges, tags, rows, and metadata treatments.
   4. Deal, note, file, buyer, delete, and send-OM dialogs/forms are restyled without changing validation, actions, or data behavior.
   5. Existing authenticated navigation and broker workflows still work after the refactor.
-**Plans**: TBD
+**Plans**: 08-01 Authenticated Shell And Navigation; 08-02 Dashboard And Deal Cards; 08-03 Deal Hub Layout And Detail Sections; 08-04 Buyers And Profile Surfaces; 08-05 Dialogs And Workflow Forms
 **UI hint**: yes
 
 ### Phase 9: Public Surfaces and Verification
@@ -66,7 +66,7 @@ Phases execute in numeric order: 7 -> 8 -> 9
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 7. Light Visual Foundation | 3/3 | Complete | 2026-05-02 |
-| 8. Authenticated Workspace Refactor | 0/TBD | Not started | - |
+| 8. Authenticated Workspace Refactor | 0/5 | Planned | - |
 | 9. Public Surfaces and Verification | 0/TBD | Not started | - |
 
 ## Requirement Coverage
