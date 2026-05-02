@@ -15,14 +15,14 @@ export function SignUpForm() {
   return (
     <form action={action} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-zinc-300">Email</Label>
+        <Label htmlFor="email" className="text-muted-foreground">Email</Label>
         <Input
           id="email"
           name="email"
           type="email"
           autoComplete="email"
           placeholder="you@example.com"
-          className="bg-zinc-800 border-zinc-700 text-zinc-50 placeholder:text-zinc-500"
+          className="border-border bg-secondary text-foreground placeholder:text-muted-foreground"
           disabled={isPending}
         />
         {state.errors?.email && (
@@ -30,14 +30,14 @@ export function SignUpForm() {
         )}
       </div>
       <div className="space-y-2">
-        <Label htmlFor="password" className="text-zinc-300">Password</Label>
+        <Label htmlFor="password" className="text-muted-foreground">Password</Label>
         <Input
           id="password"
           name="password"
           type="password"
           autoComplete="new-password"
           placeholder="••••••••"
-          className="bg-zinc-800 border-zinc-700 text-zinc-50 placeholder:text-zinc-500"
+          className="border-border bg-secondary text-foreground placeholder:text-muted-foreground"
           disabled={isPending}
         />
         {state.errors?.password && (
@@ -49,7 +49,7 @@ export function SignUpForm() {
       )}
       <Button
         type="submit"
-        className="w-full bg-white text-zinc-950 hover:bg-zinc-100"
+        className="w-full"
         disabled={isPending}
       >
         {isPending ? (

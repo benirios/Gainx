@@ -81,10 +81,10 @@ export function FilesSection({
   }
 
   return (
-    <section className="rounded-lg border border-border bg-card p-4 shadow-[0_12px_30px_rgba(35,45,72,0.05)] md:p-5">
+    <section className="rounded-lg border border-border bg-card p-4 shadow-[0_16px_36px_rgba(5,10,20,0.22)] md:p-5">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <span className="flex size-9 items-center justify-center rounded-lg bg-[#eaf3ff] text-[#497db7]">
+          <span className="flex size-9 items-center justify-center rounded-lg bg-[#182b44] text-[#8fc5ff]">
             <FileText className="size-4" />
           </span>
           <h2 className="text-[15px] font-medium text-foreground">Files</h2>
@@ -144,9 +144,9 @@ function FileRow({ file }: { file: DealFile }) {
   }
 
   return (
-    <div className="flex min-h-12 items-center justify-between rounded-lg border border-border/70 bg-[#fbfcfe] px-4 py-3 transition-colors hover:bg-[#f8fafc]">
+    <div className="flex min-h-12 items-center justify-between rounded-lg border border-border/70 bg-secondary px-4 py-3 transition-colors hover:bg-muted">
       <div className="flex items-center gap-2 min-w-0">
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#eaf3ff] text-[#497db7]">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#182b44] text-[#8fc5ff]">
           <FileText className="size-4" />
         </span>
         <span className="truncate text-sm text-foreground">{file.file_name}</span>

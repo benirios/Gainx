@@ -1,5 +1,6 @@
 import { createSupabaseServiceClient } from '@/lib/supabase/service'
 import { recordOmOpenByToken } from '@/lib/tracking/record-om-open'
+import Image from 'next/image'
 // DO NOT import createSupabaseServerClient — it calls cookies() which fails for unauthenticated requests
 // Middleware matcher explicitly excludes /om/* so no auth is attempted on this route
 
@@ -31,8 +32,8 @@ export default async function OmPage({
 
   if (!deal) {
     return (
-      <main className="min-h-screen bg-white text-zinc-900 flex items-center justify-center">
-        <p className="text-zinc-500">Deal not found.</p>
+      <main className="flex min-h-screen items-center justify-center bg-background text-foreground">
+        <p className="text-muted-foreground">Deal not found.</p>
       </main>
     )
   }
@@ -58,10 +59,17 @@ export default async function OmPage({
     : 'Closed'
 
   return (
-    <main className="min-h-screen bg-white text-zinc-900">
+    <main className="min-h-screen bg-background text-foreground">
       {/* Top bar */}
-      <header className="bg-zinc-900 text-white px-8 py-4 flex items-center justify-between">
-        <span className="text-base font-semibold">RealTools</span>
+      <header className="flex items-center justify-between border-b border-border bg-card px-8 py-4">
+        <Image
+          src="/realtools-logo.png"
+          alt="RealTools"
+          width={128}
+          height={73}
+          priority
+          className="h-9 w-auto object-contain"
+        />
         <span
           className={[
             'text-xs font-medium px-2 py-1 rounded-full border',
@@ -69,7 +77,7 @@ export default async function OmPage({
               ? 'bg-green-500/10 text-green-400 border-green-500/20'
               : deal.status === 'negotiating'
                 ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'
-                : 'bg-zinc-700 text-zinc-300 border-zinc-600',
+                : 'bg-muted text-muted-foreground border-border',
           ].join(' ')}
         >
           {statusLabel}
@@ -77,29 +85,29 @@ export default async function OmPage({
       </header>
 
       {/* Hero */}
-      <section className="px-8 py-12 border-b border-zinc-200">
-        <h1 className="text-2xl font-semibold text-zinc-900 leading-tight">{deal.title}</h1>
-        <p className="text-xl text-zinc-500 mt-2">{deal.address}</p>
+      <section className="border-b border-border px-8 py-12">
+        <h1 className="text-2xl font-semibold leading-tight text-foreground">{deal.title}</h1>
+        <p className="mt-2 text-xl text-muted-foreground">{deal.address}</p>
       </section>
 
       {/* Property details grid */}
-      <section className="px-8 py-8 grid grid-cols-2 md:grid-cols-3 gap-6 bg-zinc-50 border-b border-zinc-200">
+      <section className="grid grid-cols-2 gap-6 border-b border-border bg-secondary px-8 py-8 md:grid-cols-3">
         <div>
-          <p className="text-sm uppercase tracking-wide text-zinc-400 mb-1">Asking Price</p>
-          <p className="text-xl font-semibold text-zinc-900">{deal.price}</p>
+          <p className="mb-1 text-sm uppercase tracking-wide text-muted-foreground">Asking Price</p>
+          <p className="text-xl font-semibold text-foreground">{deal.price}</p>
         </div>
         <div>
-          <p className="text-sm uppercase tracking-wide text-zinc-400 mb-1">Status</p>
-          <p className="text-xl font-semibold text-zinc-900">{statusLabel}</p>
+          <p className="mb-1 text-sm uppercase tracking-wide text-muted-foreground">Status</p>
+          <p className="text-xl font-semibold text-foreground">{statusLabel}</p>
         </div>
       </section>
 
       {/* Description */}
       {deal.description && (
-        <section className="px-8 py-8 border-b border-zinc-200">
-          <h2 className="text-xl font-semibold text-zinc-900 mb-6">Property Overview</h2>
+        <section className="border-b border-border px-8 py-8">
+          <h2 className="mb-6 text-xl font-semibold text-foreground">Property Overview</h2>
           <p
-            className="text-base text-zinc-700 leading-relaxed"
+            className="text-base leading-relaxed text-muted-foreground"
             style={{ maxWidth: '72ch' }}
           >
             {deal.description}
@@ -110,7 +118,7 @@ export default async function OmPage({
       {/* Images — only if om-images bucket has files for this deal */}
       {images.length > 0 && (
         <section className="px-8 py-8">
-          <h2 className="text-xl font-semibold text-zinc-900 mb-6">Property Images</h2>
+          <h2 className="mb-6 text-xl font-semibold text-foreground">Property Images</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {images.map((url, i) => (
               // Using plain <img> — avoids next.config.ts remotePatterns requirement for public OM page
@@ -128,8 +136,8 @@ export default async function OmPage({
       )}
 
       {/* Footer */}
-      <footer className="px-8 py-6 border-t border-zinc-200 bg-zinc-50 text-center">
-        <p className="text-sm text-zinc-400">Powered by RealTools</p>
+      <footer className="border-t border-border bg-secondary px-8 py-6 text-center">
+        <p className="text-sm text-muted-foreground">Powered by RealTools</p>
       </footer>
 
       {/* Tracking pixel (SECONDARY signal — D-13 / TRACK-02) — only when ref present */}

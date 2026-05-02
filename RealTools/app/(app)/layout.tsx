@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import Image from 'next/image'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { Sidebar } from '@/components/sidebar'
 import { SidebarNav } from '@/components/sidebar-nav'
@@ -24,11 +25,21 @@ export default async function AppLayout({
       <Sidebar />
       <main className="flex min-h-screen flex-1 flex-col overflow-hidden">
         <header className="h-16 border-b border-border bg-card/80 px-4 backdrop-blur md:px-6 lg:px-8 flex shrink-0 items-center justify-between">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              RealTools
-            </p>
-            <p className="text-sm font-medium text-foreground">Workspace</p>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/realtools-logo.png"
+              alt="RealTools"
+              width={128}
+              height={73}
+              priority
+              className="h-9 w-auto object-contain md:hidden"
+            />
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                RealTools
+              </p>
+              <p className="text-sm font-medium text-foreground">Workspace</p>
+            </div>
           </div>
         </header>
         <div className="border-b border-border bg-sidebar md:hidden">

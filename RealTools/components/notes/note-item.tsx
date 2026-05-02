@@ -65,7 +65,7 @@ export function NoteItem({ note }: { note: Note }) {
 
   if (editing) {
     return (
-      <div className="rounded-lg border border-border/70 bg-[#fbfcfe] px-4 py-3">
+      <div className="rounded-lg border border-border/70 bg-secondary px-4 py-3">
         <form action={editAction}>
           <input type="hidden" name="note_id" value={note.id} />
           <input type="hidden" name="deal_id" value={note.deal_id} />
@@ -107,7 +107,7 @@ export function NoteItem({ note }: { note: Note }) {
   }
 
   return (
-    <div className="group min-h-12 rounded-lg border border-border/70 bg-[#fbfcfe] px-4 py-3 transition-colors hover:bg-[#f8fafc]">
+    <div className="group min-h-12 rounded-lg border border-border/70 bg-secondary px-4 py-3 transition-colors hover:bg-muted">
       <p className="text-sm leading-6 text-foreground">{note.content}</p>
       <div className="flex items-center justify-between mt-2">
         <time className="text-xs text-muted-foreground">{timestamp}</time>

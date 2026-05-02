@@ -5,9 +5,9 @@ import { Badge } from '@/components/ui/badge'
 
 // Status badge config — D-13: subtle semantic tint + border, no saturated fills
 const statusConfig = {
-  active:      { label: 'Active',      className: 'bg-[#e7faf8] text-[#249c96] border border-[#bfeeea]' },
-  negotiating: { label: 'Negotiating', className: 'bg-[#f0eeff] text-[#6759c7] border border-[#ddd7ff]' },
-  closed:      { label: 'Closed',      className: 'bg-[#f3f5f9] text-[#6b7280] border border-[#e7eaf0]' },
+  active:      { label: 'Active',      className: 'bg-[#153332] text-[#62ddd6] border border-[#285a58]' },
+  negotiating: { label: 'Negotiating', className: 'bg-primary/15 text-primary border border-primary/25' },
+  closed:      { label: 'Closed',      className: 'bg-muted text-muted-foreground border border-border' },
 } as const
 
 export function StatusBadge({ status }: { status: string }) {
@@ -26,7 +26,7 @@ type Deal = {
 export function DealCard({ deal }: { deal: Deal }) {
   return (
     <Link href={`/deals/${deal.id}`} className="block group">
-      <Card className="rounded-lg border-border bg-card transition-all hover:border-[#d9ddf7] hover:shadow-[0_16px_36px_rgba(35,45,72,0.07)]">
+      <Card className="rounded-lg border-border bg-card transition-all hover:border-primary/45 hover:shadow-[0_18px_42px_rgba(5,10,20,0.32)]">
         <CardContent className="pt-6 pb-4">
           <div className="flex items-start justify-between gap-3 mb-3">
             <h3 className="text-[15px] font-medium text-foreground leading-snug">{deal.title}</h3>

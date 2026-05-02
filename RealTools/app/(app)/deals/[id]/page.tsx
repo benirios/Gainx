@@ -104,7 +104,7 @@ export default async function DealHubPage({
         Back to Deals
       </Link>
 
-      <section className="rounded-lg border border-border bg-card p-4 shadow-[0_12px_30px_rgba(35,45,72,0.05)] md:p-6">
+      <section className="rounded-lg border border-border bg-card p-4 shadow-[0_16px_36px_rgba(5,10,20,0.22)] md:p-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0 space-y-3">
             <div className="flex flex-wrap items-center gap-3">
@@ -114,13 +114,13 @@ export default async function DealHubPage({
               <StatusBadge status={deal.status} />
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-lg border border-border/70 bg-[#fbfcfe] p-3">
+              <div className="rounded-lg border border-border/70 bg-secondary p-3">
                 <p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   Address
                 </p>
                 <p className="text-sm text-foreground">{deal.address ?? '—'}</p>
               </div>
-              <div className="rounded-lg border border-border/70 bg-[#fbfcfe] p-3">
+              <div className="rounded-lg border border-border/70 bg-secondary p-3">
                 <p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   Asking price
                 </p>
@@ -179,7 +179,7 @@ export default async function DealHubPage({
           <Card>
             <CardContent className="space-y-3 pt-6">
               <div className="flex items-center gap-3">
-                <span className="flex size-9 items-center justify-center rounded-lg bg-[#eaf3ff] text-[#497db7]">
+                <span className="flex size-9 items-center justify-center rounded-lg bg-[#182b44] text-[#8fc5ff]">
                   <FileText className="size-4" />
                 </span>
                 <h2 className="text-[15px] font-medium text-foreground">Send status</h2>
@@ -193,12 +193,12 @@ export default async function DealHubPage({
                     return (
                       <div
                         key={row.buyer_id}
-                        className="flex min-h-12 items-center justify-between gap-3 rounded-lg border border-border/70 bg-[#fbfcfe] px-3 py-2"
+                        className="flex min-h-12 items-center justify-between gap-3 rounded-lg border border-border/70 bg-secondary px-3 py-2"
                       >
                         <span className="min-w-0 truncate text-sm text-foreground">
                           {buyer?.name ?? 'Unknown buyer'}
                         </span>
-                        <span className="shrink-0 rounded-md border border-[#cfe4ff] bg-[#eaf3ff] px-2 py-0.5 text-xs font-medium text-[#497db7]">
+                        <span className="shrink-0 rounded-md border border-[#28486b] bg-[#182b44] px-2 py-0.5 text-xs font-medium text-[#8fc5ff]">
                           {row.om_sent_at ? 'Sent' : 'Not sent'}
                         </span>
                       </div>

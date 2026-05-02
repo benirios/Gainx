@@ -24,10 +24,10 @@ export default async function DashboardPage() {
   const closedDeals = dealList.filter((deal) => deal.status === 'closed').length
 
   const summaryCards = [
-    { label: 'Total deals', value: totalDeals, icon: Briefcase, className: 'bg-[#f0eeff] text-[#6759c7]' },
-    { label: 'Active', value: activeDeals, icon: CheckCircle2, className: 'bg-[#e7faf8] text-[#249c96]' },
-    { label: 'Negotiating', value: negotiatingDeals, icon: Clock3, className: 'bg-[#eaf3ff] text-[#497db7]' },
-    { label: 'Closed', value: closedDeals, icon: CircleDollarSign, className: 'bg-[#f3f5f9] text-[#6b7280]' },
+    { label: 'Total deals', value: totalDeals, icon: Briefcase, className: 'bg-primary/15 text-primary' },
+    { label: 'Active', value: activeDeals, icon: CheckCircle2, className: 'bg-[#153332] text-[#62ddd6]' },
+    { label: 'Negotiating', value: negotiatingDeals, icon: Clock3, className: 'bg-[#182b44] text-[#8fc5ff]' },
+    { label: 'Closed', value: closedDeals, icon: CircleDollarSign, className: 'bg-muted text-muted-foreground' },
   ]
 
   return (
@@ -46,7 +46,7 @@ export default async function DashboardPage() {
         {summaryCards.map(({ label, value, icon: Icon, className }) => (
           <div
             key={label}
-            className="rounded-lg border border-border bg-card p-4 shadow-[0_12px_30px_rgba(35,45,72,0.05)]"
+            className="rounded-lg border border-border bg-card p-4 shadow-[0_16px_36px_rgba(5,10,20,0.22)]"
           >
             <div className="flex items-center justify-between gap-3">
               <div>
@@ -66,8 +66,8 @@ export default async function DashboardPage() {
       </div>
 
       {dealList.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-lg border border-border bg-card px-6 py-16 text-center shadow-[0_12px_30px_rgba(35,45,72,0.05)]">
-          <span className="mb-4 flex size-12 items-center justify-center rounded-lg bg-[#f0eeff] text-[#6759c7]">
+        <div className="flex flex-col items-center justify-center rounded-lg border border-border bg-card px-6 py-16 text-center shadow-[0_16px_36px_rgba(5,10,20,0.22)]">
+          <span className="mb-4 flex size-12 items-center justify-center rounded-lg bg-primary/15 text-primary">
             <Briefcase className="size-6" />
           </span>
           <h2 className="text-lg font-semibold text-foreground">No deals yet.</h2>

@@ -102,7 +102,7 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
                   return (
                     <label
                       key={buyer.id}
-                      className="flex cursor-pointer items-center gap-3 bg-[#fbfcfe] px-4 py-3 hover:bg-[#f8fafc]"
+                      className="flex cursor-pointer items-center gap-3 bg-secondary px-4 py-3 hover:bg-muted"
                     >
                       <Checkbox
                         checked={checked}
@@ -115,7 +115,7 @@ export function SendOmModal({ dealId, buyers, dealBuyers }: Props) {
                         <span className="block truncate text-sm text-muted-foreground">{buyer.email}</span>
                       </span>
                       {sentAt && (
-                        <Badge className="bg-[#eaf3ff] text-[#497db7] border border-[#cfe4ff] hover:bg-[#eaf3ff]">
+                        <Badge className="border border-[#28486b] bg-[#182b44] text-[#8fc5ff] hover:bg-[#182b44]">
                           Sent
                         </Badge>
                       )}

@@ -43,13 +43,13 @@ function activityDescription(activity: ActivityRow) {
 function activityIcon(eventType: string) {
   switch (eventType) {
     case 'om_sent':
-      return { Icon: Send, className: 'bg-[#e7faf8] text-[#249c96]' }
+      return { Icon: Send, className: 'bg-[#153332] text-[#62ddd6]' }
     case 'om_opened':
-      return { Icon: Eye, className: 'bg-[#eaf3ff] text-[#497db7]' }
+      return { Icon: Eye, className: 'bg-[#182b44] text-[#8fc5ff]' }
     case 'note_added':
-      return { Icon: NotebookText, className: 'bg-[#f0eeff] text-[#6759c7]' }
+      return { Icon: NotebookText, className: 'bg-primary/15 text-primary' }
     case 'file_uploaded':
-      return { Icon: FileText, className: 'bg-[#eaf3ff] text-[#497db7]' }
+      return { Icon: FileText, className: 'bg-[#182b44] text-[#8fc5ff]' }
     default:
       return { Icon: Circle, className: 'bg-muted text-muted-foreground' }
   }
@@ -57,7 +57,7 @@ function activityIcon(eventType: string) {
 
 export function ActivityLogSection({ activities }: { activities: ActivityRow[] }) {
   return (
-    <section className="rounded-lg border border-border bg-card p-4 shadow-[0_12px_30px_rgba(35,45,72,0.05)] md:p-5">
+    <section className="rounded-lg border border-border bg-card p-4 shadow-[0_16px_36px_rgba(5,10,20,0.22)] md:p-5">
       <div className="mb-4 flex items-center gap-3">
         <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-muted-foreground">
           <Circle className="size-4" />
@@ -75,7 +75,7 @@ export function ActivityLogSection({ activities }: { activities: ActivityRow[] }
             return (
               <div
                 key={activity.id}
-                className="flex min-h-12 flex-col gap-2 rounded-lg border border-border/70 bg-[#fbfcfe] px-4 py-3 transition-colors hover:bg-[#f8fafc] sm:flex-row sm:items-center sm:justify-between"
+                className="flex min-h-12 flex-col gap-2 rounded-lg border border-border/70 bg-secondary px-4 py-3 transition-colors hover:bg-muted sm:flex-row sm:items-center sm:justify-between"
               >
                 <div className="flex min-w-0 items-center gap-3">
                   <span className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${className}`}>
