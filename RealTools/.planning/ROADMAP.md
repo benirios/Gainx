@@ -28,7 +28,7 @@ Phase numbering continues from the existing project history, so this milestone s
   2. Re-importing the same source URL updates the existing listing instead of creating duplicates.
   3. Ingestion targets can be configured by state, city, and search term for Brazil-wide expansion.
   4. Existing deal, buyer, OM, tracking, and activity workflows remain untouched.
-**Plans**: TBD
+**Plans**: 10-01 Listing Schema And Generated Types; 10-02 Listing Domain Helpers And Target Configuration
 **UI hint**: no
 
 ### Phase 11: Source Ingestion MVP
@@ -79,7 +79,7 @@ Phases execute in numeric order: 10 -> 11 -> 12 -> 13
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 10. Listing Data Foundation | 0/TBD | Not started | - |
+| 10. Listing Data Foundation | 0/2 | Planned | - |
 | 11. Source Ingestion MVP | 0/TBD | Not started | - |
 | 12. Classification And Geocoding | 0/TBD | Not started | - |
 | 13. Opportunity Map MVP | 0/TBD | Not started | - |
