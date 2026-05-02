@@ -28,6 +28,8 @@ RealTools now has:
 
 **v1.2 Phase 7 complete:** Light Visual Foundation established on 2026-05-02. The app now defaults to light mode, root tokens follow the Nexus-style palette, Geist drives operational UI typography, and shared shadcn/radix primitives use light dashboard controls and surfaces.
 
+**v1.2 Phase 8 complete:** Authenticated Workspace Refactor completed on 2026-05-02. The app shell, dashboard, Deal Hub, buyers, profile, notes, files, activity, send-OM, and workflow dialogs now use the light dashboard direction while preserving shipped broker workflows.
+
 ## Current Milestone: v1.2 Light Dashboard UI Refactor
 
 **Goal:** Refactor all RealTools user-facing UI again to match the provided Nexus-style light SaaS dashboard reference while preserving existing broker workflows.
@@ -56,11 +58,12 @@ RealTools now has:
 - ✓ Deal Hub shows a per-deal activity log — v1.0 implementation, live UAT pending
 - ✓ Reference visual foundation tokens and shared UI primitives match the premium dark screenshot style, excluding the background pattern — v1.1 Phase 4
 - ✓ Light dashboard foundation tokens and shared UI primitives match the Nexus-style reference direction — v1.2 Phase 7
+- ✓ Authenticated app workspace surfaces match the light dashboard direction while preserving routes, auth, deal management, buyers, notes, files, send OM, and activity behavior — v1.2 Phase 8
 
 ### Active
 
-- [ ] Apply the Phase 7 light dashboard foundation across authenticated app surfaces.
-- [ ] Preserve all shipped v1.0 workflows during the visual refactor.
+- [ ] Apply the Phase 7 light dashboard foundation across public/auth/root/OM surfaces.
+- [ ] Complete responsive visual QA and critical workflow verification after the UI refactor.
 - [ ] Complete live UAT for Phase 3: Resend delivery, open tracking, and activity timeline.
 
 ### Out of Scope
@@ -107,6 +110,7 @@ RealTools now has:
 | Start v1.2 before formally completing v1.1 | User explicitly chose to proceed with a new UI refactor despite v1.1 Phase 6 and verification state remaining incomplete | — Pending |
 | Use the provided Nexus-style light dashboard screenshot as the v1.2 visual source of truth | The user requested another UI refactor following that reference image | — Pending |
 | Default RealTools to the light dashboard foundation | Phase 7 replaced the default dark root class and dark shared primitive styling with light tokens and controls | ✓ Established v1.2 Phase 7 |
+| Apply the light dashboard foundation to authenticated workspace surfaces without behavior changes | Phase 8 refactored app shell, dashboard, Deal Hub, buyers, profile, notes, files, activity, send-OM, and dialogs while preserving existing workflows | ✓ Established v1.2 Phase 8 |
 
 ## Next Milestone Goals
 
@@ -130,4 +134,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-02 after Phase 7 Light Visual Foundation*
+*Last updated: 2026-05-02 after Phase 8 Authenticated Workspace Refactor*

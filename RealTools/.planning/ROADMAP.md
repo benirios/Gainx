@@ -13,7 +13,7 @@ Phase numbering continues from the previous roadmap, so this milestone starts at
 - Decimal phases (8.1, 8.2): Urgent insertions if needed
 
 - [x] **Phase 7: Light Visual Foundation** - Replace the dark reference foundation with light tokens, shared primitives, layout rules, and state styling based on the Nexus-style reference. (completed 2026-05-02)
-- [ ] **Phase 8: Authenticated Workspace Refactor** - Restyle the app shell, dashboard, Deal Hub, buyers, profile, forms, dialogs, tables, notes, files, send-OM flow, and activity surfaces.
+- [x] **Phase 8: Authenticated Workspace Refactor** - Restyle the app shell, dashboard, Deal Hub, buyers, profile, forms, dialogs, tables, notes, files, send-OM flow, and activity surfaces. (completed 2026-05-02)
 - [ ] **Phase 9: Public Surfaces and Verification** - Restyle auth/root/public OM surfaces, verify responsive quality, and complete critical workflow plus deferred live UAT checks.
 
 ## Phase Details
@@ -66,7 +66,7 @@ Phases execute in numeric order: 7 -> 8 -> 9
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 7. Light Visual Foundation | 3/3 | Complete | 2026-05-02 |
-| 8. Authenticated Workspace Refactor | 0/5 | Planned | - |
+| 8. Authenticated Workspace Refactor | 5/5 | Complete | 2026-05-02 |
 | 9. Public Surfaces and Verification | 0/TBD | Not started | - |
 
 ## Requirement Coverage
@@ -77,12 +77,12 @@ Phases execute in numeric order: 7 -> 8 -> 9
 | UI-06 | Phase 7 | Complete |
 | UI-07 | Phase 7 | Complete |
 | UI-08 | Phase 7 | Complete |
-| APP-04 | Phase 8 | Pending |
-| APP-05 | Phase 8 | Pending |
-| APP-06 | Phase 8 | Pending |
-| DEAL-01 | Phase 8 | Pending |
-| DEAL-02 | Phase 8 | Pending |
-| DEAL-03 | Phase 8 | Pending |
+| APP-04 | Phase 8 | Complete |
+| APP-05 | Phase 8 | Complete |
+| APP-06 | Phase 8 | Complete |
+| DEAL-01 | Phase 8 | Complete |
+| DEAL-02 | Phase 8 | Complete |
+| DEAL-03 | Phase 8 | Complete |
 | SURF-04 | Phase 9 | Pending |
 | SURF-05 | Phase 9 | Pending |
 | SURF-06 | Phase 9 | Pending |
