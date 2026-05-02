@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState, useState, useRef, useEffect } from 'react'
-import { Plus, Loader2 } from 'lucide-react'
+import { NotebookText, Plus, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { NoteItem } from './note-item'
@@ -35,9 +35,14 @@ export function NotesSection({ notes, dealId }: { notes: Note[]; dealId: string 
   }, [isPending, state])
 
   return (
-    <div>
+    <section className="rounded-lg border border-border bg-card p-4 shadow-[0_12px_30px_rgba(35,45,72,0.05)] md:p-5">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-heading text-[20px] font-semibold text-foreground">Notes</h2>
+        <div className="flex items-center gap-3">
+          <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+            <NotebookText className="size-4" />
+          </span>
+          <h2 className="text-[15px] font-medium text-foreground">Notes</h2>
+        </div>
         <Button
           variant="ghost"
           size="sm"
@@ -56,7 +61,7 @@ export function NotesSection({ notes, dealId }: { notes: Note[]; dealId: string 
             name="content"
             placeholder="Write a note…"
             rows={3}
-            className="bg-muted border-border text-foreground placeholder:text-muted-foreground w-full"
+            className="w-full"
             disabled={isPending}
           />
           {state.errors?.content && (
@@ -79,7 +84,6 @@ export function NotesSection({ notes, dealId }: { notes: Note[]; dealId: string 
             <Button
               type="submit"
               size="sm"
-              className="bg-accent text-accent-foreground hover:bg-accent/90"
               disabled={isPending}
             >
               {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Save Note'}
@@ -97,6 +101,6 @@ export function NotesSection({ notes, dealId }: { notes: Note[]; dealId: string 
           ))}
         </div>
       )}
-    </div>
+    </section>
   )
 }

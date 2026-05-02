@@ -1,8 +1,8 @@
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
+import { ArrowLeft, Building2, FileText } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { StatusBadge } from '@/components/deals/deal-card'
 import { DealFormModal } from '@/components/deals/deal-form-modal'
@@ -95,74 +95,123 @@ export default async function DealHubPage({
   )
 
   return (
-    <div className="max-w-3xl mx-auto">
-      {/* Back link */}
+    <div className="mx-auto w-full max-w-7xl space-y-6">
       <Link
         href="/dashboard"
-        className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+        className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
-        ← Back to Deals
+        <ArrowLeft className="size-4" />
+        Back to Deals
       </Link>
 
-      {/* Section 1: Deal details */}
-      <div className="flex items-start justify-between mt-4 mb-6 gap-4">
-        <div className="flex items-center gap-3 min-w-0">
-          <h1 className="font-heading text-[28px] font-semibold text-foreground leading-tight">{deal.title}</h1>
-          <StatusBadge status={deal.status} />
-        </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <SendOmModal
-            dealId={deal.id}
-            buyers={buyers}
-            dealBuyers={dealBuyers}
-          />
-          <DealFormModal
-            deal={deal}
-            trigger={
-              <Button variant="outline" size="sm" className="border-border text-foreground hover:bg-muted">
-                Edit
-              </Button>
-            }
-          />
-          <DeleteDealDialog dealId={deal.id} />
-        </div>
-      </div>
-
-      <Card className="bg-card border-border mb-6">
-        <CardContent className="pt-6">
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Address</p>
-              <p className="text-base text-foreground">{deal.address ?? '—'}</p>
+      <section className="rounded-lg border border-border bg-card p-4 shadow-[0_12px_30px_rgba(35,45,72,0.05)] md:p-6">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+          <div className="min-w-0 space-y-3">
+            <div className="flex flex-wrap items-center gap-3">
+              <h1 className="max-w-4xl text-2xl font-semibold leading-tight text-foreground md:text-[28px]">
+                {deal.title}
+              </h1>
+              <StatusBadge status={deal.status} />
             </div>
-            <div>
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Asking price</p>
-              <p className="text-base text-foreground">{deal.price ?? '—'}</p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="rounded-lg border border-border/70 bg-[#fbfcfe] p-3">
+                <p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Address
+                </p>
+                <p className="text-sm text-foreground">{deal.address ?? '—'}</p>
+              </div>
+              <div className="rounded-lg border border-border/70 bg-[#fbfcfe] p-3">
+                <p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Asking price
+                </p>
+                <p className="text-sm text-foreground">{deal.price ?? '—'}</p>
+              </div>
             </div>
           </div>
-          {deal.description && (
-            <div>
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Description</p>
-              <p className="text-base text-foreground leading-relaxed">{deal.description}</p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+          <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+            <SendOmModal
+              dealId={deal.id}
+              buyers={buyers}
+              dealBuyers={dealBuyers}
+            />
+            <DealFormModal
+              deal={deal}
+              trigger={
+                <Button variant="outline" size="sm">
+                  Edit
+                </Button>
+              }
+            />
+            <DeleteDealDialog dealId={deal.id} />
+          </div>
+        </div>
+      </section>
 
-      <Separator className="my-12" />
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
+        <div className="space-y-6">
+          <Card>
+            <CardContent className="space-y-3 pt-6">
+              <div className="flex items-center gap-3">
+                <span className="flex size-9 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                  <Building2 className="size-4" />
+                </span>
+                <h2 className="text-[15px] font-medium text-foreground">Deal details</h2>
+              </div>
+              {deal.description ? (
+                <div>
+                  <p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Description
+                  </p>
+                  <p className="text-sm leading-6 text-foreground">{deal.description}</p>
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">No description added.</p>
+              )}
+            </CardContent>
+          </Card>
 
-      {/* Section 2: Notes */}
-      <NotesSection notes={notes} dealId={deal.id} />
+          <NotesSection notes={notes} dealId={deal.id} />
 
-      <Separator className="my-12" />
+          <FilesSection files={filesWithUrls} dealId={deal.id} userId={user.id} />
+        </div>
 
-      {/* Section 3: Files */}
-      <FilesSection files={filesWithUrls} dealId={deal.id} userId={user.id} />
+        <div className="space-y-6">
+          <Card>
+            <CardContent className="space-y-3 pt-6">
+              <div className="flex items-center gap-3">
+                <span className="flex size-9 items-center justify-center rounded-lg bg-[#eaf3ff] text-[#497db7]">
+                  <FileText className="size-4" />
+                </span>
+                <h2 className="text-[15px] font-medium text-foreground">Send status</h2>
+              </div>
+              <div className="space-y-2">
+                {dealBuyers.length === 0 ? (
+                  <p className="text-sm text-muted-foreground">No OMs sent for this deal yet.</p>
+                ) : (
+                  dealBuyers.map((row) => {
+                    const buyer = buyers.find((item) => item.id === row.buyer_id)
+                    return (
+                      <div
+                        key={row.buyer_id}
+                        className="flex min-h-12 items-center justify-between gap-3 rounded-lg border border-border/70 bg-[#fbfcfe] px-3 py-2"
+                      >
+                        <span className="min-w-0 truncate text-sm text-foreground">
+                          {buyer?.name ?? 'Unknown buyer'}
+                        </span>
+                        <span className="shrink-0 rounded-md border border-[#cfe4ff] bg-[#eaf3ff] px-2 py-0.5 text-xs font-medium text-[#497db7]">
+                          {row.om_sent_at ? 'Sent' : 'Not sent'}
+                        </span>
+                      </div>
+                    )
+                  })
+                )}
+              </div>
+            </CardContent>
+          </Card>
 
-      <Separator className="my-12" />
-
-      {/* Section 4: Activity */}
-      <ActivityLogSection activities={activities} />
+          <ActivityLogSection activities={activities} />
+        </div>
+      </div>
     </div>
   )
 }

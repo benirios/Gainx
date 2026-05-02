@@ -65,7 +65,7 @@ export function NoteItem({ note }: { note: Note }) {
 
   if (editing) {
     return (
-      <div className="bg-muted/50 rounded-lg px-4 py-3">
+      <div className="rounded-lg border border-border/70 bg-[#fbfcfe] px-4 py-3">
         <form action={editAction}>
           <input type="hidden" name="note_id" value={note.id} />
           <input type="hidden" name="deal_id" value={note.deal_id} />
@@ -73,7 +73,7 @@ export function NoteItem({ note }: { note: Note }) {
             name="content"
             defaultValue={note.content}
             rows={3}
-            className="bg-muted border-border text-foreground placeholder:text-muted-foreground w-full"
+            className="w-full"
             disabled={isEditPending}
           />
           {editState.errors?.content && (
@@ -96,7 +96,6 @@ export function NoteItem({ note }: { note: Note }) {
             <Button
               type="submit"
               size="sm"
-              className="bg-accent text-accent-foreground hover:bg-accent/90"
               disabled={isEditPending}
             >
               {isEditPending ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Save Note'}
@@ -108,8 +107,8 @@ export function NoteItem({ note }: { note: Note }) {
   }
 
   return (
-    <div className="group bg-muted/50 rounded-lg px-4 py-3 min-h-[44px] hover:bg-muted/70 transition-colors">
-      <p className="text-base text-foreground">{note.content}</p>
+    <div className="group min-h-12 rounded-lg border border-border/70 bg-[#fbfcfe] px-4 py-3 transition-colors hover:bg-[#f8fafc]">
+      <p className="text-sm leading-6 text-foreground">{note.content}</p>
       <div className="flex items-center justify-between mt-2">
         <time className="text-xs text-muted-foreground">{timestamp}</time>
         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

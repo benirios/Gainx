@@ -81,9 +81,14 @@ export function FilesSection({
   }
 
   return (
-    <div>
+    <section className="rounded-lg border border-border bg-card p-4 shadow-[0_12px_30px_rgba(35,45,72,0.05)] md:p-5">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-heading text-[20px] font-semibold text-foreground">Files</h2>
+        <div className="flex items-center gap-3">
+          <span className="flex size-9 items-center justify-center rounded-lg bg-[#eaf3ff] text-[#497db7]">
+            <FileText className="size-4" />
+          </span>
+          <h2 className="text-[15px] font-medium text-foreground">Files</h2>
+        </div>
         <label className="cursor-pointer">
           <span className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-muted">
             {uploading ? (
@@ -116,7 +121,7 @@ export function FilesSection({
           ))}
         </div>
       )}
-    </div>
+    </section>
   )
 }
 
@@ -139,10 +144,12 @@ function FileRow({ file }: { file: DealFile }) {
   }
 
   return (
-    <div className="flex items-center justify-between bg-muted/50 rounded-lg px-4 py-3 min-h-[44px] hover:bg-muted/70 transition-colors">
+    <div className="flex min-h-12 items-center justify-between rounded-lg border border-border/70 bg-[#fbfcfe] px-4 py-3 transition-colors hover:bg-[#f8fafc]">
       <div className="flex items-center gap-2 min-w-0">
-        <FileText className="size-4 text-muted-foreground shrink-0" />
-        <span className="text-base text-foreground truncate">{file.file_name}</span>
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#eaf3ff] text-[#497db7]">
+          <FileText className="size-4" />
+        </span>
+        <span className="truncate text-sm text-foreground">{file.file_name}</span>
       </div>
       <div className="flex items-center gap-2 shrink-0">
         {file.signedUrl && (
