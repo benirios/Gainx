@@ -247,6 +247,65 @@ export type Database = {
         }
         Relationships: []
       }
+      listing_import_runs: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          created_count: number
+          error_message: string | null
+          failed_count: number
+          id: string
+          metadata: Json | null
+          skipped_count: number
+          source: string
+          started_at: string | null
+          status: string
+          target_id: string | null
+          updated_count: number
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          created_count?: number
+          error_message?: string | null
+          failed_count?: number
+          id?: string
+          metadata?: Json | null
+          skipped_count?: number
+          source: string
+          started_at?: string | null
+          status?: string
+          target_id?: string | null
+          updated_count?: number
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          created_count?: number
+          error_message?: string | null
+          failed_count?: number
+          id?: string
+          metadata?: Json | null
+          skipped_count?: number
+          source?: string
+          started_at?: string | null
+          status?: string
+          target_id?: string | null
+          updated_count?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "listing_import_runs_target_id_fkey"
+            columns: ["target_id"]
+            isOneToOne: false
+            referencedRelation: "listing_import_targets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       listings: {
         Row: {
           address_text: string | null
