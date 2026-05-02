@@ -14,7 +14,7 @@
 
 ### App Shell And Dashboard
 
-- [ ] **APP-04**: User can navigate the authenticated app through a light sidebar/topbar shell that matches the reference's compact SaaS layout while preserving existing routes and actions.
+- [x] **APP-04**: User can navigate the authenticated app through a light sidebar/topbar shell that matches the reference's compact SaaS layout while preserving existing routes and actions.
 - [ ] **APP-05**: User can scan the dashboard through light metric cards, deal summaries, activity previews, and broker workflow shortcuts that feel visually aligned with the reference without inventing unsupported analytics.
 - [ ] **APP-06**: User can use dashboard filters, buttons, menus, badges, and cards in the light visual system without losing existing deal-management behavior.
 
@@ -67,7 +67,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | UI-06 | Phase 7 | Complete |
 | UI-07 | Phase 7 | Complete |
 | UI-08 | Phase 7 | Complete |
-| APP-04 | Phase 8 | Pending |
+| APP-04 | Phase 8 | Complete |
 | APP-05 | Phase 8 | Pending |
 | APP-06 | Phase 8 | Pending |
 | DEAL-01 | Phase 8 | Pending |
