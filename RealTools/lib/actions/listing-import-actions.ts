@@ -4,9 +4,10 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { completeImportRun, failImportRun, startImportRun } from '@/lib/listings/import-runs'
-import { upsertListing } from '@/lib/listings/ingestion'
+import { upsertListing, upsertListingImportTarget } from '@/lib/listings/ingestion'
 import { scrapeOlxListings } from '@/lib/listings/olx'
 import { parseManualListingCsv } from '@/lib/listings/csv'
+import { DEFAULT_LISTING_IMPORT_TARGETS } from '@/lib/listings/constants'
 import type { Database } from '@/types/supabase'
 
 type ListingImportTargetRow = Database['public']['Tables']['listing_import_targets']['Row']
@@ -182,5 +183,25 @@ export async function runOlxImportAction(targetId: string): Promise<ImportAction
     })
     revalidatePath('/listings/import')
     return { ok: false, message }
+  }
+}
+
+export async function seedDefaultImportTargetsAction(): Promise<ImportActionResult> {
+  const supabase = await createSupabaseServerClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect('/auth/login')
+
+  let saved = 0
+
+  for (const target of DEFAULT_LISTING_IMPORT_TARGETS) {
+    const { error } = await upsertListingImportTarget(supabase, user.id, target)
+    if (!error) saved += 1
+  }
+
+  revalidatePath('/listings/import')
+
+  return {
+    ok: saved > 0,
+    message: saved > 0 ? `${saved} default targets ready.` : 'No default targets were saved.',
   }
 }

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
-import { ManualImportForm } from '@/components/listings/import-actions'
+import { ManualImportForm, SeedDefaultTargetsButton } from '@/components/listings/import-actions'
 import { ImportRunsTable, type ImportRun } from '@/components/listings/import-runs-table'
 import { ImportTargetsTable, type ImportTarget } from '@/components/listings/import-targets-table'
 
@@ -65,9 +65,12 @@ export default async function ListingImportPage() {
       </div>
 
       <section className="space-y-3">
-        <div>
-          <h2 className="text-lg font-semibold text-foreground">Import Targets</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Run active OLX target searches in controlled batches.</p>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-lg font-semibold text-foreground">Import Targets</h2>
+            <p className="mt-1 text-sm text-muted-foreground">Run active OLX target searches in controlled batches.</p>
+          </div>
+          <SeedDefaultTargetsButton />
         </div>
         <ImportTargetsTable targets={targets} />
       </section>

@@ -5,7 +5,7 @@ import { Loader2, Play, Upload } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import { importManualListingsAction, runOlxImportAction, type ManualImportState } from '@/lib/actions/listing-import-actions'
+import { importManualListingsAction, runOlxImportAction, seedDefaultImportTargetsAction, type ManualImportState } from '@/lib/actions/listing-import-actions'
 
 const initialManualImportState: ManualImportState = {}
 
@@ -29,6 +29,31 @@ export function RunOlxImportButton({ targetId }: { targetId: string }) {
     >
       {isPending ? <Loader2 className="mr-2 size-4 animate-spin" /> : <Play className="mr-2 size-4" />}
       Run OLX
+    </Button>
+  )
+}
+
+export function SeedDefaultTargetsButton() {
+  const [isPending, startTransition] = useTransition()
+
+  return (
+    <Button
+      variant="outline"
+      size="sm"
+      disabled={isPending}
+      onClick={() => {
+        startTransition(async () => {
+          const result = await seedDefaultImportTargetsAction()
+          if (result.ok) {
+            toast.success(result.message)
+          } else {
+            toast.error(result.message)
+          }
+        })
+      }}
+    >
+      {isPending ? <Loader2 className="mr-2 size-4 animate-spin" /> : <Upload className="mr-2 size-4" />}
+      Add default targets
     </Button>
   )
 }

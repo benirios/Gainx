@@ -29,8 +29,10 @@ metrics:
 - Added import client controls:
   - `RunOlxImportButton`
   - `ManualImportForm`
+  - `SeedDefaultTargetsButton`
 - Added import target and recent run tables.
 - Added `Listings` to authenticated sidebar navigation.
+- Added default target seeding from the Phase 10 national sample so a fresh user has runnable OLX targets.
 
 ## Verification
 
