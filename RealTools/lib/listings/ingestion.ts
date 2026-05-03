@@ -1,9 +1,10 @@
-import type { SupabaseClient } from '@supabase/supabase-js'
 import { ListingDraftSchema, ListingImportTargetSchema, type ListingDraft, type ListingImportTarget } from '@/lib/schemas/listing'
 import type { Database, Json } from '@/types/supabase'
 
 type ListingInsert = Database['public']['Tables']['listings']['Insert']
 type ListingImportTargetInsert = Database['public']['Tables']['listing_import_targets']['Insert']
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SupabaseLike = { from: (relation: string) => any }
 
 export function toListingInsert(userId: string, draft: ListingDraft): ListingInsert {
   const parsed = ListingDraftSchema.parse(draft)
@@ -48,7 +49,7 @@ export function toListingTargetInsert(userId: string, target: ListingImportTarge
 }
 
 export async function upsertListing(
-  supabase: SupabaseClient<Database>,
+  supabase: SupabaseLike,
   userId: string,
   draft: ListingDraft
 ) {
@@ -66,7 +67,7 @@ export async function upsertListing(
 }
 
 export async function upsertListingImportTarget(
-  supabase: SupabaseClient<Database>,
+  supabase: SupabaseLike,
   userId: string,
   target: ListingImportTarget
 ) {

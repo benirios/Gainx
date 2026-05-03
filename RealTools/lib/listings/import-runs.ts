@@ -1,10 +1,11 @@
-import type { SupabaseClient } from '@supabase/supabase-js'
 import type { Database, Json } from '@/types/supabase'
 import type { ListingSource } from '@/lib/schemas/listing'
 
 type ImportRunRow = Database['public']['Tables']['listing_import_runs']['Row']
 type ImportRunInsert = Database['public']['Tables']['listing_import_runs']['Insert']
 type ImportRunUpdate = Database['public']['Tables']['listing_import_runs']['Update']
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SupabaseLike = { from: (relation: string) => any }
 
 type StartImportRunInput = {
   source: ListingSource
@@ -20,7 +21,7 @@ type ImportRunCounts = {
 }
 
 export async function startImportRun(
-  supabase: SupabaseClient<Database>,
+  supabase: SupabaseLike,
   userId: string,
   input: StartImportRunInput
 ): Promise<{ data: ImportRunRow | null; error: unknown }> {
@@ -39,7 +40,7 @@ export async function startImportRun(
 }
 
 export async function completeImportRun(
-  supabase: SupabaseClient<Database>,
+  supabase: SupabaseLike,
   runId: string,
   userId: string,
   counts: ImportRunCounts,
@@ -64,7 +65,7 @@ export async function completeImportRun(
 }
 
 export async function failImportRun(
-  supabase: SupabaseClient<Database>,
+  supabase: SupabaseLike,
   runId: string,
   userId: string,
   errorMessage: string,
