@@ -13,10 +13,10 @@
 
 ### Source Ingestion
 
-- [ ] **SRC-01**: User can run controlled OLX Brazil ingestion for configured city/state/search combinations and save extracted listing records.
-- [ ] **SRC-02**: User can extract OLX title, description when available, price, location, address when available, images, URL, and source.
-- [ ] **SRC-03**: User can import Facebook Marketplace listings manually or by CSV when automated scraping is not viable.
-- [ ] **SRC-04**: User can review ingestion status, including successful records, skipped duplicates, and failed records.
+- [x] **SRC-01**: User can run controlled OLX Brazil ingestion for configured city/state/search combinations and save extracted listing records.
+- [x] **SRC-02**: User can extract OLX title, description when available, price, location, address when available, images, URL, and source.
+- [x] **SRC-03**: User can import Facebook Marketplace listings manually or by CSV when automated scraping is not viable.
+- [x] **SRC-04**: User can review ingestion status, including successful records, skipped duplicates, and failed records.
 
 ### Commercial Classification
 
@@ -78,10 +78,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-01 | Phase 10 | Complete |
 | DATA-02 | Phase 10 | Complete |
 | DATA-03 | Phase 10 | Complete |
-| SRC-01 | Phase 11 | Pending |
-| SRC-02 | Phase 11 | Pending |
-| SRC-03 | Phase 11 | Pending |
-| SRC-04 | Phase 11 | Pending |
+| SRC-01 | Phase 11 | Complete |
+| SRC-02 | Phase 11 | Complete |
+| SRC-03 | Phase 11 | Complete |
+| SRC-04 | Phase 11 | Complete |
 | CLS-01 | Phase 12 | Pending |
 | CLS-02 | Phase 12 | Pending |
 | CLS-03 | Phase 12 | Pending |
@@ -101,4 +101,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-05-03*
-*Last updated: 2026-05-03 after v1.3 roadmap creation*
+*Last updated: 2026-05-03 after Phase 11 completion*

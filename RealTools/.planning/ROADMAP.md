@@ -13,7 +13,7 @@ Phase numbering continues from the existing project history, so this milestone s
 - Decimal phases (12.1, 12.2): Urgent insertions if needed
 
 - [x] **Phase 10: Listing Data Foundation** - Add the national listing schema, ingestion configuration model, deduplication, and basic admin review surfaces. (completed 2026-05-03)
-- [ ] **Phase 11: Source Ingestion MVP** - Build controlled OLX ingestion and Facebook manual/CSV import, with source run status and failure visibility.
+- [x] **Phase 11: Source Ingestion MVP** - Build controlled OLX ingestion and Facebook manual/CSV import, with source run status and failure visibility. (completed 2026-05-03)
 - [ ] **Phase 12: Classification And Geocoding** - Classify commercial listings with Portuguese rules plus optional AI fallback, geocode locations, and retain failed records for review.
 - [ ] **Phase 13: Opportunity Map MVP** - Display geocoded listings on a map with popups, filters, and a demo-ready validation pass.
 
@@ -80,7 +80,7 @@ Phases execute in numeric order: 10 -> 11 -> 12 -> 13
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 10. Listing Data Foundation | 2/2 | Complete | 2026-05-03 |
-| 11. Source Ingestion MVP | 0/3 | Planned | - |
+| 11. Source Ingestion MVP | 3/3 | Complete | 2026-05-03 |
 | 12. Classification And Geocoding | 0/TBD | Not started | - |
 | 13. Opportunity Map MVP | 0/TBD | Not started | - |
 
@@ -91,10 +91,10 @@ Phases execute in numeric order: 10 -> 11 -> 12 -> 13
 | DATA-01 | Phase 10 | Complete |
 | DATA-02 | Phase 10 | Complete |
 | DATA-03 | Phase 10 | Complete |
-| SRC-01 | Phase 11 | Pending |
-| SRC-02 | Phase 11 | Pending |
-| SRC-03 | Phase 11 | Pending |
-| SRC-04 | Phase 11 | Pending |
+| SRC-01 | Phase 11 | Complete |
+| SRC-02 | Phase 11 | Complete |
+| SRC-03 | Phase 11 | Complete |
+| SRC-04 | Phase 11 | Complete |
 | CLS-01 | Phase 12 | Pending |
 | CLS-02 | Phase 12 | Pending |
 | CLS-03 | Phase 12 | Pending |

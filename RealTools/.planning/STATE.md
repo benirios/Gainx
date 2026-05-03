@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Brazil Commercial Listing Map
-status: ready_to_execute
+status: ready_to_plan
 last_updated: "2026-05-03T00:00:00.000Z"
-last_activity: 2026-05-03 -- Phase 11 planned, ready to execute
+last_activity: 2026-05-03 -- Phase 11 completed; ready to plan Phase 12
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
-  completed_plans: 2
-  percent: 25
+  completed_plans: 5
+  percent: 50
 ---
 
 # Project State
@@ -20,14 +20,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-03)
 
 **Core value:** Every broker has one practical workspace to find, qualify, and manage commercial real estate opportunities without hunting across listing sites, Facebook posts, spreadsheets, email, and Drive.
-**Current focus:** Phase 11 — Source Ingestion MVP
+**Current focus:** Phase 12 — Classification And Geocoding
 
 ## Current Position
 
-Phase: 11 (Source Ingestion MVP)
-Plan: —
-Status: Ready to execute
-Last activity: 2026-05-03 — Phase 11 plans created
+Phase: 12 (Classification And Geocoding) — READY TO PLAN
+Plan: TBD
+Status: Ready to plan Phase 12
+Last activity: 2026-05-03 -- Phase 11 completed; ready to plan Phase 12
 
 ## Accumulated Context
 
@@ -55,6 +55,7 @@ Recent decisions affecting future work:
 - Facebook Marketplace automation is not part of Milestone 1; use manual or CSV import to avoid platform friction and keep execution fast.
 - Commercial classification should start with Portuguese keyword rules and use optional AI only for ambiguous listings.
 - Phase 10 created listing schema, generated-style types, validation schemas, national target constants, and ingestion upsert helpers. `supabase db push` reports the remote database is up to date.
+- Phase 11 added import run tracking, controlled OLX ingestion, manual/Facebook CSV import, default target seeding, and a Listing Import admin page with source status visibility.
 
 ### Pending Todos
 
@@ -78,4 +79,4 @@ Items acknowledged and deferred at milestone close on 2026-05-01:
 
 ## Session Continuity
 
-Resume with `$gsd-execute-phase 11` to execute Source Ingestion MVP.
+Resume with `$gsd-plan-phase 12` to plan Classification And Geocoding.
