@@ -1,7 +1,20 @@
 import type { NextConfig } from 'next'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const repoRoot = dirname(fileURLToPath(import.meta.url))
 
 const nextConfig: NextConfig = {
-  // Phase 2 will add: images.remotePatterns for Supabase Storage URLs
+  outputFileTracingRoot: repoRoot,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.supabase.co',
+        pathname: '/storage/v1/**',
+      },
+    ],
+  },
 }
 
 export default nextConfig
