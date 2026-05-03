@@ -80,6 +80,7 @@ export async function runOlxSearchImportAction(
     let createdCount = 0
     let failedCount = 0
     const failures: string[] = []
+    const savedUrls: string[] = []
 
     for (const listing of listings) {
       const { error } = await upsertListing(supabase, user.id, listing)
@@ -88,6 +89,7 @@ export async function runOlxSearchImportAction(
         failures.push(`${listing.sourceUrl}: ${error.message ?? 'upsert failed'}`)
       } else {
         createdCount += 1
+        savedUrls.push(listing.sourceUrl)
       }
     }
 
@@ -108,6 +110,7 @@ export async function runOlxSearchImportAction(
         state,
         searchTerm,
         successfulUpserts: createdCount,
+        savedUrls,
         note: 'On-demand OLX import records successful upserts; insert vs update split is not distinguished by Supabase upsert result.',
         failures: failures.slice(0, 10),
       }
@@ -172,6 +175,7 @@ export async function runOlxImportAction(targetId: string): Promise<ImportAction
     let createdCount = 0
     let failedCount = 0
     const failures: string[] = []
+    const savedUrls: string[] = []
 
     for (const listing of listings) {
       const { error } = await upsertListing(supabase, user.id, listing)
@@ -180,6 +184,7 @@ export async function runOlxImportAction(targetId: string): Promise<ImportAction
         failures.push(`${listing.sourceUrl}: ${error.message ?? 'upsert failed'}`)
       } else {
         createdCount += 1
+        savedUrls.push(listing.sourceUrl)
       }
     }
 
@@ -197,6 +202,7 @@ export async function runOlxImportAction(targetId: string): Promise<ImportAction
         targetId: target.id,
         source: 'olx',
         successfulUpserts: createdCount,
+        savedUrls,
         note: 'Phase 11 records successful upserts; insert vs update split is not distinguished by Supabase upsert result.',
         failures: failures.slice(0, 10),
       }
