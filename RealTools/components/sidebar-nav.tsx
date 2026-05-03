@@ -2,11 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Briefcase, Users, User } from 'lucide-react'
+import { Briefcase, MapPinned, Users, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
   { href: '/dashboard', label: 'Deals', icon: Briefcase, matchPrefixes: ['/dashboard', '/deals'] },
+  { href: '/listings/import', label: 'Listings', icon: MapPinned, matchPrefixes: ['/listings'] },
   { href: '/buyers', label: 'Buyers', icon: Users, matchPrefixes: ['/buyers'] },
   { href: '/profile', label: 'Profile', icon: User, matchPrefixes: ['/profile'] },
 ]
