@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const ListingSourceSchema = z.enum(['olx', 'facebook_manual'])
+export const ListingSourceSchema = z.enum(['olx'])
 
 export const ListingDraftSchema = z.object({
   source:         ListingSourceSchema,

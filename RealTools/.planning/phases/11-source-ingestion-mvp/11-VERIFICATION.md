@@ -7,8 +7,8 @@
 
 - Import run tracking table exists with RLS, ownership policy, status fields, counters, errors, metadata, and timestamps.
 - Controlled OLX ingestion backend can scrape configured targets, normalize extracted records, upsert listings, and record run success/failure.
-- Facebook Marketplace workaround exists through manual/CSV import using the normalized listing schema.
-- Listing Import admin UI exposes target setup, OLX run action, manual CSV import, recent run status, and record counts.
+- On-demand OLX ingestion can run from website-entered address/city/region, search term, state, and max-result inputs.
+- Listing Import admin UI exposes on-demand OLX search, optional saved targets, recent run status, and record counts.
 - Sidebar navigation exposes the Listings import surface.
 
 ## Commands
@@ -25,8 +25,8 @@ All commands passed.
 
 ```bash
 rg "listing_import_runs|Users can manage own listing import runs" supabase/migrations/009_listing_import_runs.sql
-rg "runOlxImportAction|importManualListingsAction|seedDefaultImportTargetsAction" lib/actions/listing-import-actions.ts
-rg "Listing Import|listing_import_targets|listing_import_runs|ManualImportForm|SeedDefaultTargetsButton" app components
+rg "runOlxSearchImportAction|runOlxImportAction|seedDefaultImportTargetsAction" lib/actions/listing-import-actions.ts
+rg "Listing Import|listing_import_targets|listing_import_runs|OlxSearchImportForm|SeedDefaultTargetsButton" app components
 rg "Listings|/listings/import" components/sidebar-nav.tsx
 ```
 

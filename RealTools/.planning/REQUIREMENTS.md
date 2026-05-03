@@ -13,9 +13,9 @@
 
 ### Source Ingestion
 
-- [x] **SRC-01**: User can run controlled OLX Brazil ingestion for configured city/state/search combinations and save extracted listing records.
+- [x] **SRC-01**: User can run controlled OLX Brazil ingestion for configured city/state/search combinations or on-demand address/city/region inputs and save extracted listing records.
 - [x] **SRC-02**: User can extract OLX title, description when available, price, location, address when available, images, URL, and source.
-- [x] **SRC-03**: User can import Facebook Marketplace listings manually or by CSV when automated scraping is not viable.
+- [x] **SRC-03**: User can trigger listing collection directly from the website by entering an address, city, or region.
 - [x] **SRC-04**: User can review ingestion status, including successful records, skipped duplicates, and failed records.
 
 ### Commercial Classification
@@ -59,7 +59,7 @@ Explicitly excluded for this milestone to protect speed.
 
 | Feature | Reason |
 |---------|--------|
-| Full Facebook Marketplace automation | High platform friction and risk; manual/CSV import proves the workflow faster. |
+| Facebook Marketplace automation/import | Deferred for now; OLX on-demand search is the active ingestion path. |
 | Scraping the entire country at once | Build national support, then ingest controlled city batches for MVP validation. |
 | Anti-bot evasion infrastructure | Too much risk and maintenance for a first MVP. |
 | Perfect address normalization | Approximate geocoding is acceptable for market discovery. |
@@ -101,4 +101,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-05-03*
-*Last updated: 2026-05-03 after Phase 11 completion*
+*Last updated: 2026-05-03 after OLX on-demand ingestion update*

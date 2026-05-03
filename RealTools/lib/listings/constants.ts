@@ -1,6 +1,6 @@
 import type { ListingImportTarget, ListingSource } from '@/lib/schemas/listing'
 
-export const LISTING_SOURCES = ['olx', 'facebook_manual'] as const satisfies readonly ListingSource[]
+export const LISTING_SOURCES = ['olx'] as const satisfies readonly ListingSource[]
 
 export const COMMERCIAL_TYPES = [
   'loja',

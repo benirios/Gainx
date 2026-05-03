@@ -6,7 +6,6 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { completeImportRun, failImportRun, startImportRun } from '@/lib/listings/import-runs'
 import { upsertListing, upsertListingImportTarget } from '@/lib/listings/ingestion'
 import { scrapeOlxListings } from '@/lib/listings/olx'
-import { parseManualListingCsv } from '@/lib/listings/csv'
 import { DEFAULT_LISTING_IMPORT_TARGETS } from '@/lib/listings/constants'
 import type { Database } from '@/types/supabase'
 
@@ -17,9 +16,10 @@ export type ImportActionResult = {
   message: string
 }
 
-export type ManualImportState = {
+export type OlxSearchImportState = {
   errors?: {
-    csv?: string[]
+    locationQuery?: string[]
+    searchTerm?: string[]
     general?: string[]
   }
   message?: string
@@ -29,22 +29,39 @@ function getErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : 'Unknown import error'
 }
 
-export async function importManualListingsAction(
-  _prevState: ManualImportState,
+export async function runOlxSearchImportAction(
+  _prevState: OlxSearchImportState,
   formData: FormData
-): Promise<ManualImportState> {
+): Promise<OlxSearchImportState> {
   const supabase = await createSupabaseServerClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
 
-  const csv = String(formData.get('csv') ?? '').trim()
-  if (!csv) {
-    return { errors: { csv: ['Paste CSV content before importing.'] } }
+  const locationQuery = String(formData.get('locationQuery') ?? '').trim()
+  const searchTerm = String(formData.get('searchTerm') ?? '').trim() || 'ponto comercial'
+  const state = String(formData.get('state') ?? '').trim().toUpperCase()
+  const maxListingsRaw = Number(formData.get('maxListings') ?? 25)
+  const maxListings = Number.isFinite(maxListingsRaw)
+    ? Math.min(Math.max(Math.trunc(maxListingsRaw), 1), 50)
+    : 25
+
+  if (locationQuery.length < 2) {
+    return { errors: { locationQuery: ['Enter an address, city, or region.'] } }
+  }
+
+  if (searchTerm.length < 2) {
+    return { errors: { searchTerm: ['Enter a search term.'] } }
   }
 
   const { data: run, error: runError } = await startImportRun(supabase, user.id, {
-    source: 'facebook_manual',
-    metadata: { importType: 'csv' },
+    source: 'olx',
+    metadata: {
+      importType: 'on_demand_search',
+      locationQuery,
+      state,
+      searchTerm,
+      maxListings,
+    },
   })
 
   if (runError || !run) {
@@ -52,7 +69,14 @@ export async function importManualListingsAction(
   }
 
   try {
-    const listings = parseManualListingCsv(csv)
+    const listings = await scrapeOlxListings({
+      searchTerm,
+      region: locationQuery,
+      city: locationQuery,
+      state: state || undefined,
+      maxListings,
+    })
+
     let createdCount = 0
     let failedCount = 0
     const failures: string[] = []
@@ -78,18 +102,27 @@ export async function importManualListingsAction(
         failedCount,
       },
       {
-        source: 'facebook_manual',
+        source: 'olx',
+        importType: 'on_demand_search',
+        locationQuery,
+        state,
+        searchTerm,
         successfulUpserts: createdCount,
+        note: 'On-demand OLX import records successful upserts; insert vs update split is not distinguished by Supabase upsert result.',
         failures: failures.slice(0, 10),
       }
     )
 
     revalidatePath('/listings/import')
-    return { message: `Manual import finished: ${createdCount} saved, ${failedCount} failed.` }
+    return { message: `OLX search finished: ${createdCount} saved, ${failedCount} failed.` }
   } catch (error) {
     const message = getErrorMessage(error)
     await failImportRun(supabase, run.id, user.id, message, {
-      source: 'facebook_manual',
+      source: 'olx',
+      importType: 'on_demand_search',
+      locationQuery,
+      state,
+      searchTerm,
     })
     revalidatePath('/listings/import')
     return { errors: { general: [message] } }

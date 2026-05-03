@@ -52,10 +52,10 @@ Recent decisions affecting future work:
 - Phase 8 completed the authenticated workspace refactor: light app shell, mobile/desktop navigation, dashboard count cards, Deal Hub panels, buyers/profile surfaces, and workflow dialogs/forms now follow the Phase 7 light foundation while preserving behavior.
 - v1.3 starts before v1.2 Phase 9 is completed because the user prioritized a national Brazil commercial listing map MVP.
 - The opportunity-sourcing MVP is national in data model and filters, but initial ingestion should use controlled city/state batches instead of trying to scrape all Brazil at once.
-- Facebook Marketplace automation is not part of Milestone 1; use manual or CSV import to avoid platform friction and keep execution fast.
+- Facebook Marketplace automation/import is deferred for now; OLX on-demand website search is the active ingestion path.
 - Commercial classification should start with Portuguese keyword rules and use optional AI only for ambiguous listings.
 - Phase 10 created listing schema, generated-style types, validation schemas, national target constants, and ingestion upsert helpers. `supabase db push` reports the remote database is up to date.
-- Phase 11 added import run tracking, controlled OLX ingestion, manual/Facebook CSV import, default target seeding, and a Listing Import admin page with source status visibility.
+- Phase 11 added import run tracking, controlled OLX ingestion, on-demand address/city/region OLX search from the website, default target seeding, and a Listing Import admin page with source status visibility.
 
 ### Pending Todos
 

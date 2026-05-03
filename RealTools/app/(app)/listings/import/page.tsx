@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
-import { ManualImportForm, SeedDefaultTargetsButton } from '@/components/listings/import-actions'
+import { OlxSearchImportForm, SeedDefaultTargetsButton } from '@/components/listings/import-actions'
 import { ImportRunsTable, type ImportRun } from '@/components/listings/import-runs-table'
 import { ImportTargetsTable, type ImportTarget } from '@/components/listings/import-targets-table'
 
@@ -51,9 +51,11 @@ export default async function ListingImportPage() {
       <div>
         <h1 className="text-2xl font-semibold leading-tight text-foreground">Listing Import</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Run controlled OLX targets and import manual Facebook Marketplace records.
+          Search OLX by address, city, or region and save matching Brazilian property listings.
         </p>
       </div>
+
+      <OlxSearchImportForm />
 
       <div className="grid gap-3 md:grid-cols-4">
         {summary.map((item) => (
@@ -68,14 +70,12 @@ export default async function ListingImportPage() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-lg font-semibold text-foreground">Import Targets</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Run active OLX target searches in controlled batches.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Optional saved OLX target searches for repeat batches.</p>
           </div>
           <SeedDefaultTargetsButton />
         </div>
         <ImportTargetsTable targets={targets} />
       </section>
-
-      <ManualImportForm />
 
       <section className="space-y-3">
         <div>

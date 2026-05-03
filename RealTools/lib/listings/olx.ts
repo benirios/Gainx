@@ -2,8 +2,10 @@ import { chromium } from 'playwright'
 import type { ListingDraft } from '@/lib/schemas/listing'
 
 export type OlxTarget = {
-  state: string
-  city: string
+  state?: string
+  city?: string
+  region?: string
+  address?: string
   searchTerm: string
   maxListings?: number
 }
@@ -31,8 +33,18 @@ function compactText(value: string | null | undefined) {
 }
 
 export function buildOlxSearchUrl(target: OlxTarget) {
+  const query = [
+    target.searchTerm,
+    target.address,
+    target.region,
+    target.city,
+    target.state,
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   const params = new URLSearchParams({
-    q: `${target.searchTerm} ${target.city} ${target.state}`,
+    q: query,
   })
 
   return `${OLX_BASE_URL}/imoveis?${params.toString()}`
@@ -119,11 +131,17 @@ export async function scrapeOlxListings(target: OlxTarget): Promise<ListingDraft
         addressText,
         country: 'BR',
         state: target.state,
-        city: target.city,
+        city: target.city ?? target.region,
         images: raw.images
           .map((image) => toAbsoluteUrl(image))
           .filter((image): image is string => Boolean(image)),
-        rawPayload: raw,
+        rawPayload: {
+          ...raw,
+          requestedAddress: target.address,
+          requestedRegion: target.region,
+          requestedCity: target.city,
+          requestedState: target.state,
+        },
       })
     }
 

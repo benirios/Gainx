@@ -2,7 +2,7 @@
 
 ## Overview
 
-RealTools v1.3 adds a fast opportunity-sourcing MVP for Brazilian commercial real estate. The milestone does not try to scrape the entire country at once. It builds national data structures, runs controlled OLX ingestion by configured city/state/search terms, supports Facebook Marketplace through manual/CSV import, classifies likely `pontos comerciais`, geocodes listings, and shows them on a searchable Brazil map.
+RealTools v1.3 adds a fast opportunity-sourcing MVP for Brazilian commercial real estate. The milestone does not try to scrape the entire country at once. It builds national data structures, runs controlled OLX ingestion by configured city/state/search terms or on-demand address/city/region inputs, classifies likely `pontos comerciais`, geocodes listings, and shows them on a searchable Brazil map.
 
 Phase numbering continues from the existing project history, so this milestone starts at Phase 10.
 
@@ -13,7 +13,7 @@ Phase numbering continues from the existing project history, so this milestone s
 - Decimal phases (12.1, 12.2): Urgent insertions if needed
 
 - [x] **Phase 10: Listing Data Foundation** - Add the national listing schema, ingestion configuration model, deduplication, and basic admin review surfaces. (completed 2026-05-03)
-- [x] **Phase 11: Source Ingestion MVP** - Build controlled OLX ingestion and Facebook manual/CSV import, with source run status and failure visibility. (completed 2026-05-03)
+- [x] **Phase 11: Source Ingestion MVP** - Build controlled OLX ingestion from saved targets and website-entered address/city/region searches, with source run status and failure visibility. (completed 2026-05-03)
 - [ ] **Phase 12: Classification And Geocoding** - Classify commercial listings with Portuguese rules plus optional AI fallback, geocode locations, and retain failed records for review.
 - [ ] **Phase 13: Opportunity Map MVP** - Display geocoded listings on a map with popups, filters, and a demo-ready validation pass.
 
@@ -32,16 +32,16 @@ Phase numbering continues from the existing project history, so this milestone s
 **UI hint**: no
 
 ### Phase 11: Source Ingestion MVP
-**Goal**: RealTools can collect real listings from OLX and accept Facebook Marketplace records without fighting Facebook automation.
+**Goal**: RealTools can collect real listings from OLX when the user requests a search from the website.
 **Depends on**: Phase 10
 **Requirements**: SRC-01, SRC-02, SRC-03, SRC-04
 **Success Criteria** (what must be TRUE):
-  1. User can run a controlled OLX ingestion for selected city/state/search configurations.
+  1. User can run a controlled OLX ingestion for selected city/state/search configurations or on-demand address/city/region inputs.
   2. OLX ingestion extracts title, description when available, price, location, address when available, images, URL, and source.
-  3. User can import Facebook Marketplace records manually or by CSV with the same normalized listing fields.
+  3. User can enter an address, city, or region on the website and save matching OLX records.
   4. User can review run status, created records, updated duplicates, skipped records, and failures.
   5. The implementation avoids anti-bot evasion and keeps source failures non-fatal.
-**Plans**: 11-01 Import Run Schema And Status Helpers; 11-02 Controlled OLX Ingestion Backend; 11-03 Manual Import And Ingestion Admin UI
+**Plans**: 11-01 Import Run Schema And Status Helpers; 11-02 Controlled OLX Ingestion Backend; 11-03 On-Demand Ingestion Admin UI
 **UI hint**: yes
 
 ### Phase 12: Classification And Geocoding
