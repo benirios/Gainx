@@ -6,8 +6,6 @@ import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { regenerateAiDealSummaryAction } from '@/lib/actions/ai-summary-actions'
-import { formatDatetime } from '@/lib/format'
-import { CONFIDENCE_LABELS, ENRICHMENT_STATUS_LABELS, confidenceVariant } from '@/lib/labels'
 import type { AiDealSummary } from '@/lib/ai/deal-summary-schema'
 import type { Database } from '@/types/supabase'
 
@@ -26,7 +24,34 @@ function statusVariant(status: string | null | undefined) {
   return 'secondary' as const
 }
 
-const STATUS_LABELS = ENRICHMENT_STATUS_LABELS
+function confidenceVariant(confidence: string) {
+  if (confidence === 'high') return 'default' as const
+  if (confidence === 'medium') return 'outline' as const
+  return 'secondary' as const
+}
+
+const STATUS_LABELS: Record<string, string> = {
+  pending: 'Pendente',
+  processing: 'Processando',
+  completed: 'Concluído',
+  failed: 'Falhou',
+}
+
+const CONFIDENCE_LABELS: Record<string, string> = {
+  low: 'baixa',
+  medium: 'média',
+  high: 'alta',
+}
+
+function formatDate(value: string | null | undefined) {
+  if (!value) return '-'
+  return new Intl.DateTimeFormat('pt-BR', {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(value))
+}
 
 export function AiDealSummaryCard({ listingId, summaryRow, summary }: Props) {
   const [isPending, startTransition] = useTransition()
@@ -40,7 +65,7 @@ export function AiDealSummaryCard({ listingId, summaryRow, summary }: Props) {
           <h2 className="text-lg font-semibold text-foreground">Resumo comercial do ponto</h2>
           <p className="mt-1 text-xs text-muted-foreground">
             {summaryRow?.provider && summaryRow?.model
-              ? `${summaryRow.provider} · ${summaryRow.model} · ${formatDatetime(summaryRow.generated_at)}`
+              ? `${summaryRow.provider} · ${summaryRow.model} · ${formatDate(summaryRow.generated_at)}`
               : 'Gerado após enriquecimento e score universal.'}
           </p>
         </div>

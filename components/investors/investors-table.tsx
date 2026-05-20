@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import { Pencil } from 'lucide-react'
-import { formatBudget } from '@/lib/format'
-import { STRATEGY_LABELS } from '@/lib/labels'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { InvestorFormModal, type InvestorFormInvestor } from '@/components/investors/investor-form-modal'
@@ -9,6 +7,25 @@ import { DeleteInvestorButton } from '@/components/investors/investor-actions'
 
 type Props = {
   investors: InvestorFormInvestor[]
+}
+
+function formatBudget(investor: InvestorFormInvestor) {
+  const min = investor.budget_min ? `R$ ${Number(investor.budget_min).toLocaleString('pt-BR')}` : 'Qualquer'
+  const max = investor.budget_max ? `R$ ${Number(investor.budget_max).toLocaleString('pt-BR')}` : 'Qualquer'
+  return `${min} - ${max}`
+}
+
+const STRATEGY_LABELS: Record<string, string> = {
+  any: 'Qualquer',
+  rental_income: 'Renda de aluguel',
+  retail: 'Varejo',
+  warehouse_logistics: 'Galpão / logística',
+  food_beverage: 'Alimentação',
+  pharmacy: 'Farmácia',
+  gym_fitness: 'Academia / fitness',
+  flip: 'Revenda',
+  own_business: 'Negócio próprio',
+  land_banking: 'Reserva de terreno',
 }
 
 const RISK_LABELS: Record<string, string> = {

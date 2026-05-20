@@ -4,7 +4,6 @@ import { notFound, redirect } from 'next/navigation'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ReenrichImportRunButton } from '@/components/listings/import-actions'
-import { formatDatetime } from '@/lib/format'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
 import type { Json } from '@/types/supabase'
 
@@ -49,7 +48,15 @@ function getSavedUrls(metadata: Json | null): string[] {
   return savedUrls.filter((url): url is string => typeof url === 'string' && url.length > 0)
 }
 
-
+function formatDate(value: string | null | undefined) {
+  if (!value) return '-'
+  return new Intl.DateTimeFormat('pt-BR', {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(value))
+}
 
 export default async function ImportRunListingsPage({ params }: PageProps) {
   const { id } = await params
@@ -108,7 +115,7 @@ export default async function ImportRunListingsPage({ params }: PageProps) {
           </Button>
           <h1 className="text-2xl font-semibold leading-tight text-foreground">Imóveis Coletados</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Execução {run.source} de {formatDatetime(run.completed_at ?? run.started_at)}
+            Execução {run.source} de {formatDate(run.completed_at ?? run.started_at)}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -181,13 +188,13 @@ export default async function ImportRunListingsPage({ params }: PageProps) {
                   <Badge variant={listing.enrichment_status === 'failed' ? 'destructive' : listing.enrichment_status === 'completed' ? 'default' : 'outline'}>
                     {STATUS_LABELS[listing.enrichment_status ?? 'pending'] ?? listing.enrichment_status}
                   </Badge>
-                  <p className="text-[11px] text-muted-foreground">{formatDatetime(listing.enrichment_last_processed_at)}</p>
+                  <p className="text-[11px] text-muted-foreground">{formatDate(listing.enrichment_last_processed_at)}</p>
                 </div>
                 <div className="space-y-1">
                   <Badge variant={listing.matching_status === 'failed' ? 'destructive' : listing.matching_status === 'completed' ? 'default' : 'outline'}>
                     {STATUS_LABELS[listing.matching_status ?? 'pending'] ?? listing.matching_status}
                   </Badge>
-                  <p className="text-[11px] text-muted-foreground">{formatDatetime(listing.matching_last_processed_at)}</p>
+                  <p className="text-[11px] text-muted-foreground">{formatDate(listing.matching_last_processed_at)}</p>
                 </div>
                 <Button asChild variant="outline" size="sm">
                   <a href={listing.source_url} target="_blank" rel="noreferrer">

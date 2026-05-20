@@ -1,5 +1,4 @@
 import { ExternalLink } from 'lucide-react'
-import { CONFIDENCE_LABELS, MATCH_STRENGTH_LABELS, matchStrengthVariant } from '@/lib/labels'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import type { InvestorDealMatch } from '@/lib/investors/matching'
@@ -21,6 +20,24 @@ type Listing = {
 
 type Props = InvestorDealMatch & {
   deal: Listing
+}
+
+function statusVariant(status: string) {
+  if (status === 'strong') return 'default' as const
+  if (status === 'medium') return 'outline' as const
+  return 'secondary' as const
+}
+
+const STATUS_LABELS: Record<string, string> = {
+  strong: 'Forte',
+  medium: 'Médio',
+  weak: 'Fraco',
+}
+
+const CONFIDENCE_LABELS: Record<string, string> = {
+  low: 'Baixa',
+  medium: 'Média',
+  high: 'Alta',
 }
 
 export function MatchCard({
@@ -45,7 +62,7 @@ export function MatchCard({
           <p className="mt-1 text-sm text-muted-foreground">{location}</p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          <Badge variant={matchStrengthVariant(match_status)}>{MATCH_STRENGTH_LABELS[match_status] ?? match_status}</Badge>
+          <Badge variant={statusVariant(match_status)}>{STATUS_LABELS[match_status] ?? match_status}</Badge>
           <Badge variant="outline">{CONFIDENCE_LABELS[confidence] ?? confidence}</Badge>
           <span className="text-2xl font-semibold text-foreground">{match_score}%</span>
         </div>

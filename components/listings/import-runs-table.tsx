@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { List } from 'lucide-react'
-import { formatDatetime } from '@/lib/format'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
@@ -29,6 +28,16 @@ const STATUS_LABELS: Record<string, string> = {
   completed: 'Concluído',
   partial: 'Parcial',
   failed: 'Falhou',
+}
+
+function formatDate(value: string | null) {
+  if (!value) return '-'
+  return new Intl.DateTimeFormat('pt-BR', {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(value))
 }
 
 function canViewListings(run: ImportRun) {
@@ -63,7 +72,7 @@ export function ImportRunsTable({ runs }: { runs: ImportRun[] }) {
             <span className="text-muted-foreground">{run.updated_count}</span>
             <span className="text-muted-foreground">{run.skipped_count}</span>
             <span className="text-muted-foreground">{run.failed_count}</span>
-            <span className="text-muted-foreground">{formatDatetime(run.completed_at ?? run.started_at)}</span>
+            <span className="text-muted-foreground">{formatDate(run.completed_at ?? run.started_at)}</span>
             <span className="break-words text-xs text-muted-foreground">{run.error_message ?? '-'}</span>
             <div>
               {canViewListings(run) ? (

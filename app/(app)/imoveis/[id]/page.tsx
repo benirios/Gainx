@@ -2,8 +2,6 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
 import { AlertTriangle, ArrowLeft, CheckCircle2, ChevronDown, ExternalLink, MapPin, Sparkles } from 'lucide-react'
-import { formatDateLong } from '@/lib/format'
-import { type WorkflowStatus, normalizeWorkflowStatus } from '@/lib/workflow'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { AiDealSummaryCard } from '@/components/listings/ai-deal-summary-card'
@@ -26,7 +24,13 @@ import type { Database } from '@/types/supabase'
 type ListingRow = Database['public']['Tables']['listings']['Row']
 type InvestorRow = Pick<Database['public']['Tables']['investors']['Row'], 'id' | 'name'>
 type ClientOpportunityRow = Database['public']['Tables']['client_opportunities']['Row']
+type WorkflowStatus = 'suggested' | 'saved' | 'sent' | 'interested' | 'rejected' | 'negotiating' | 'closed'
 type ScoreEntry = ReturnType<typeof scoreRowToCardEntry>
+
+function formatDate(value: string | null) {
+  if (!value) return '-'
+  return new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(value))
+}
 
 function statusVariant(status: string) {
   if (status === 'failed') return 'destructive' as const
@@ -57,7 +61,10 @@ function clientStatusVariant(status: WorkflowStatus) {
   return 'outline' as const
 }
 
-const normalizeClientStatus = normalizeWorkflowStatus
+function normalizeClientStatus(value: string | null | undefined): WorkflowStatus {
+  const statuses: WorkflowStatus[] = ['suggested', 'saved', 'sent', 'interested', 'rejected', 'negotiating', 'closed']
+  return statuses.includes(value as WorkflowStatus) ? value as WorkflowStatus : 'suggested'
+}
 
 function firstParam(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value
@@ -316,32 +323,6 @@ function ClientOpportunityRecommendationView({
   )
 }
 
-async function loadClientContext(
-  supabase: Awaited<ReturnType<typeof createSupabaseServerClient>>,
-  userId: string,
-  clientId: string,
-  listingId: string
-) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: client } = await (supabase.from('investors') as any)
-    .select('id, name')
-    .eq('id', clientId)
-    .eq('user_id', userId)
-    .maybeSingle() as { data: InvestorRow | null }
-
-  if (!client) return null
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: clientOpportunity } = await (supabase.from('client_opportunities') as any)
-    .select('*')
-    .eq('user_id', userId)
-    .eq('client_id', client.id)
-    .eq('opportunity_id', listingId)
-    .maybeSingle() as { data: ClientOpportunityRow | null }
-
-  return { client, clientOpportunity }
-}
-
 export default async function ImovelDetailPage({
   params,
   searchParams,
@@ -365,16 +346,35 @@ export default async function ImovelDetailPage({
 
   if (!listing) notFound()
 
-  const [locationInsight, scoreRows, strategyFitRows, investorMatches, aiSummaryRow] = await Promise.all([
-    getListingLocationInsightByListingId(supabase, user.id, id),
-    getScoreHistory(supabase, user.id, id),
-    getStrategyFitScores(supabase, user.id, id),
-    loadPersistedMatchesForListing(supabase, user.id, id),
-    loadAiDealSummary(supabase, user.id, id),
-  ])
+  const locationInsight = await getListingLocationInsightByListingId(supabase, user.id, id)
+  const scoreRows = await getScoreHistory(supabase, user.id, id)
   const scoreEntries = scoreRows.map(scoreRowToCardEntry)
+  const strategyFitRows = await getStrategyFitScores(supabase, user.id, id)
+  const investorMatches = await loadPersistedMatchesForListing(supabase, user.id, id)
+  const aiSummaryRow = await loadAiDealSummary(supabase, user.id, id)
   const aiSummary = getAiSummaryJson(aiSummaryRow)
-  const clientContext = clientId ? await loadClientContext(supabase, user.id, clientId, id) : null
+  const clientContext = clientId
+    ? await (async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: client } = await (supabase.from('investors') as any)
+        .select('id, name')
+        .eq('id', clientId)
+        .eq('user_id', user.id)
+        .maybeSingle() as { data: InvestorRow | null }
+
+      if (!client) return null
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: clientOpportunity } = await (supabase.from('client_opportunities') as any)
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('client_id', client.id)
+        .eq('opportunity_id', id)
+        .maybeSingle() as { data: ClientOpportunityRow | null }
+
+      return { client, clientOpportunity }
+    })()
+    : null
   const enrichmentStatus = listing.enrichment_status ?? 'pending'
   const matchingStatus = listing.matching_status ?? 'pending'
 
@@ -486,19 +486,19 @@ export default async function ImovelDetailPage({
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">Encontrado em</p>
-            <p className="text-sm text-foreground">{formatDateLong(listing.first_seen_at)}</p>
+            <p className="text-sm text-foreground">{formatDate(listing.first_seen_at)}</p>
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">Última atualização</p>
-            <p className="text-sm text-foreground">{formatDateLong(listing.last_seen_at)}</p>
+            <p className="text-sm text-foreground">{formatDate(listing.last_seen_at)}</p>
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">Enriquecido em</p>
-            <p className="text-sm text-foreground">{formatDateLong(listing.enrichment_last_processed_at)}</p>
+            <p className="text-sm text-foreground">{formatDate(listing.enrichment_last_processed_at)}</p>
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">Matches em</p>
-            <p className="text-sm text-foreground">{formatDateLong(listing.matching_last_processed_at)}</p>
+            <p className="text-sm text-foreground">{formatDate(listing.matching_last_processed_at)}</p>
           </div>
         </div>
 
