@@ -30,6 +30,8 @@ import {
 } from '@/components/ui/select'
 import { regenerateAiDealSummaryAction } from '@/lib/actions/ai-summary-actions'
 import { enrichListingLocationAction, recalculateListingMatchesAction } from '@/lib/actions/location-insight-actions'
+import { formatDatetime, formatMoney, formatNumber } from '@/lib/format'
+import { CONFIDENCE_LABELS, ENRICHMENT_STATUS_LABELS, confidenceVariant } from '@/lib/labels'
 import { cn } from '@/lib/utils'
 import type { AiDealSummary } from '@/lib/ai/deal-summary-schema'
 import type { Json } from '@/types/supabase'
@@ -136,59 +138,23 @@ function imageSrc(src: string) {
   return src.startsWith('http') ? `/api/proxy-image?url=${encodeURIComponent(src)}` : src
 }
 
-function statusVariant(status: string | null | undefined) {
+function enrichmentStatusVariant(status: string | null | undefined) {
   if (status === 'failed') return 'destructive' as const
   if (status === 'completed') return 'default' as const
   if (status === 'processing') return 'outline' as const
   return 'secondary' as const
 }
 
-function confidenceVariant(confidence: string | null | undefined) {
-  if (confidence === 'high') return 'default' as const
-  if (confidence === 'medium') return 'outline' as const
-  return 'secondary' as const
-}
-
 const STATUS_LABELS: Record<string, string> = {
-  pending: 'Pendente',
-  processing: 'Processando',
-  completed: 'Concluído',
-  failed: 'Falhou',
+  ...ENRICHMENT_STATUS_LABELS,
   strong: 'Forte',
   medium: 'Médio',
   weak: 'Fraco',
 }
 
-const CONFIDENCE_LABELS: Record<string, string> = {
-  low: 'baixa',
-  medium: 'média',
-  high: 'alta',
-}
-
-function formatDate(value: string | null | undefined) {
-  if (!value) return '-'
-  return new Intl.DateTimeFormat('pt-BR', {
-    day: '2-digit',
-    month: 'short',
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(new Date(value))
-}
-
-function formatMoney(opportunity: DecisionOpportunity) {
+function formatOpportunityPrice(opportunity: DecisionOpportunity) {
   if (opportunity.priceText) return opportunity.priceText
-  if (opportunity.priceAmount === null) return null
-
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-    maximumFractionDigits: 0,
-  }).format(opportunity.priceAmount)
-}
-
-function formatNumber(value: number | null | undefined) {
-  if (value === null || value === undefined) return '-'
-  return new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 }).format(value)
+  return formatMoney(opportunity.priceAmount)
 }
 
 function uniqueSorted(values: Array<string | null | undefined>) {
@@ -415,7 +381,7 @@ function OpportunityFeed({
                 </div>
 
                 <div className="mt-3 flex flex-wrap items-center gap-2">
-                  {formatMoney(opportunity) && <Badge variant="outline">{formatMoney(opportunity)}</Badge>}
+                  {formatOpportunityPrice(opportunity) && <Badge variant="outline">{formatOpportunityPrice(opportunity)}</Badge>}
                   {opportunity.propertyType && <Badge variant="outline">{opportunity.propertyType}</Badge>}
                   <Badge variant={opportunity.investorMatches.length > 0 ? 'default' : 'outline'}>
                     {opportunity.investorMatches.length} matches
@@ -544,8 +510,8 @@ function IntelligencePanel({ opportunity }: { opportunity: DecisionOpportunity |
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge variant={statusVariant(opportunity.enrichmentStatus)}>Enriq. {STATUS_LABELS[opportunity.enrichmentStatus] ?? opportunity.enrichmentStatus}</Badge>
-              <Badge variant={statusVariant(opportunity.matchingStatus)}>Match {STATUS_LABELS[opportunity.matchingStatus] ?? opportunity.matchingStatus}</Badge>
+              <Badge variant={enrichmentStatusVariant(opportunity.enrichmentStatus)}>Enriq. {STATUS_LABELS[opportunity.enrichmentStatus] ?? opportunity.enrichmentStatus}</Badge>
+              <Badge variant={enrichmentStatusVariant(opportunity.matchingStatus)}>Match {STATUS_LABELS[opportunity.matchingStatus] ?? opportunity.matchingStatus}</Badge>
               {opportunity.aiSummary?.confidence && (
                 <Badge variant={confidenceVariant(opportunity.aiSummary.confidence)}>
                   IA {CONFIDENCE_LABELS[opportunity.aiSummary.confidence] ?? opportunity.aiSummary.confidence}
@@ -578,9 +544,9 @@ function IntelligencePanel({ opportunity }: { opportunity: DecisionOpportunity |
             <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Dados do ponto</p>
             <dl className="mt-3 space-y-2 text-sm">
               <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Tipo</dt><dd className="text-right text-foreground">{opportunity.propertyType ?? '-'}</dd></div>
-              <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Preço</dt><dd className="text-right text-foreground">{formatMoney(opportunity) ?? '-'}</dd></div>
+              <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Preço</dt><dd className="text-right text-foreground">{formatOpportunityPrice(opportunity) ?? '-'}</dd></div>
               <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Área</dt><dd className="text-right text-foreground">-</dd></div>
-              <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Processado</dt><dd className="text-right text-foreground">{formatDate(opportunity.lastProcessedAt)}</dd></div>
+              <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Processado</dt><dd className="text-right text-foreground">{formatDatetime(opportunity.lastProcessedAt)}</dd></div>
             </dl>
           </div>
 
@@ -608,7 +574,7 @@ function IntelligencePanel({ opportunity }: { opportunity: DecisionOpportunity |
           <div className="rounded-md border border-border bg-background p-4">
             <div className="flex items-center justify-between gap-3">
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Resumo IA do negócio</p>
-              <span className="text-xs text-muted-foreground">{formatDate(opportunity.aiSummaryGeneratedAt)}</span>
+              <span className="text-xs text-muted-foreground">{formatDatetime(opportunity.aiSummaryGeneratedAt)}</span>
             </div>
             {opportunity.aiSummary ? (
               <div className="mt-3 space-y-4">
@@ -708,7 +674,7 @@ function IntelligencePanel({ opportunity }: { opportunity: DecisionOpportunity |
                   <div><dt className="text-xs text-muted-foreground">Renda média</dt><dd className="font-medium text-foreground">{formatNumber(opportunity.localIntelligence.avgIncome)}</dd></div>
                   <div><dt className="text-xs text-muted-foreground">Densidade</dt><dd className="font-medium text-foreground">{formatNumber(opportunity.localIntelligence.populationDensity)}</dd></div>
                   <div><dt className="text-xs text-muted-foreground">Confiança</dt><dd className="font-medium text-foreground">{formatNumber(opportunity.localIntelligence.confidenceScore)}</dd></div>
-                  <div><dt className="text-xs text-muted-foreground">Atualizado</dt><dd className="font-medium text-foreground">{formatDate(opportunity.localIntelligence.updatedAt)}</dd></div>
+                  <div><dt className="text-xs text-muted-foreground">Atualizado</dt><dd className="font-medium text-foreground">{formatDatetime(opportunity.localIntelligence.updatedAt)}</dd></div>
                 </dl>
               </div>
             ) : (

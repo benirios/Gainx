@@ -1,20 +1,9 @@
+import { formatMoney, formatNumber } from '@/lib/format'
 import { Badge } from '@/components/ui/badge'
 import type { LocationDataSource, LocationInsightPersisted, NearbyBusiness } from '@/lib/schemas/location-insight'
 
 function formatCurrency(value: number | null | undefined) {
-  if (value === null || value === undefined) return '-'
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-    maximumFractionDigits: 0,
-  }).format(value)
-}
-
-function formatNumber(value: number | null | undefined) {
-  if (value === null || value === undefined) return '-'
-  return new Intl.NumberFormat('pt-BR', {
-    maximumFractionDigits: 0,
-  }).format(value)
+  return formatMoney(value) ?? '-'
 }
 
 function formatDistance(value: number | null | undefined) {

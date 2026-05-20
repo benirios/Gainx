@@ -18,6 +18,7 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import { formatDate } from '@/lib/format'
 import type { Database } from '@/types/supabase'
 
 type ListingRow = Database['public']['Tables']['listings']['Row']
@@ -27,11 +28,6 @@ export type ListingSummary = Pick<
 > & {
   enrichment_status: string
   matching_status: string
-}
-
-function formatDate(value: string | null) {
-  if (!value) return '-'
-  return new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'short', year: 'numeric' }).format(new Date(value))
 }
 
 function statusVariant(status: string) {

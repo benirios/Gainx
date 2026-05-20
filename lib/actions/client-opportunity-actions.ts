@@ -8,22 +8,12 @@ import { upsertListing } from '@/lib/listings/ingestion'
 import { scrapeOlxListings } from '@/lib/listings/olx'
 import { processImportRunListings } from '@/lib/listings/processing'
 import { recalculateMatchesForInvestor } from '@/lib/investors/match-processing'
+import { type WorkflowStatus, normalizeWorkflowStatus } from '@/lib/workflow'
 import type { Database } from '@/types/supabase'
 
 type Supabase = Awaited<ReturnType<typeof createSupabaseServerClient>>
-type ClientOpportunityStatus = 'suggested' | 'saved' | 'sent' | 'interested' | 'rejected' | 'negotiating' | 'closed'
 type ClientOpportunityRow = Database['public']['Tables']['client_opportunities']['Row']
 type InvestorListingMatchRow = Database['public']['Tables']['investor_listing_matches']['Row']
-
-const STATUS_VALUES = new Set<ClientOpportunityStatus>([
-  'suggested',
-  'saved',
-  'sent',
-  'interested',
-  'rejected',
-  'negotiating',
-  'closed',
-])
 
 export type ClientSearchImportState = {
   errors?: {
@@ -34,11 +24,8 @@ export type ClientSearchImportState = {
   message?: string
 }
 
-function parseStatus(value: FormDataEntryValue | string | null): ClientOpportunityStatus {
-  const status = String(value ?? 'suggested')
-  return STATUS_VALUES.has(status as ClientOpportunityStatus)
-    ? status as ClientOpportunityStatus
-    : 'suggested'
+function parseStatus(value: FormDataEntryValue | string | null): WorkflowStatus {
+  return normalizeWorkflowStatus(String(value ?? 'suggested'))
 }
 
 function getErrorMessage(error: unknown) {
@@ -85,7 +72,7 @@ async function upsertClientOpportunity(
     user_id: string
     client_id: string
     opportunity_id: string
-    status: ClientOpportunityStatus
+    status: WorkflowStatus
     match_score: number | null
     notes?: string | null
     last_action_at?: string | null
@@ -159,7 +146,7 @@ async function syncClientOpportunitiesForMatches(
 export async function updateClientOpportunityStatusAction(
   clientId: string,
   opportunityId: string,
-  status: ClientOpportunityStatus
+  status: WorkflowStatus
 ): Promise<{ ok: boolean; message: string }> {
   const supabase = await createSupabaseServerClient()
   const { data: { user } } = await supabase.auth.getUser()

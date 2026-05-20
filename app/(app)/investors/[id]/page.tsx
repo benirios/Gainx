@@ -2,6 +2,9 @@ import Link from 'next/link'
 import { redirect, notFound } from 'next/navigation'
 import { ArrowUpRight, Clock, FileText, KanbanSquare, MapPin, Send, Star, Target } from 'lucide-react'
 import { createSupabaseServerClient } from '@/lib/supabase/server'
+import { formatBudget, formatDatetimeFull, formatMoney } from '@/lib/format'
+import { MATCH_STRENGTH_LABELS, RISK_LABELS, STRATEGY_LABELS, matchStrengthVariant } from '@/lib/labels'
+import { WORKFLOW_STATUSES, WORKFLOW_STATUS_LABELS, type WorkflowStatus, normalizeWorkflowStatus, workflowStatusVariant } from '@/lib/workflow'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { InvestorFormModal } from '@/components/investors/investor-form-modal'
@@ -38,8 +41,6 @@ const TABS: Array<{ value: WorkspaceTab; label: string }> = [
   { value: 'exports', label: 'Exportações' },
 ]
 
-const WORKFLOW_STATUSES = ['suggested', 'saved', 'sent', 'interested', 'rejected', 'negotiating', 'closed'] as const
-type WorkflowStatus = typeof WORKFLOW_STATUSES[number]
 type PipelineItem = {
   row: ClientOpportunityRow
   match?: PersistedInvestorMatch
@@ -47,36 +48,8 @@ type PipelineItem = {
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  suggested: 'Sugerida',
-  saved: 'Salva',
-  sent: 'Enviada',
-  interested: 'Interessado',
-  rejected: 'Rejeitada',
-  negotiating: 'Negociando',
-  closed: 'Fechada',
-  strong: 'Forte',
-  medium: 'Médio',
-  weak: 'Fraco',
-}
-
-const STRATEGY_LABELS: Record<string, string> = {
-  any: 'Qualquer',
-  rental_income: 'Renda de aluguel',
-  retail: 'Varejo',
-  warehouse_logistics: 'Galpão / logística',
-  food_beverage: 'Alimentação',
-  pharmacy: 'Farmácia',
-  gym_fitness: 'Academia / fitness',
-  flip: 'Revenda',
-  own_business: 'Negócio próprio',
-  land_banking: 'Reserva de terreno',
-}
-
-const RISK_LABELS: Record<string, string> = {
-  any: 'Qualquer',
-  low: 'Baixo',
-  medium: 'Médio',
-  high: 'Alto',
+  ...WORKFLOW_STATUS_LABELS,
+  ...MATCH_STRENGTH_LABELS,
 }
 
 function firstParam(value: string | string[] | undefined) {
@@ -88,40 +61,9 @@ function normalizeTab(value: string | string[] | undefined): WorkspaceTab {
   return TABS.some((item) => item.value === tab) ? tab as WorkspaceTab : 'overview'
 }
 
-function normalizeStatus(value: string | null | undefined): WorkflowStatus {
-  return WORKFLOW_STATUSES.includes(value as WorkflowStatus) ? value as WorkflowStatus : 'suggested'
-}
-
-function formatBudget(investor: InvestorRow) {
-  const min = investor.budget_min ? `R$ ${Number(investor.budget_min).toLocaleString('pt-BR')}` : 'Qualquer'
-  const max = investor.budget_max ? `R$ ${Number(investor.budget_max).toLocaleString('pt-BR')}` : 'Qualquer'
-  return `${min} - ${max}`
-}
-
-function formatMoney(value: number | null | undefined) {
-  if (value === null || value === undefined) return null
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-    maximumFractionDigits: 0,
-  }).format(value)
-}
-
-function formatDateTime(value: string | null | undefined) {
-  if (!value) return '-'
-  return new Intl.DateTimeFormat('pt-BR', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(new Date(value))
-}
-
 function statusVariant(status: string) {
-  if (['saved', 'sent', 'interested', 'negotiating', 'closed', 'strong'].includes(status)) return 'default' as const
-  if (['suggested', 'medium'].includes(status)) return 'outline' as const
-  return 'secondary' as const
+  if (WORKFLOW_STATUSES.includes(status as WorkflowStatus) || status === 'strong') return workflowStatusVariant(status)
+  return matchStrengthVariant(status)
 }
 
 function addressForDeal(deal: MatchDeal) {
@@ -383,7 +325,7 @@ function MatchOpportunityCard({
   clientOpportunity: ClientOpportunityRow | undefined
   summary: AiDealSummary | null
 }) {
-  const status = normalizeStatus(clientOpportunity?.status)
+  const status = normalizeWorkflowStatus(clientOpportunity?.status)
   const fit = strategyFitScore(match, client)
 
   return (
@@ -498,7 +440,7 @@ function PipelineTab({
   return (
     <section className="space-y-5">
       {WORKFLOW_STATUSES.map((status) => {
-        const group = items.filter((item) => normalizeStatus(item.row.status) === status)
+        const group = items.filter((item) => normalizeWorkflowStatus(item.row.status) === status)
         if (group.length === 0) return null
 
         return (
@@ -531,7 +473,7 @@ function PipelineTab({
                       )}
                       <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                         <Clock className="size-3.5" />
-                        <span>Última atualização: {formatDateTime(lastUpdated)}</span>
+                        <span>Última atualização: {formatDatetimeFull(lastUpdated)}</span>
                       </div>
                     </div>
                     <div className="grid min-w-[280px] grid-cols-3 gap-2 text-center">
@@ -653,7 +595,7 @@ function SavedTab({
   items: PipelineItem[]
 }) {
   const savedStatuses = new Set(['saved', 'sent', 'interested', 'negotiating', 'closed'])
-  const savedItems = items.filter((item) => savedStatuses.has(normalizeStatus(item.row.status)))
+  const savedItems = items.filter((item) => savedStatuses.has(normalizeWorkflowStatus(item.row.status)))
 
   if (savedItems.length === 0) {
     return (
@@ -670,7 +612,7 @@ function SavedTab({
   return (
     <section className="space-y-3">
       {savedItems.map((item) => {
-        const status = normalizeStatus(item.row.status)
+        const status = normalizeWorkflowStatus(item.row.status)
         const matchScore = item.row.match_score ?? item.match?.match_score ?? null
 
         return (
@@ -715,7 +657,7 @@ function ExportsTab() {
       <FileText className="mx-auto mb-3 size-10 text-muted-foreground" />
       <h2 className="text-lg font-semibold text-foreground">Exportações do cliente</h2>
       <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-        TODO: este espaço vai concentrar memorandos e pacotes prontos para enviar ao cliente, usando as oportunidades salvas.
+        Memorandos e pacotes prontos para enviar ao cliente, usando as oportunidades salvas. Em breve.
       </p>
     </section>
   )

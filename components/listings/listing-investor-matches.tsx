@@ -1,55 +1,9 @@
 import Link from 'next/link'
+import { formatDatetime } from '@/lib/format'
+import { CONFIDENCE_LABELS, MATCH_STRENGTH_LABELS, RISK_LABELS, STRATEGY_LABELS, matchStrengthVariant } from '@/lib/labels'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import type { PersistedListingMatch } from '@/lib/investors/match-processing'
-
-function statusVariant(status: string) {
-  if (status === 'strong') return 'default' as const
-  if (status === 'medium') return 'outline' as const
-  return 'secondary' as const
-}
-
-const STATUS_LABELS: Record<string, string> = {
-  strong: 'Forte',
-  medium: 'Médio',
-  weak: 'Fraco',
-}
-
-const CONFIDENCE_LABELS: Record<string, string> = {
-  low: 'Baixa',
-  medium: 'Média',
-  high: 'Alta',
-}
-
-const STRATEGY_LABELS: Record<string, string> = {
-  any: 'Qualquer',
-  rental_income: 'Renda de aluguel',
-  retail: 'Varejo',
-  warehouse_logistics: 'Galpão / logística',
-  food_beverage: 'Alimentação',
-  pharmacy: 'Farmácia',
-  gym_fitness: 'Academia / fitness',
-  flip: 'Revenda',
-  own_business: 'Negócio próprio',
-  land_banking: 'Reserva de terreno',
-}
-
-const RISK_LABELS: Record<string, string> = {
-  any: 'qualquer',
-  low: 'baixo',
-  medium: 'médio',
-  high: 'alto',
-}
-
-function formatDate(value: string | null) {
-  if (!value) return '-'
-  return new Intl.DateTimeFormat('pt-BR', {
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(new Date(value))
-}
 
 export function ListingInvestorMatches({ matches }: { matches: PersistedListingMatch[] }) {
   return (
@@ -73,11 +27,11 @@ export function ListingInvestorMatches({ matches }: { matches: PersistedListingM
                     {match.investor.name}
                   </Link>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    {STRATEGY_LABELS[match.investor.strategy] ?? match.investor.strategy} · risco {RISK_LABELS[match.investor.risk_level] ?? match.investor.risk_level} · {formatDate(match.processed_at)}
+                    {STRATEGY_LABELS[match.investor.strategy] ?? match.investor.strategy} · risco {RISK_LABELS[match.investor.risk_level] ?? match.investor.risk_level} · {formatDatetime(match.processed_at)}
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge variant={statusVariant(match.match_status)}>{STATUS_LABELS[match.match_status] ?? match.match_status}</Badge>
+                  <Badge variant={matchStrengthVariant(match.match_status)}>{MATCH_STRENGTH_LABELS[match.match_status] ?? match.match_status}</Badge>
                   <Badge variant="outline">{CONFIDENCE_LABELS[match.confidence] ?? match.confidence}</Badge>
                   <span className="text-2xl font-semibold text-foreground">{match.match_score}%</span>
                 </div>
