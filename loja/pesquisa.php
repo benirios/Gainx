@@ -76,7 +76,7 @@ $query_string = $query ? "q=" . urlencode($query) . "&" : "";
         <?php if ($query !== ''): ?>
             <p class="info-paginacao">
                 Encontrados <?= $total_resultados ?> produto<?= $total_resultados !== 1 ? 's' : '' ?>
-            </div>
+            </p>
 
             <?php if ($mensagem_carrinho): ?>
                 <div class="alerta-sucesso">
