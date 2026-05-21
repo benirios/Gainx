@@ -18,6 +18,3 @@ const nextConfig: NextConfig = {
 }
 
 export default nextConfig
-
-// TODO(secmaxxing): Add Content-Security-Policy header
-// headers: async () => [{ source: '/(.*)', headers: [{ key: 'Content-Security-Policy', value: "default-src 'self'" }] }]

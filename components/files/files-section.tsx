@@ -1,27 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-
-const ALLOWED_MIME_TYPES = new Set([
-  'application/pdf',
-  'application/msword',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  'application/vnd.ms-excel',
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  'application/vnd.ms-powerpoint',
-  'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-  'image/jpeg',
-  'image/png',
-  'image/gif',
-  'image/webp',
-  'text/plain',
-  'text/csv',
-])
-
-const ALLOWED_EXTENSIONS = new Set([
-  'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
-  'jpg', 'jpeg', 'png', 'gif', 'webp', 'txt', 'csv',
-])
 import { Upload, FileText, Download, Trash2, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -61,13 +40,6 @@ export function FilesSection({
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
-
-    const ext = file.name.split('.').pop()?.toLowerCase() ?? ''
-    if (!ALLOWED_MIME_TYPES.has(file.type) || !ALLOWED_EXTENSIONS.has(ext)) {
-      toast.error('Tipo de arquivo não permitido.')
-      e.target.value = ''
-      return
-    }
 
     // 50MB limit
     if (file.size > 50 * 1024 * 1024) {
@@ -134,7 +106,6 @@ export function FilesSection({
           <input
             type="file"
             className="sr-only"
-            accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.webp,.txt,.csv"
             onChange={handleFileChange}
             disabled={uploading}
           />
