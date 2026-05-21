@@ -8,6 +8,16 @@ import type { Database } from '@/types/supabase'
 
 type DealFileInsert = Database['public']['Tables']['deal_files']['Insert']
 
+const ALLOWED_EXTENSIONS = new Set([
+  'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+  'jpg', 'jpeg', 'png', 'gif', 'webp', 'txt', 'csv',
+])
+
+function isAllowedFileName(name: string): boolean {
+  const ext = name.split('.').pop()?.toLowerCase() ?? ''
+  return ALLOWED_EXTENSIONS.has(ext)
+}
+
 export async function insertDealFileAction({
   dealId,
   storagePath,
@@ -17,6 +27,8 @@ export async function insertDealFileAction({
   storagePath: string
   fileName: string
 }): Promise<{ error?: string }> {
+  if (!isAllowedFileName(fileName)) return { error: 'Tipo de arquivo não permitido.' }
+
   const supabase = await createSupabaseServerClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
