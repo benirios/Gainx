@@ -1,5 +1,9 @@
 'use server'
 
+// TODO: add Upstash rate limiting (@upstash/ratelimit) before production launch.
+// Supabase provides sign_in_sign_ups=30/5min at the auth layer, but app-level
+// rate limiting per IP via Upstash is needed for brute-force hardening on Vercel.
+
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { createSupabaseServerClient } from '@/lib/supabase/server'

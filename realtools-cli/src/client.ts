@@ -55,8 +55,9 @@ if (stored) {
     if (error) throw new Error(`Auth failed: ${error.message}`);
     saveSession(data.session);
   } else {
-    const { data: { session } } = await supabase.auth.getSession();
-    saveSession(session);
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    if (userError || !user) throw new Error("Stored session invalid — re-login required");
+    saveSession(stored);
   }
 } else {
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
