@@ -53,11 +53,11 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `nome`, `categoria_pai`) VALUES
-(1, 'Portáteis', NULL),
-(2, 'Gaming', NULL),
-(3, 'Smartphones', NULL),
-(4, 'Componentes', NULL),
-(5, 'Periféricos', NULL);
+(1, 'Lifestyle', NULL),
+(2, 'Running', NULL),
+(3, 'New Drops', NULL),
+(4, 'Basketball', NULL),
+(5, 'Skate', NULL);
 
 -- --------------------------------------------------------
 
@@ -140,32 +140,32 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`id`, `nome`, `descricao`, `preco`, `stock`, `categoria_id`, `especificacoes`, `criado_em`, `promocao`, `imagens`) VALUES
-(1, 'MacBook Pro 16 M3', 'MacBook Pro com chip M3, 16GB RAM, 512GB SSD. Ideal para profissionais.', 2499.99, 5, 1, NULL, '2026-05-20 09:51:35', 1, NULL),
-(2, 'Dell XPS 13', 'Ultrabook com Intel Core i7, 8GB RAM, 512GB SSD. Portátil leve e poderoso.', 1299.99, 8, 1, NULL, '2026-05-20 09:51:35', 0, NULL),
-(3, 'ASUS VivoBook 15', 'Portátil com Intel Core i5, 8GB RAM, 256GB SSD. Bom para uso quotidiano.', 599.99, 15, 1, NULL, '2026-05-20 09:51:35', 0, NULL),
-(4, 'Lenovo ThinkPad X1', 'ThinkPad X1 com Intel Core i7, 16GB RAM, 512GB SSD. Fiável para negócios.', 1399.99, 6, 1, NULL, '2026-05-20 09:51:35', 0, NULL),
-(5, 'HP Pavilion 15', 'HP Pavilion com Intel Core i5, 8GB RAM, 512GB SSD. Portátil versátil.', 699.99, 12, 1, NULL, '2026-05-20 09:51:35', 1, NULL),
-(6, 'MSI RTX 4070 Gaming', 'PC Gaming com RTX 4070, i7 13º gen, 32GB RAM. Top performance.', 2199.99, 4, 2, NULL, '2026-05-20 09:51:35', 1, NULL),
-(7, 'ASUS TUF Gaming A15', 'Laptop Gaming com RTX 3060, R7 5800H, 16GB RAM. Gaming portátil.', 1099.99, 7, 2, NULL, '2026-05-20 09:51:35', 0, NULL),
-(8, 'Razer Blade 15', 'Razer Blade com RTX 4080, i9 13º gen, 16GB RAM, 4K display. Premium gaming.', 3299.99, 2, 2, NULL, '2026-05-20 09:51:35', 1, NULL),
-(9, 'Alienware m17', 'Alienware m17 com RTX 4090, i9 13º gen, 32GB RAM. Máximo desempenho.', 3899.99, 3, 2, NULL, '2026-05-20 09:51:35', 0, NULL),
-(10, 'ASUS ROG Strix', 'ROG Strix com RTX 4080, i7 13º gen, 32GB RAM. Gaming profissional.', 2799.99, 5, 2, NULL, '2026-05-20 09:51:35', 0, NULL),
-(11, 'iPhone 15 Pro Max', 'iPhone 15 Pro Max com chip A17 Pro, 256GB. Topo de gama Apple.', 1299.99, 10, 3, NULL, '2026-05-20 09:51:35', 1, NULL),
-(12, 'Samsung Galaxy S24', 'Galaxy S24 com Snapdragon 8 Gen 3, 256GB. Flagship Samsung.', 999.99, 12, 3, NULL, '2026-05-20 09:51:35', 0, NULL),
-(13, 'Google Pixel 8 Pro', 'Pixel 8 Pro com Tensor G3, 256GB. Fotografia e IA.', 899.99, 8, 3, NULL, '2026-05-20 09:51:35', 0, NULL),
-(14, 'OnePlus 12', 'OnePlus 12 com Snapdragon 8 Gen 3, 256GB. Performance e custo.', 749.99, 15, 3, NULL, '2026-05-20 09:51:35', 1, NULL),
-(15, 'Xiaomi 14 Ultra', 'Xiaomi 14 Ultra com Snapdragon 8 Gen 3, 512GB. Valor e qualidade.', 699.99, 20, 3, NULL, '2026-05-20 09:51:35', 0, NULL),
-(16, 'RTX 4070 Ti', 'Placa gráfica NVIDIA RTX 4070 Ti. Excelente para gaming e workstation.', 799.99, 6, 4, NULL, '2026-05-20 09:51:35', 1, NULL),
-(17, 'Intel Core i9-13900K', 'Processador Intel Core i9 13º gen. 24 cores de puro desempenho.', 599.99, 4, 4, NULL, '2026-05-20 09:51:35', 0, NULL),
-(18, 'DDR5 64GB (2x32GB) 6000MHz', 'Kit de RAM DDR5 64GB, 6000MHz CAS 30. Rápida e fiável.', 349.99, 10, 4, NULL, '2026-05-20 09:51:35', 1, NULL),
-(19, 'Samsung 990 Pro NVMe 2TB', 'SSD Samsung 990 Pro 2TB NVMe. Velocidades até 7100MB/s.', 249.99, 8, 4, NULL, '2026-05-20 09:51:35', 0, NULL),
-(20, 'ASUS ProArt X870E', 'Motherboard ASUS ProArt X870E. Suporte DDR5 e PCIe 5.0.', 399.99, 5, 4, NULL, '2026-05-20 09:51:35', 0, NULL),
-(21, 'Logitech MX Master 3S', 'Rato profissional Logitech MX Master 3S. Precisão e conforto.', 99.99, 20, 5, NULL, '2026-05-20 09:51:35', 1, NULL),
-(22, 'Corsair K95 Platinum XT', 'Teclado mecânico Corsair K95. RGB e switches mecânicos.', 229.99, 10, 5, NULL, '2026-05-20 09:51:35', 0, NULL),
-(23, 'SteelSeries Arctis Nova 7', 'Headset wireless SteelSeries Arctis Nova. Áudio premium.', 179.99, 15, 5, NULL, '2026-05-20 09:51:35', 1, NULL),
-(24, 'BenQ PD2700U', 'Monitor BenQ 27\" 4K IPS. Ideal para design e fotografia.', 599.99, 4, 5, NULL, '2026-05-20 09:51:35', 0, NULL),
-(25, 'ASUS ROG Swift 27\"', 'Monitor gaming 27\" 360Hz. Ultra rápido para FPS.', 449.99, 7, 5, NULL, '2026-05-20 09:51:35', 1, NULL),
-(26, 'Elgato Stream Deck', 'Painel de controlo Elgato Stream Deck 15 teclas. Para streaming.', 149.99, 12, 5, NULL, '2026-05-20 09:51:35', 0, NULL);
+(1, 'Nike Air Force 1 ''07', 'O clássico branco que nunca sai de moda. Cabedal em pele e sola Air.', 109.99, 5, 1, NULL, '2026-05-20 09:51:35', 1, NULL),
+(2, 'Adidas Stan Smith', 'Ícone minimalista com perfurado verde. Estilo limpo para o dia a dia.', 99.99, 8, 1, NULL, '2026-05-20 09:51:35', 0, NULL),
+(3, 'Converse Chuck 70 High', 'Canvas premium e sola de borracha vulcanizada. Edição Chuck 70.', 84.99, 15, 1, NULL, '2026-05-20 09:51:35', 0, NULL),
+(4, 'New Balance 550', 'Silhueta retro de basquetebol reborn. Combinações vintage.', 119.99, 6, 1, NULL, '2026-05-20 09:51:35', 0, NULL),
+(5, 'Puma Suede Classic', 'Camurça icónica desde os anos 60. Streetwear essencial.', 79.99, 12, 1, NULL, '2026-05-20 09:51:35', 1, NULL),
+(6, 'Nike Air Zoom Pegasus 41', 'Amortecimento React e Zoom Air. O daily runner mais popular.', 139.99, 4, 2, NULL, '2026-05-20 09:51:35', 1, NULL),
+(7, 'Adidas Ultraboost Light', 'Boost leve e upper Primeknit. Conforto máximo em cada passo.', 189.99, 7, 2, NULL, '2026-05-20 09:51:35', 0, NULL),
+(8, 'Asics Gel-Nimbus 26', 'Gel cushioning e FF Blast+. Feito para longas distâncias.', 169.99, 2, 2, NULL, '2026-05-20 09:51:35', 1, NULL),
+(9, 'New Balance Fresh Foam X 1080v13', 'Fresh Foam X e upper Hypoknit. Corrida suave e estável.', 164.99, 3, 2, NULL, '2026-05-20 09:51:35', 0, NULL),
+(10, 'Hoka Clifton 9', 'Meta-Rocker e espuma compressiva. Leveza para corridas fáceis.', 144.99, 5, 2, NULL, '2026-05-20 09:51:35', 0, NULL),
+(11, 'Air Jordan 1 Retro High OG', 'Silhueta que mudou o jogo. Cabedal em pele e Swoosh icónico.', 179.99, 10, 3, NULL, '2026-05-20 09:51:35', 1, NULL),
+(12, 'Nike Dunk Low Retro', 'Skateboarding heritage com estética college. Cores OG.', 119.99, 12, 3, NULL, '2026-05-20 09:51:35', 0, NULL),
+(13, 'adidas Yeezy Boost 350 V2', 'Primeknit upper e full-length Boost. Silhueta reconhecível.', 229.99, 8, 3, NULL, '2026-05-20 09:51:35', 0, NULL),
+(14, 'New Balance 1906R', 'Tecnologia N-ergy e ABZORB SBS. Runner Y2K aesthetic.', 149.99, 15, 3, NULL, '2026-05-20 09:51:35', 1, NULL),
+(15, 'Nike Air Max 1', 'A primeira Air Max visível. Design Tinker Hatfield.', 139.99, 20, 3, NULL, '2026-05-20 09:51:35', 0, NULL),
+(16, 'Air Jordan 4 Retro', 'Mesh panels e wings laterais. Um dos Jordan mais desejados.', 209.99, 6, 4, NULL, '2026-05-20 09:51:35', 1, NULL),
+(17, 'Nike LeBron 21', 'Zoom Air e suporte para jogadores explosivos. Domina o court.', 199.99, 4, 4, NULL, '2026-05-20 09:51:35', 0, NULL),
+(18, 'Adidas Harden Vol. 8', 'Tração BOOST e estabilidade lateral. Assinatura James Harden.', 159.99, 10, 4, NULL, '2026-05-20 09:51:35', 1, NULL),
+(19, 'Under Armour Curry 11', 'Flow cushioning sem borracha. Velocidade de Stephen Curry.', 169.99, 8, 4, NULL, '2026-05-20 09:51:35', 0, NULL),
+(20, 'Puma MB.03', 'Assinatura LaMelo Ball. Design futurista e grip agressivo.', 129.99, 5, 4, NULL, '2026-05-20 09:51:35', 0, NULL),
+(21, 'Nike SB Dunk Low Pro', 'Zoom Air no heel e suede resistente. Feito para skate.', 109.99, 20, 5, NULL, '2026-05-20 09:51:35', 1, NULL),
+(22, 'Vans Old Skool Pro', 'Suede/canvas com waffle sole. O stripe lateral clássico.', 74.99, 10, 5, NULL, '2026-05-20 09:51:35', 0, NULL),
+(23, 'Converse CONS Louie Lopez Pro', 'Assinatura Louie Lopez. Durabilidade para sessões longas.', 79.99, 15, 5, NULL, '2026-05-20 09:51:35', 1, NULL),
+(24, 'Adidas Busenitz Pro', 'Cupsole vulcanizada inspirada em futebol. Controlo e feel.', 89.99, 4, 5, NULL, '2026-05-20 09:51:35', 0, NULL),
+(25, 'New Balance Numeric 306', 'FUELCELL foam e upper em mesh. Pro model NB Numeric.', 94.99, 7, 5, NULL, '2026-05-20 09:51:35', 1, NULL),
+(26, 'DC Shoes Metric S', 'Super Suede e ventilation holes. Estilo anos 90 reborn.', 84.99, 12, 5, NULL, '2026-05-20 09:51:35', 0, NULL);
 
 -- --------------------------------------------------------
 

@@ -5,8 +5,8 @@
         <div class="footer-grid">
 
             <div class="footer-col">
-                <h4>InfoStore</h4>
-                <p>A tua loja de informática em Leiria.<br>Produtos originais com garantia.<br>Envio para todo o país.</p>
+                <h4>SoleDrop</h4>
+                <p>A tua sneaker store em Leiria.<br>Sapatilhas autênticas com garantia.<br>Envio para todo o país.</p>
                 <br>
                 <div class="footer-contact">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -19,7 +19,7 @@
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
-                    <span>info@infostore.pt</span>
+                    <span>hello@soledrop.pt</span>
                 </div>
                 <div class="footer-contact">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -31,13 +31,14 @@
             </div>
 
             <div class="footer-col">
-                <h4>Categorias</h4>
+                <h4>Shop</h4>
                 <ul>
-                    <li><a href="<?= $prefixo_raiz ?>portateis.php">Portáteis</a></li>
-                    <li><a href="<?= $prefixo_raiz ?>gaming.php">Gaming</a></li>
-                    <li><a href="<?= $prefixo_raiz ?>componentes.php">Componentes PC</a></li>
-                    <li><a href="<?= $prefixo_raiz ?>perifericos.php">Periféricos</a></li>
-                    <li><a href="<?= $prefixo_raiz ?>promocoes.php">Promoções</a></li>
+                    <li><a href="<?= $prefixo_raiz ?>portateis.php">Lifestyle</a></li>
+                    <li><a href="<?= $prefixo_raiz ?>gaming.php">Running</a></li>
+                    <li><a href="<?= $prefixo_raiz ?>lancamentos.php">New Drops</a></li>
+                    <li><a href="<?= $prefixo_raiz ?>componentes.php">Basketball</a></li>
+                    <li><a href="<?= $prefixo_raiz ?>perifericos.php">Skate</a></li>
+                    <li><a href="<?= $prefixo_raiz ?>promocoes.php">Sale</a></li>
                 </ul>
             </div>
 
@@ -45,10 +46,10 @@
                 <h4>Informações</h4>
                 <ul>
                     <li><a href="#">Sobre nós</a></li>
-                    <li><a href="#">Formas de Pagamento</a></li>
+                    <li><a href="#">Tamanhos &amp; Fit</a></li>
                     <li><a href="#">Envios e Entregas</a></li>
                     <li><a href="#">Devoluções</a></li>
-                    <li><a href="#">Garantia</a></li>
+                    <li><a href="#">Autenticidade</a></li>
                     <li><a href="<?= $prefixo_raiz ?>contactos.php">Contacto</a></li>
                 </ul>
             </div>
@@ -56,7 +57,7 @@
         </div>
 
         <div class="footer-bottom">
-            &copy; <?= date('Y') ?> <strong>InfoStore</strong> — Todos os direitos reservados &nbsp;|&nbsp;
+            &copy; <?= date('Y') ?> <strong>SoleDrop</strong> — Todos os direitos reservados &nbsp;|&nbsp;
             <a href="#">Política de Privacidade</a> &nbsp;|&nbsp;
             <a href="#">Termos e Condições</a>
         </div>

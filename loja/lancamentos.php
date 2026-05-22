@@ -7,7 +7,7 @@ include 'cabecalho.php';
 
 $numero_pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $numero_pagina = max(1, $numero_pagina);
-$id_categoria = 5;
+$id_categoria = 3;
 
 $mensagem_carrinho = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['produto_id'])) {
@@ -61,7 +61,7 @@ $next_page = $numero_pagina < $total_pages ? $numero_pagina + 1 : null;
 
 <section class="produtos-section">
     <div class="container">
-        <h2 class="section-title">Skate</h2>
+        <h2 class="section-title">New Drops</h2>
 
         <p class="info-paginacao">
             Mostrando <?= $offset + 1 ?> a <?= min($offset + $produtos_por_pagina, $total_produtos) ?>

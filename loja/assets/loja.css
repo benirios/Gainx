@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 *, *::before, *::after {
     margin: 0;
@@ -7,16 +7,16 @@
 }
 
 :root {
-    --cor-fundo: #f4f7fb;
+    --cor-fundo: #f2efe9;
     --cor-superficie: #ffffff;
-    --cor-superficie-alt: #e8eef6;
-    --cor-texto: #0f172a;
-    --cor-texto-suave: #64748b;
-    --cor-destaque: #0284c7;
-    --cor-destaque-hover: #0369a1;
-    --cor-secundaria: #f97316;
-    --cor-borda: #cbd5e1;
-    --cor-sombra: rgba(15, 23, 42, 0.08);
+    --cor-superficie-alt: #e8e4dc;
+    --cor-texto: #111111;
+    --cor-texto-suave: #5c5c5c;
+    --cor-destaque: #e11d48;
+    --cor-destaque-hover: #be123c;
+    --cor-secundaria: #111111;
+    --cor-borda: #d4cfc4;
+    --cor-sombra: rgba(17, 17, 17, 0.1);
     --cor-sucesso: #059669;
     --cor-erro: #dc2626;
     --raio-sm: 8px;
@@ -36,15 +36,15 @@
 }
 
 [data-theme="dark"] {
-    --cor-fundo: #0b1220;
-    --cor-superficie: #111827;
-    --cor-superficie-alt: #1e293b;
-    --cor-texto: #f1f5f9;
-    --cor-texto-suave: #94a3b8;
-    --cor-destaque: #38bdf8;
-    --cor-destaque-hover: #7dd3fc;
-    --cor-borda: #334155;
-    --cor-sombra: rgba(0, 0, 0, 0.35);
+    --cor-fundo: #0c0c0c;
+    --cor-superficie: #171717;
+    --cor-superficie-alt: #262626;
+    --cor-texto: #fafafa;
+    --cor-texto-suave: #a3a3a3;
+    --cor-destaque: #fb7185;
+    --cor-destaque-hover: #fda4af;
+    --cor-borda: #333333;
+    --cor-sombra: rgba(0, 0, 0, 0.45);
 }
 
 html {
@@ -52,7 +52,7 @@ html {
 }
 
 body {
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'DM Sans', system-ui, sans-serif;
     background: var(--cor-fundo);
     color: var(--cor-texto);
     line-height: 1.6;
@@ -65,10 +65,40 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: color-mix(in srgb, var(--cor-superficie) 88%, transparent);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--cor-borda);
-    box-shadow: 0 4px 24px var(--cor-sombra);
+    background: var(--cor-secundaria);
+    border-bottom: 3px solid var(--cor-destaque);
+    box-shadow: 0 8px 32px var(--cor-sombra);
+}
+
+.site-header .logo,
+.site-header .header-cart,
+.site-header .theme-toggle {
+    color: #fafafa;
+    border-color: #404040;
+    background: transparent;
+}
+
+.site-header .search-bar {
+    background: #262626;
+    border-color: #404040;
+}
+
+.site-header .search-bar input {
+    color: #fafafa;
+}
+
+.site-header .search-bar input::placeholder {
+    color: #737373;
+}
+
+.site-header .search-bar button {
+    background: var(--cor-destaque);
+}
+
+.site-header .header-cart:hover,
+.site-header .theme-toggle:hover {
+    color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
 }
 
 .header-inner {
@@ -96,13 +126,14 @@ body {
 .logo-mark {
     width: 38px;
     height: 38px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--cor-destaque), #6366f1);
+    border-radius: 4px;
+    background: var(--cor-destaque);
     display: grid;
     place-items: center;
     color: #fff;
-    font-size: 0.75rem;
-    font-weight: 800;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
 }
 
 .search-bar {
@@ -223,8 +254,18 @@ body {
 
 /* ── Nav ── */
 .site-nav {
-    background: var(--cor-superficie);
-    border-bottom: 1px solid var(--cor-borda);
+    background: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+
+.site-nav ul li a {
+    color: #a3a3a3;
+}
+
+.site-nav ul li a:hover,
+.site-nav ul li a.ativo {
+    color: #fff;
+    background: color-mix(in srgb, var(--cor-destaque) 18%, transparent);
 }
 
 .nav-inner {
@@ -289,8 +330,8 @@ body {
 
 /* ── Promo strip ── */
 .faixa-promo {
-    background: linear-gradient(90deg, #0c4a6e, #0369a1 45%, #4f46e5);
-    color: #e0f2fe;
+    background: var(--cor-destaque);
+    color: #fff;
     padding: 10px 24px;
     text-align: center;
     font-size: 0.82rem;
@@ -317,22 +358,39 @@ main {
 /* ── Hero ── */
 .hero-loja {
     margin: 0 0 36px;
-    padding: 40px 36px;
-    border-radius: var(--raio-lg);
-    background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 50%, #6366f1 100%);
+    padding: 48px 40px;
+    border-radius: 4px;
+    background: var(--cor-secundaria);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    box-shadow: 0 20px 50px rgba(2, 132, 199, 0.25);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-loja::after {
+    content: '';
+    position: absolute;
+    right: -40px;
+    bottom: -60px;
+    width: 280px;
+    height: 280px;
+    background: var(--cor-destaque);
+    opacity: 0.15;
+    border-radius: 50%;
 }
 
 .hero-loja h1 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    margin-bottom: 12px;
+    text-transform: uppercase;
 }
 
 .hero-loja p {
@@ -342,8 +400,8 @@ main {
 }
 
 .hero-loja .btn-hero {
-    background: #fff;
-    color: #0369a1;
+    background: var(--cor-destaque);
+    color: #fff;
     padding: 12px 24px;
     border-radius: 999px;
     text-decoration: none;
@@ -361,11 +419,13 @@ main {
 
 /* ── Sections ── */
 .section-title {
-    font-size: 1.35rem;
-    font-weight: 800;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 400;
     margin: 0 0 20px;
     color: var(--cor-texto);
-    letter-spacing: -0.02em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -373,10 +433,10 @@ main {
 
 .section-title::before {
     content: '';
-    width: 4px;
+    width: 6px;
     height: 1.1em;
-    background: linear-gradient(180deg, var(--cor-destaque), var(--cor-secundaria));
-    border-radius: 4px;
+    background: var(--cor-destaque);
+    border-radius: 0;
 }
 
 .categorias-section {
@@ -479,8 +539,8 @@ main {
 }
 
 .produto-img {
-    background: linear-gradient(160deg, var(--cor-superficie-alt), var(--cor-fundo));
-    height: 180px;
+    background: linear-gradient(180deg, #fafafa 0%, var(--cor-superficie-alt) 100%);
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;

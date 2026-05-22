@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <section class="painel-formulario">
     <div class="cartao-formulario" style="text-align:center;">
         <h2>Criar Conta</h2>
-        <p class="subtitulo">Junta-te a InfoStore</p>
+        <p class="subtitulo">Junta-te à SoleDrop</p>
 
         <?php if ($erro): ?>
             <div class="msg-erro">⚠ <?= htmlspecialchars($erro) ?></div>

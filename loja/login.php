@@ -56,7 +56,7 @@ $sessao_ativa = isset($_SESSION['id']);
 
 		<?php else: ?>
 			<h2>Iniciar Sessao</h2>
-			<p class="subtitulo">Entra na tua conta da InfoStore</p>
+			<p class="subtitulo">Entra na tua conta SoleDrop</p>
 
 			<?php if ($erro): ?>
 				<div class="msg-erro">⚠ <?= htmlspecialchars($erro) ?></div>

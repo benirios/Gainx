@@ -3,8 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$pagina_atual = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$pagina_atual = max(1, $pagina_atual);
+$numero_pagina = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$numero_pagina = max(1, $numero_pagina);
 $id_categoria = isset($_GET['category']) ? (int)$_GET['category'] : null;
 
 $mensagem_carrinho = '';
@@ -40,8 +40,8 @@ if (isset($_GET['added'])) {
 include 'cabecalho.php';
 
 $produtos_por_pagina = 32;
-$pagina_atual = max(1, $pagina_atual);
-$offset = ($pagina_atual - 1) * $produtos_por_pagina;
+$numero_pagina = max(1, $numero_pagina);
+$offset = ($numero_pagina - 1) * $produtos_por_pagina;
 
 if ($id_categoria) {
     $count_query = "SELECT COUNT(*) as total FROM produtos WHERE categoria_id = ?";
@@ -56,7 +56,7 @@ $row_count = $stmt_count->get_result()->fetch_assoc();
 $total_produtos = $row_count['total'];
 
 $total_pages = ceil($total_produtos / $produtos_por_pagina);
-$pagina_atual = min($pagina_atual, max(1, $total_pages));
+$numero_pagina = min($numero_pagina, max(1, $total_pages));
 
 if ($id_categoria) {
     $products_query = "SELECT p.id, p.nome, p.preco, p.stock, p.categoria_id, c.nome as categoria
@@ -85,19 +85,19 @@ $result_categories = $conn->query($categories_query);
 $categorias = $result_categories->fetch_all(MYSQLI_ASSOC);
 
 $query_string = $id_categoria ? "category=$id_categoria&" : "";
-$prev_page = $pagina_atual > 1 ? $pagina_atual - 1 : null;
-$next_page = $pagina_atual < $total_pages ? $pagina_atual + 1 : null;
+$prev_page = $numero_pagina > 1 ? $numero_pagina - 1 : null;
+$next_page = $numero_pagina < $total_pages ? $numero_pagina + 1 : null;
 
 ?>
 
-<?php if ($id_categoria === null && $pagina_atual === 1): ?>
+<?php if ($id_categoria === null && $numero_pagina === 1): ?>
 <section class="container">
     <div class="hero-loja">
         <div>
-            <h1>Tecnologia que faz a diferença</h1>
-            <p>Portáteis, gaming, componentes e periféricos — tudo num só lugar, com envio rápido em Portugal.</p>
+            <h1>Step Into Heat</h1>
+            <p>Jordan, Nike, Adidas, New Balance e mais — drops frescos e clássicos icónicos com envio em Portugal.</p>
         </div>
-        <a href="promocoes.php" class="btn-hero">Ver promoções</a>
+        <a href="lancamentos.php" class="btn-hero">New Drops</a>
     </div>
 </section>
 <?php endif; ?>
@@ -107,7 +107,7 @@ $next_page = $pagina_atual < $total_pages ? $pagina_atual + 1 : null;
         <h2 class="section-title">Categorias</h2>
         <div class="categorias-list">
             <a href="index.php" class="categoria-tag <?= $id_categoria === null ? 'ativa' : '' ?>">
-                Todos os Produtos
+                All Sneakers
             </a>
 
             <?php foreach ($categorias as $cat): ?>
@@ -123,7 +123,7 @@ $next_page = $pagina_atual < $total_pages ? $pagina_atual + 1 : null;
 <section class="produtos-section">
     <div class="container">
         <h2 class="section-title">
-            <?= $id_categoria ? "Produtos - " . htmlspecialchars($categorias[array_search($id_categoria, array_column($categorias, 'id'))]['nome'] ?? '') : "Todos os Produtos" ?>
+            <?= $id_categoria ? htmlspecialchars($categorias[array_search($id_categoria, array_column($categorias, 'id'))]['nome'] ?? '') : "All Sneakers" ?>
         </h2>
         
         <!-- Info de paginação (quantos produtos mostrando) -->
@@ -139,7 +139,7 @@ $next_page = $pagina_atual < $total_pages ? $pagina_atual + 1 : null;
         <div class="produtos-grid">
             <?php foreach ($produtos as $p): ?>
                 <div class="produto-card">
-                    <span class="badge">NOVO</span>
+                    <span class="badge">HEAT</span>
                     <div class="produto-img">
                         <?= obterIconeProduto($p['categoria_id']) ?>
                     </div>   
@@ -168,7 +168,7 @@ $next_page = $pagina_atual < $total_pages ? $pagina_atual + 1 : null;
                 <span class="pag-btn desativado">← Anterior</span>
             <?php endif; ?>
 
-            <span class="pag-info">Página <?= $pagina_atual ?> de <?= $total_pages ?></span>
+            <span class="pag-info">Página <?= $numero_pagina ?> de <?= $total_pages ?></span>
 
             <?php if ($next_page): ?>
                 <a href="?<?= $query_string ?>page=<?= $next_page ?>" class="pag-btn">Próximo →</a>
